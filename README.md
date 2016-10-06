@@ -15,10 +15,10 @@ HOW TO BUILD:
 [Install the Git Bash shell, we can run npm commands through here.](https://git-scm.com/downloads)  
 
 3. Once you have the project pulled, open the git shell.  
-    
-    cd pl8/war
-    
-    npm install
-    npm start
-    
+    ```
+cd pl8/war/
+
+npm install
+npm start
+    ```
 The dependencis will install and the site should open in an open browser after running npm start.  You can also navigate to the site at localhost:3000 in your browser.
