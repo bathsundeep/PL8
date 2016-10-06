@@ -2,7 +2,8 @@
   "name": "angular-quickstart",
   "version": "1.0.0",
   "scripts": {
-    "start": "tsc -p",
+    "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
+    "lite": "lite-server",
     "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
@@ -28,6 +29,8 @@
     "zone.js": "^0.6.25"
   },
   "devDependencies": {
+    "concurrently": "^3.0.0",
+    "lite-server": "^2.2.2",
     "typescript": "^2.0.3",
     "typings":"^1.4.0"
   }

@@ -4,6 +4,8 @@
     <title>Angular QuickStart</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <!-- 1. Load libraries -->
      <!-- Polyfill(s) for older browsers -->
@@ -19,6 +21,8 @@
   </head>
   <!-- 3. Display the application -->
   <body>
-    <my-app>Loading...</my-app>
+    <my-app> <!-- This loads the app.component.ts module.  The selector for app.component is 'my-app', which is how it knows what component to load !-->
+    Loading...
+      </my-app>
   </body>
 </html>
