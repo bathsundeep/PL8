@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
+import {User} from '../API/models.ts'
+
 
 @Component({
   selector: 'my-profile',
@@ -14,9 +16,9 @@ export class ProfileComponent implements OnInit {
         add(name: string): void {
             //TO DO:
             //Implement a ton of shit
-           /* name = name.trim();
+            name = name.trim();
             if (!name) {return;}
-            this.selectedNutrition = null; */
+            //this.user. = null; 
         }
        ngOnInit(): void {
        

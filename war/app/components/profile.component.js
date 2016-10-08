@@ -17,9 +17,11 @@ var ProfileComponent = (function () {
     ProfileComponent.prototype.add = function (name) {
         //TO DO:
         //Implement a ton of shit
-        /* name = name.trim();
-         if (!name) {return;}
-         this.selectedNutrition = null; */
+        name = name.trim();
+        if (!name) {
+            return;
+        }
+        //this.user. = null; 
     };
     ProfileComponent.prototype.ngOnInit = function () {
     };
