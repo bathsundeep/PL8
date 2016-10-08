@@ -9,17 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var http_1 = require('@angular/http');
+var forms_1 = require('@angular/forms');
 var platform_browser_1 = require('@angular/platform-browser');
 /* Import components we make here.  Include the component file when importing so the app
    module knows where to find the component. Create components like app.component.ts */
 var app_component_1 = require('./app.component');
+var app_routing_1 = require('./app.routing');
+var login_component_1 = require('./components/login.component');
+var signup_component_1 = require('./components/signup.component');
+var home_component_1 = require('./components/home.component');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule],
-            declarations: [app_component_1.AppComponent],
+            imports: [platform_browser_1.BrowserModule, http_1.HttpModule, forms_1.FormsModule, app_routing_1.routing],
+            declarations: [app_component_1.AppComponent, login_component_1.LoginComponent, signup_component_1.SignupComponent, home_component_1.HomeComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
