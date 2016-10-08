@@ -1,0 +1,9 @@
+<!-- This is the template for the app component called by templateUrl !-->
+
+      <h1>This is your profile</h1>
+      <div>
+          <label> Nutrition Restriction</label> <input #nutritionName/>
+          <button (click) = "add(nutrionName.value); nutritionName.value=''">
+              Add
+          </button>
+     </div>
