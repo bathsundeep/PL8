@@ -5,6 +5,8 @@ import { LoginComponent } from './components/login.component';
 import { SignupComponent } from './components/signup.component';
 import { HomeComponent } from './components/home.component';
 import { ProfileComponent } from './components/profile.component';
+import { PantryComponent } from './components/pantry.component';
+
 const appRoutes: Routes = [
     {
         path: 'login', component: LoginComponent
@@ -17,6 +19,9 @@ const appRoutes: Routes = [
     },
     {
         path: 'profile', component: ProfileComponent
+    },
+    {
+        path: 'pantry', component: PantryComponent
     }
 ];
 

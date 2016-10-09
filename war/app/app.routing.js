@@ -4,6 +4,7 @@ var login_component_1 = require('./components/login.component');
 var signup_component_1 = require('./components/signup.component');
 var home_component_1 = require('./components/home.component');
 var profile_component_1 = require('./components/profile.component');
+var pantry_component_1 = require('./components/pantry.component');
 var appRoutes = [
     {
         path: 'login', component: login_component_1.LoginComponent
@@ -16,6 +17,9 @@ var appRoutes = [
     },
     {
         path: 'profile', component: profile_component_1.ProfileComponent
+    },
+    {
+        path: 'pantry', component: pantry_component_1.PantryComponent
     }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes, { useHash: true });

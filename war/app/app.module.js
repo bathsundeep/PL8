@@ -20,13 +20,14 @@ var login_component_1 = require('./components/login.component');
 var signup_component_1 = require('./components/signup.component');
 var home_component_1 = require('./components/home.component');
 var profile_component_1 = require('./components/profile.component');
+var pantry_component_1 = require('./components/pantry.component');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, http_1.HttpModule, forms_1.FormsModule, app_routing_1.routing],
-            declarations: [app_component_1.AppComponent, login_component_1.LoginComponent, signup_component_1.SignupComponent, home_component_1.HomeComponent, profile_component_1.ProfileComponent],
+            declarations: [app_component_1.AppComponent, login_component_1.LoginComponent, signup_component_1.SignupComponent, home_component_1.HomeComponent, profile_component_1.ProfileComponent, pantry_component_1.PantryComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
