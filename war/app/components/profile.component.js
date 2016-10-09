@@ -9,28 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
+var nutrition_service_1 = require('../nutrition.service');
 var ProfileComponent = (function () {
-    function ProfileComponent(router) {
-        this.router = router;
+    function ProfileComponent(nutrtionServices) {
+        this.nutrtionServices = nutrtionServices;
+        this.title = 'Your profile';
     }
+    ProfileComponent.prototype.getNutrition = function () {
+        var _this = this;
+        this.nutrtionServices.getNutritions().then(function (nutritions) { return _this.nutritions = nutritions; });
+    };
     ProfileComponent.prototype.add = function (name) {
         //TO DO:
         //Implement a ton of shit
-        name = name.trim();
-        if (!name) {
-            return;
-        }
-        //this.user. = null; 
+        /* name = name.trim();
+         if (!name) {return;}
+         this.selectedNutrition = null; */
     };
     ProfileComponent.prototype.ngOnInit = function () {
+        this.getNutrition();
     };
     ProfileComponent = __decorate([
         core_1.Component({
             selector: 'my-profile',
             templateUrl: '/templates/profile.html',
+            providers: [nutrition_service_1.NutritionService]
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [nutrition_service_1.NutritionService])
     ], ProfileComponent);
     return ProfileComponent;
 }());
