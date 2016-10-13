@@ -14,6 +14,20 @@ var api_service_1 = require('./API/api.service');
 var AppComponent = (function () {
     function AppComponent() {
     }
+    /*constructor(
+      private PL8Service: PL8Service,
+      @Input() private UserService: UserService
+    ) { }
+  
+    public logOut() {
+      this.PL8Service.logout()
+        .then(obj => {
+          window.location.reload();
+        });
+    }
+  */
+    AppComponent.prototype.ngOnInit = function () {
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
