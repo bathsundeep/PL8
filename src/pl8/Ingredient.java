@@ -44,15 +44,15 @@ public class Ingredient {
 
     @Override
     public String toString(){
-//      1 argument ingredient
+//      1 argument ingredient: salt
         if (quantity == 0){
             return ingredient;
         }
-//      2 argument ingredient
+//      2 argument ingredient: 2 + eggs
         else if (unit == null){
             return Float.toString(quantity) + ingredient;
         }
-//      3 argument ingredient
+//      3 argument ingredient: 4 + lbs + of + chicken
         else{
             return Float.toString(quantity) + unit + "of" + ingredient;
         }
