@@ -2,6 +2,8 @@
 The ingredient class
 Kevin Zhou
 */
+import com.google.appengine.api.datastore.Entity;
+
 
 public class Ingredient {
     String ingredient;
@@ -21,7 +23,7 @@ public class Ingredient {
     public Ingredient(float q, String i){
         quantity = q;
         ingredient = i;
-        unit = "";
+        unit = null;
     }
 
 //  1 Argument constructor
@@ -29,7 +31,7 @@ public class Ingredient {
     public Ingredient(String i){
         ingredient = i;
         quantity = 0;
-        unit = "";
+        unit = null;
     }
 
     public String toString(){
@@ -38,7 +40,7 @@ public class Ingredient {
             return ingredient;
         }
 //      2 argument ingredient
-        else if (unit == ""){
+        else if (unit == null){
             return Float.toString(quantity) + ingredient;
         }
 //      3 argument ingredient
@@ -46,4 +48,12 @@ public class Ingredient {
             return Float.toString(quantity) + unit + "of" + ingredient;
         }
     }
+
+    public Entity toEntity(){
+        Entity ingredientity = new Entity("ingredient", ingredient);
+        ingredientity.setProperty("quantity", quantity);
+        ingredientity.setProperty("unit", unit);
+        return ingredientity;
+    }
+    
 }
