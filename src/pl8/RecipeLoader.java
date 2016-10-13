@@ -34,14 +34,21 @@ public class RecipeLoader {
 		q = new Query("Recipe").setFilter(uf);
 
 		/* Run Query on Datastore */
-		PreparedQuery pq = datastore.prepare(q);
+		PreparedQuery prepquar = datastore.prepare(q);
 
-		u = pq.asSingleEntity();
+		u = prepquar.asSingleEntity();
 
 		return u;
 	}
 
-	public static Entity getRecipeByIngredients(String ingredients[]) {
+	public static Entity getRecipeByIngredients(Ingredient ingredients[]) {
+
+		/* Validate ingredient list */
+		if (ingredients.size() == 0) {
+			jsonForbidden(resp, new APIError(APIErrorCode.InvalidPassword, "Must enter at least one ingredient."));
+			return;
+		}
+
 		/* Init a datastore session to perform the check */
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
@@ -95,10 +102,27 @@ public class RecipeLoader {
 		u.setProperty("Ingredients", ingredients);
 		u.setProperty("Steps", steps);
 
-		/* Add new User to the datastore */
+		/* Add new Recipe to the datastore */
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		datastore.put(u);
 
 		return u;
 	}
+
+	public static Entity saveRecipe(Recipe recipe) 
+			throws NoSuchAlgorithmException, InvalidKeySpecException {
+			
+		// Set Entity properties
+		Entity u = new Entity("Recipe");
+		u.setProperty("Name", recipe.name);
+		u.setProperty("Ingredients", recipe.ingredients);
+		u.setProperty("Steps", recipe.steps);
+
+		// Add new Recipe to datastore
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		datastore.put(u);
+		
+		return u;
+		}
+
 }

@@ -14,12 +14,8 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 
-// Basically plagiarized from SignUp.java
-
-//TODO create and import API Error code
+// TODO create and import API Error code
 import pl8.api.JsonServlet;
-
-// IDFK what's going on, I'm just adding stuff I think makes sense
 
 /* This class processes AddRecipe POST requests from <somewhere>. */
 @SuppressWarnings("serial")
@@ -30,10 +26,9 @@ public class AddRecipe extends JsonServlet {
         // Not recommended. Should add logging framework. Whatever that means
 		System.out.println("Attempting add recipe");
 		
-		/* Get parameters from login attempt */
+		/* Get parameters */
 		String name = request.getParameter("name");
-		
-		String ingredients[] = request.getParameter("Ingredients");
+		String ingredients[] = request.getParameter("ingredients");
 		String steps = request.getParameter("steps");
 		
 		}
@@ -46,12 +41,11 @@ public class AddRecipe extends JsonServlet {
 		if(u != null)
 		{
 			jsonForbidden(resp, new APIError(APIErrorCode.RecipeNameTaken, "Recipe Name is taken."));
-			
 			return;
 		}
 		
 		try {
-			u = UserLoader.saveUser(name, ingredients, steps);
+			u = RecipeLoader.saveRecipe(name, ingredients, steps);
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			json(resp, HttpStatusCodes.STATUS_CODE_SERVER_ERROR, new APIError(APIErrorCode.UnhandledException, e.toString()));
 			return;
