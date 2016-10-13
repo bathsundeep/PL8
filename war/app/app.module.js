@@ -15,6 +15,7 @@ var platform_browser_1 = require('@angular/platform-browser');
 /* Import components we make here.  Include the component file when importing so the app
    module knows where to find the component. Create components like app.component.ts */
 var app_component_1 = require('./app.component');
+var api_service_1 = require('./API/api.service');
 var app_routing_1 = require('./app.routing');
 var login_component_1 = require('./components/login.component');
 var signup_component_1 = require('./components/signup.component');
@@ -28,7 +29,8 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, http_1.HttpModule, forms_1.FormsModule, app_routing_1.routing],
             declarations: [app_component_1.AppComponent, login_component_1.LoginComponent, signup_component_1.SignupComponent, home_component_1.HomeComponent, profile_component_1.ProfileComponent, pantry_component_1.PantryComponent],
-            bootstrap: [app_component_1.AppComponent]
+            bootstrap: [app_component_1.AppComponent],
+            providers: [api_service_1.PL8Service, api_service_1.UserService]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

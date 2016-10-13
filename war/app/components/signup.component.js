@@ -9,11 +9,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
 var SignupComponent = (function () {
-    function SignupComponent(router) {
-        this.router = router;
+    function SignupComponent() {
     }
+    /*  constructor(
+         private router: Router,
+         private PL8Service: PL8Service,
+         private UserService: UserService) { }
+   
+       public username: string;
+       public email: string;
+       public password: string;
+       public isLoading: boolean;
+       @Input() public errorMessage: string;
+   
+       onSubmit() {
+         this.isLoading = true;
+         this.PL8Service.signup(this.username, this.email, this.password)
+         .then(User => {
+           this.isLoading = false;
+           this.UserService.currentUser = User;
+           this.router.navigate(['/'])
+         }, (reason : Response) => {
+           this.errorMessage = reason.json()["message"];
+           this.isLoading = false;
+         });
+         return false;
+       }
+        */
     SignupComponent.prototype.ngOnInit = function () {
     };
     SignupComponent = __decorate([
@@ -21,7 +44,7 @@ var SignupComponent = (function () {
             selector: 'my-signup',
             templateUrl: '/templates/signup.html',
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [])
     ], SignupComponent);
     return SignupComponent;
 }());

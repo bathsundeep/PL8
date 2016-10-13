@@ -9,19 +9,24 @@ import { PantryComponent } from './components/pantry.component';
 
 const appRoutes: Routes = [
     {
-        path: 'login', component: LoginComponent
+        path: 'login', 
+        component: LoginComponent
     }, 
     {
-        path: 'signup', component: SignupComponent
+        path: 'signup', 
+        component: SignupComponent
     }, 
     {
-        path: 'home', component: HomeComponent
+        path: 'home', 
+        component: HomeComponent
     },
     {
-        path: 'profile', component: ProfileComponent
+        path: 'profile', 
+        component: ProfileComponent
     },
     {
-        path: 'pantry', component: PantryComponent
+        path: 'pantry', 
+        component: PantryComponent
     }
 ];
 

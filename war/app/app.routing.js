@@ -7,19 +7,24 @@ var profile_component_1 = require('./components/profile.component');
 var pantry_component_1 = require('./components/pantry.component');
 var appRoutes = [
     {
-        path: 'login', component: login_component_1.LoginComponent
+        path: 'login',
+        component: login_component_1.LoginComponent
     },
     {
-        path: 'signup', component: signup_component_1.SignupComponent
+        path: 'signup',
+        component: signup_component_1.SignupComponent
     },
     {
-        path: 'home', component: home_component_1.HomeComponent
+        path: 'home',
+        component: home_component_1.HomeComponent
     },
     {
-        path: 'profile', component: profile_component_1.ProfileComponent
+        path: 'profile',
+        component: profile_component_1.ProfileComponent
     },
     {
-        path: 'pantry', component: pantry_component_1.PantryComponent
+        path: 'pantry',
+        component: pantry_component_1.PantryComponent
     }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes, { useHash: true });
