@@ -41,5 +41,9 @@ public class Ingredient {
         else if (unit == ""){
             return Float.toString(quantity) + ingredient;
         }
+//      3 argument ingredient
+        else{
+            return Float.toString(quantity) + unit + "of" + ingredient;
+        }
     }
 }
