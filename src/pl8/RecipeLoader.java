@@ -36,8 +36,37 @@ public class RecipeLoader {
 		/* Run Query on Datastore */
 		PreparedQuery pq = datastore.prepare(q);
 
-		/* There should only be one result since emails are unique */
 		u = pq.asSingleEntity();
+
+		return u;
+	}
+
+	public static Entity getRecipeByIngredients(String ingredients[]) {
+		/* Init a datastore session to perform the check */
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
+		/* Create Filter for Recipes */
+		//Filter uf = new FilterPredicate("Ingredients", FilterOperator.IN, name);
+		ArrayList<Filter> ingredientListFilter = [];
+		for (String ingredient : ingredients) {
+			ingredientListFilter.add(new FilterPredicate("Ingredients", FilterOperator.IN, ingredient))
+		}
+		
+		// Combine individual recipe filters into single filter
+		CompositeFilter ingredientsFilter = CompositeFilterOperator.and(ingredientListFilter)
+
+		/* Apply Filter to a Query on the Datastore */
+		Query q = null;
+		Entity u = null;
+
+		/* Form Query for execution */
+		q = new Query("Recipe").setFilter(ingredientsFilter);
+
+		/* Run Query on Datastore */
+		PreparedQuery pq = datastore.prepare(q);
+
+		/* REturns list */
+		u = pq.asList();
 
 		return u;
 	}
