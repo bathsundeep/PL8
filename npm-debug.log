@@ -4,6 +4,7 @@
 1 verbose cli   'install' ]
 2 info using npm@2.15.9
 3 info using node@v4.6.0
+<<<<<<< HEAD
 4 verbose readDependencies loading dependencies from C:\Users\Austin\Documents\cs307\pl8\package.json
 5 error install Couldn't read dependencies
 6 verbose stack Error: ENOENT: no such file or directory, open 'C:\Users\Austin\Documents\cs307\pl8\package.json'
@@ -18,6 +19,22 @@
 14 error errno -4058
 15 error syscall open
 16 error package.json ENOENT: no such file or directory, open 'C:\Users\Austin\Documents\cs307\pl8\package.json'
+=======
+4 verbose readDependencies loading dependencies from C:\Users\disca\OneDrive\Documents\GitHub\PL8\package.json
+5 error install Couldn't read dependencies
+6 verbose stack Error: ENOENT: no such file or directory, open 'C:\Users\disca\OneDrive\Documents\GitHub\PL8\package.json'
+6 verbose stack     at Error (native)
+7 verbose cwd C:\Users\disca\OneDrive\Documents\GitHub\PL8
+8 error Windows_NT 10.0.10240
+9 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
+10 error node v4.6.0
+11 error npm  v2.15.9
+12 error path C:\Users\disca\OneDrive\Documents\GitHub\PL8\package.json
+13 error code ENOPACKAGEJSON
+14 error errno -4058
+15 error syscall open
+16 error package.json ENOENT: no such file or directory, open 'C:\Users\disca\OneDrive\Documents\GitHub\PL8\package.json'
+>>>>>>> origin/master
 16 error package.json This is most likely not a problem with npm itself.
 16 error package.json npm can't find a package.json file in your current directory.
 17 verbose exit [ -4058, true ]

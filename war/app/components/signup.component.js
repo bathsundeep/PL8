@@ -12,33 +12,26 @@ var core_1 = require('@angular/core');
 var SignupComponent = (function () {
     function SignupComponent() {
     }
-    /*  constructor(
-         private router: Router,
-         private PL8Service: PL8Service,
-         private UserService: UserService) { }
-   
-       public username: string;
-       public email: string;
-       public password: string;
-       public isLoading: boolean;
-       @Input() public errorMessage: string;
-   
-       onSubmit() {
-         this.isLoading = true;
-         this.PL8Service.signup(this.username, this.email, this.password)
-         .then(User => {
-           this.isLoading = false;
-           this.UserService.currentUser = User;
-           this.router.navigate(['/'])
-         }, (reason : Response) => {
-           this.errorMessage = reason.json()["message"];
-           this.isLoading = false;
-         });
-         return false;
-       }
-        */
+    SignupComponent.prototype.onSubmit = function () {
+        var _this = this;
+        this.isLoading = true;
+        this.pl8service.signup(this.username, this.email, this.password)
+            .then(function (User) {
+            _this.isLoading = false;
+            _this.UserService.currentUser = User;
+            _this.router.navigate(['/']);
+        }, function (reason) {
+            _this.errorMessage = reason.json()["message"];
+            _this.isLoading = false;
+        });
+        return false;
+    };
     SignupComponent.prototype.ngOnInit = function () {
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], SignupComponent.prototype, "errorMessage", void 0);
     SignupComponent = __decorate([
         core_1.Component({
             selector: 'my-signup',

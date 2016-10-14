@@ -1,0 +1,22 @@
+<form action ="createRecipe" method="post" (ngSubmit)="onSubmit()" class="form-horizontal">
+    <fieldset>
+        <legend></legend>
+        <div class="form-group">
+            <label for ="name" class="col-sm-1.1 control-label">Recipe Name</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Recipe Name" [(ngModel)]="recipe.propertyMap.Name">
+        </div>
+        <div class="form-group">
+            <label for ="description" class = "col-sm-1.1 control-label">Description</label>
+            <input type="text" class="form-control" name="description" id="description" placeholder="Description"  [(ngModel)]="recipe.porpertyMap.Description">
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Ingredients</legend>
+        <div class="form-group">
+            <div class="col-sm-1">
+                <div class = "input-group">
+                    <input type="text" class="form-control" name="ingredients" id="ingredients" placeholder="Ingredients" [(ngModel)]="recipe.propertyMap.Ingredients">
+                </div>
+            </div>
+        </div>
+    </fieldset>

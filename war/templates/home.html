@@ -1,14 +1,15 @@
 <div class="container">
     <div class="jumbotron text-center">
-      <h1>Welcome to PL8</h1>
+      <!--<div *ngIf="UserService.isLoggedIn">
+      <h1>{{UserService.currentUser.propertyMap.Username}}'s PL8</h1>
+      </div>-->
       <p></p>
     </div>
+    </div>
 
-
-<h1>Here lies recipes</h1>
-<h2>One day...</h2>
-<h3>Before Friday...</h3>
 <nav>
 <li routerLinkActive="active"><a routerLink="/profile" >Profile</a></li>
+<li routerLinkActive="active"><a routerLink = "/createRecipe">
+<h1>Create A Recipe</h1></a></li>
 </nav>
 <router-outlet></router-outlet>

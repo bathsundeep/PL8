@@ -65,6 +65,37 @@ var PL8Service = (function () {
             .toPromise()
             .then(function (resp) { return resp.json(); });
     };
+    PL8Service.prototype.createRecipe = function (recipe) {
+        var _this = this;
+        return this.apiPost('/api/auth/createRecipe', {
+            name: recipe.propertyMap.Name,
+            description: recipe.propertyMap.Description,
+            ingredients: JSON.stringify(recipe.propertyMap.Ingredients)
+        })
+            .toPromise()
+            .catch(this.handleError)
+            .then(function (resp) { return resp.json(); })
+            .then(function (db) { return _this.toRecipe(db); });
+    };
+    PL8Service.prototype.toRecipe = function (original) {
+        return {
+            key: original.key,
+            propertyMap: {
+                Name: original.propertyMap.Name,
+                Description: original.propertyMap.Description,
+                Ingredients: JSON.parse(original.propertyMap.Ingredients),
+                Pic: original.propertyMap.Pic
+            }
+        };
+    };
+    PL8Service.prototype.recipes = function () {
+        var _this = this;
+        return this.http.get('/getRecipe')
+            .toPromise()
+            .catch(this.handleError)
+            .then(function (resp) { return resp.json(); })
+            .then(function (recipebases) { return recipebases.map(_this.toRecipe); });
+    };
     PL8Service = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

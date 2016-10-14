@@ -8,8 +8,35 @@ export interface Model {
 } 
 
 export interface User extends Model {
-    Username: string;
-    Email: string;
-    Preferences: string[];
+    propertyMap: {
+        Username: string;
+        Email: string;
+        Preferences: string[];
+    }
+
+}
+
+export interface Ingredient {
+    ingredient: string;
+    amount: number;
+    unit: string;
+    abv: number;
+}
+
+export interface Recipe extends Model {
+    propertyMap: {
+        Name: string;
+        Description: string;
+        Ingredients: Ingredient[];
+        Pic: string;
+    }
+}
+export interface RecipeBase extends Model {
+    propertyMap: {
+        Name: string;
+        Description: string;
+        Ingredients: string;
+        Pic: string;
+    }
 }
 
