@@ -12,10 +12,10 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var api_service_1 = require('../API/api.service');
 var CreateRecipeComponent = (function () {
-    function CreateRecipeComponent(router, PL8Service, UserService) {
+    function CreateRecipeComponent(router, PL8Service //,
+        ) {
         this.router = router;
         this.PL8Service = PL8Service;
-        this.UserService = UserService;
         this.recipe = {
             key: {
                 kind: "Recipe",
@@ -46,7 +46,7 @@ var CreateRecipeComponent = (function () {
         return false;
     };
     CreateRecipeComponent.prototype.ngOnInit = function () {
-        this.addIng();
+        // this.addIng();
     };
     CreateRecipeComponent.prototype.addIng = function () {
         this.recipe.propertyMap.Ingredients.push({
@@ -56,14 +56,12 @@ var CreateRecipeComponent = (function () {
             unit: ""
         });
     };
-    CreateRecipeComponent.prototype.del = function (idx) {
-    };
     CreateRecipeComponent = __decorate([
         core_1.Component({
             selector: 'my-createRecipe',
             templateUrl: '/templates/createRecipe.html',
         }), 
-        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service, api_service_1.UserService])
+        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service])
     ], CreateRecipeComponent);
     return CreateRecipeComponent;
 }());

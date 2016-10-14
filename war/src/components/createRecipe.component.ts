@@ -17,8 +17,8 @@ import {Recipe, Ingredient } from '../API/api.models';
 export class CreateRecipeComponent implements OnInit {
 
     constructor(private router: Router,
-                private PL8Service: PL8Service,
-                private UserService: UserService) {}
+                private PL8Service: PL8Service//,
+                /*private UserService: UserService*/) {}
 
     public name: string;
     public description: string;
@@ -52,10 +52,10 @@ export class CreateRecipeComponent implements OnInit {
                 this.isLoading = false;
             });
             return false;
-        }
+        } 
     
     ngOnInit(): void {
-        this.addIng();
+       // this.addIng();
     }
 
 
@@ -67,7 +67,4 @@ export class CreateRecipeComponent implements OnInit {
             unit: ""
         });
     }
-        del(idx: number) {
-           
-        }
     }
