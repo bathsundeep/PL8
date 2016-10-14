@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { User } from './API/api.models';
 import { PL8Service, UserService } from './API/api.service';
+
 /* This is the app component typescript (.ts) file.  This creates the main App Component, or the root component */
 
 @Component({

@@ -8,8 +8,10 @@ export interface Model {
 } 
 
 export interface User extends Model {
-    Username: string;
-    Email: string;
-    Preferences: string[];
+    propertyMap: {
+        Username: string;
+        Email: string;
+        Preferences: string[];
+    }
 }
 
