@@ -3,6 +3,7 @@ import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 
 import {PL8Service, UserService } from '../API/api.service';
+import { Recipe } from '../API/api.models';
 
 @Component({
   selector: 'my-home',
@@ -11,11 +12,44 @@ import {PL8Service, UserService } from '../API/api.service';
 
 export class HomeComponent implements OnInit {
          constructor(
-    private router: Router) {}
-        
-       ngOnInit(): void {
-       
-       }
-       
+        private router: Router,
+        private Pl8Service: PL8Service) {
+    }
+
+    @Input()
+    isLoading: boolean;
+
+    @Input()
+    recipes: Recipe[];
+
+    searchquery: string;
+
+    allRecipes: Recipe[];
+    searchResults: Recipe[];
+
+    ngOnInit(): void {
+        this.isLoading = true;
+
+        this.Pl8Service.recipes()
+            .then(recipes => {
+                this.allRecipes = this.recipes = recipes;
+                this.isLoading = false;
+            });
+    }
+
+    showAll() {
+        this.recipes = this.allRecipes;
+        return false;
+    }
+
+    onSubmit() {
+        if(this.searchquery.length == 0) {
+            this.recipes = this.allRecipes;
+            return;
+        }
+
+        this.isLoading = true;
+
+        return false;
+    }
 }
- 
