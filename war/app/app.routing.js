@@ -28,7 +28,7 @@ var appRoutes = [
         component: pantry_component_1.PantryComponent
     },
     { path: 'createRecipe',
-        component: createRecipe_component_1.CreateRecipe
+        component: createRecipe_component_1.CreateRecipeComponent
     }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes, { useHash: true });

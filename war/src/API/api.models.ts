@@ -20,10 +20,11 @@ export interface Ingredient {
     ingredient: string;
     amount: number;
     unit: string;
+    abv: number;
 }
 
 export interface Recipe extends Model {
-    propertMap: {
+    propertyMap: {
         Name: string;
         Description: string;
         Ingredients: Ingredient[];

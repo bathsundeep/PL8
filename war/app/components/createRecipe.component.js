@@ -10,20 +10,62 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var CreateRecipe = (function () {
-    function CreateRecipe(router) {
+var api_service_1 = require('../API/api.service');
+var CreateRecipeComponent = (function () {
+    function CreateRecipeComponent(router, PL8Service, UserService) {
         this.router = router;
+        this.PL8Service = PL8Service;
+        this.UserService = UserService;
+        this.recipe = {
+            key: {
+                kind: "Recipe",
+                id: -1
+            },
+            propertyMap: {
+                Name: "",
+                Description: "",
+                Ingredients: [],
+                Pic: ""
+            }
+        };
     }
-    CreateRecipe.prototype.ngOnInit = function () {
+    CreateRecipeComponent.prototype.onSubmit = function () {
+        var _this = this;
+        this.isLoading = true;
+        this.recipe.propertyMap.Ingredients.map(function (i) {
+            i.abv = i.abv / 2 / 100;
+            return i;
+        });
+        this.PL8Service.createRecipe(this.recipe)
+            .then(function (recipe) {
+            _this.isLoading = false;
+            _this.router.navigate(['/recipe', recipe.key.id]);
+        }, function (reason) {
+            _this.isLoading = false;
+        });
+        return false;
     };
-    CreateRecipe = __decorate([
+    CreateRecipeComponent.prototype.ngOnInit = function () {
+        this.addIng();
+    };
+    CreateRecipeComponent.prototype.addIng = function () {
+        this.recipe.propertyMap.Ingredients.push({
+            ingredient: "",
+            abv: 0,
+            amount: 0,
+            unit: ""
+        });
+    };
+    CreateRecipeComponent.prototype.del = function (idx) {
+    };
+    CreateRecipeComponent = __decorate([
         core_1.Component({
-            selector: 'my-pantry',
+            selector: 'my-createRecipe',
             templateUrl: '/templates/createRecipe.html',
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
-    ], CreateRecipe);
-    return CreateRecipe;
+        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service, api_service_1.UserService])
+    ], CreateRecipeComponent);
+    return CreateRecipeComponent;
 }());
-exports.CreateRecipe = CreateRecipe;
+exports.CreateRecipeComponent = CreateRecipeComponent;
 //# sourceMappingURL=createRecipe.component.js.map

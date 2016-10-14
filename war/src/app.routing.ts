@@ -6,7 +6,7 @@ import { SignupComponent } from './components/signup.component';
 import { HomeComponent } from './components/home.component';
 import { ProfileComponent } from './components/profile.component';
 import { PantryComponent } from './components/pantry.component';
-import {CreateRecipe} from './components/createRecipe.component';
+import {CreateRecipeComponent} from './components/createRecipe.component';
 const appRoutes: Routes = [
     {
         path: 'login', 
@@ -29,7 +29,7 @@ const appRoutes: Routes = [
         component: PantryComponent
     },
     {   path: 'createRecipe',
-        component: CreateRecipe
+        component: CreateRecipeComponent
     }   
 ];
 
