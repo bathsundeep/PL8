@@ -15,5 +15,59 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <url-pattern>/*</url-pattern>
 </filter-mapping>
 
+<servlet>
+		<servlet-name>PL8</servlet-name>
+		<servlet-class>pl8.PL8Servlet</servlet-class>
+		<url-pattern>/pl8</url-pattern>
+	</servlet>
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>pl8.Login</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Signup</servlet-name>
+		<servlet-class>pl8.Signup</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>pl8.Logout</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CreateRecipe</servlet-name>
+		<servlet-class>pl8.CreateRecipe</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>MeServlet</servlet-name>
+		<servlet-class>pl8.MeServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/api/auth/logout</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Signup</servlet-name>
+		<url-pattern>/signup</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CreateRecipe</servlet-name>
+		<url-pattern>/api/auth/createRecipe</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>QueryRecipe</servlet-name>
+		<url-pattern>/getRecipe</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MeServlet</servlet-name>
+		<url-pattern>/api/auth/me</url-pattern>
+</servlet-mapping>		
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
 
 </web-app>
