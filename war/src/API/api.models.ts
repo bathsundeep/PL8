@@ -20,7 +20,6 @@ export interface Ingredient {
     ingredient: string;
     amount: number;
     unit: string;
-    abv: number;
 }
 
 export interface Recipe extends Model {

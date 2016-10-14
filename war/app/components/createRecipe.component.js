@@ -33,8 +33,6 @@ var CreateRecipeComponent = (function () {
         var _this = this;
         this.isLoading = true;
         this.recipe.propertyMap.Ingredients.map(function (i) {
-            i.abv = i.abv / 2 / 100;
-            return i;
         });
         this.PL8Service.createRecipe(this.recipe)
             .then(function (recipe) {
@@ -43,10 +41,11 @@ var CreateRecipeComponent = (function () {
         }, function (reason) {
             _this.isLoading = false;
         });
+        setTimeout(function () { return _this.router.navigate(['/home']); });
         return false;
     };
     CreateRecipeComponent.prototype.ngOnInit = function () {
-        // this.addIng();
+        this.addIng();
     };
     CreateRecipeComponent.prototype.addIng = function () {
         this.recipe.propertyMap.Ingredients.push({

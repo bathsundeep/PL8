@@ -41,8 +41,6 @@ export class CreateRecipeComponent implements OnInit {
     public onSubmit() {
         this.isLoading = true;
         this.recipe.propertyMap.Ingredients.map(i => {
-            i.abv = i.abv / 2 / 100;
-            return i;
         });
         this.PL8Service.createRecipe(this.recipe)
             .then(recipe => {
@@ -51,11 +49,12 @@ export class CreateRecipeComponent implements OnInit {
             }, (reason: Response) => {
                 this.isLoading = false;
             });
+            setTimeout(() => this.router.navigate(['/home']));
             return false;
         } 
     
     ngOnInit(): void {
-       // this.addIng();
+        this.addIng();
     }
 
 
