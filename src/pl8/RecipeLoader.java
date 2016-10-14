@@ -19,9 +19,12 @@ import com.google.appengine.api.datastore.Query.FilterPredicate;
 // Basically plagiarized from UserLoader.java
 
 public class RecipeLoader {
+
 	public static Entity getRecipeByName(String name) {
 		/* Init a datastore session to perform the check */
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
+		Key key = KeyFactory.createKey("Name", name);
 
 		/* Create Filter for Email */
 		Filter filter = new FilterPredicate("Name", FilterOperator.EQUAL, name);
@@ -89,12 +92,13 @@ public class RecipeLoader {
 		datastore.delete(keys);
 	}
 
-	public static Entity saveRecipe(String name, String ingredients[], String steps)
+	public static Entity saveRecipe(String name, List<Ingredient> ingredients, String steps)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 
 		/* Set Entity properties */
 		Entity entity = new Entity("Recipe");
-		entity.setProperty("Name", name);
+		recipeName = name.trim();
+		entity.setProperty("Name", recipeName);
 		entity.setProperty("Ingredients", ingredients);
 		entity.setProperty("Steps", steps);
 
@@ -110,7 +114,7 @@ public class RecipeLoader {
 			
 		// Set Entity properties
 		Entity entity = new Entity("Recipe");
-		entity.setProperty("Name", recipe.name);
+		entity.setProperty("Name", recipe.name.trim());
 		entity.setProperty("Ingredients", recipe.ingredients);
 		entity.setProperty("Steps", recipe.steps);
 
@@ -119,6 +123,6 @@ public class RecipeLoader {
 		datastore.put(entity);
 		
 		return entity;
-		}
+	}
 
 }
