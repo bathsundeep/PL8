@@ -4,7 +4,7 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import 'rxjs/add/operator/toPromise';
 
 /* Import our interfaces */
-import { User, Recipe, Ingredient } from './api.models';
+import { User, Recipe, RecipeBase, Ingredient } from './api.models';
 
 const useMocks = false;
 
@@ -76,21 +76,30 @@ export class PL8Service {
         })
         .toPromise()
         .catch(this.handleError)
-        .then(resp => resp.json() as Recipe)
+        .then(resp => resp.json() as RecipeBase)
         .then(db => this.toRecipe(db));
     }
 
-    /*private toRecipe(original: Recipe) : Recipe {
+    private toRecipe(original: RecipeBase) : Recipe {
         return {
             key: original.key,
-            propertyMap {
+            propertyMap: {
+                Name: original.propertyMap.Name,
+                Description: original.propertyMap.Description,
+                Ingredients: <Ingredient[]>JSON.parse(original.propertyMap.Ingredients),
+                Pic: original.propertyMap.Pic
             }
-                
-            }
-        }
-    }*/
-}
+        };
+    }
 
+    public recipes() {
+        return this.http.get('/getRecipe')
+            .toPromise()
+            .catch(this.handleError)
+            .then(resp => resp.json() as RecipeBase[])
+            .then(recipebases => recipebases.map(this.toRecipe));
+    }
+}
 @Injectable()
 export class UserService {
 

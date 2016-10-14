@@ -31,3 +31,12 @@ export interface Recipe extends Model {
         Pic: string;
     }
 }
+export interface RecipeBase extends Model {
+    propertyMap: {
+        Name: string;
+        Description: string;
+        Ingredients: string;
+        Pic: string;
+    }
+}
+
