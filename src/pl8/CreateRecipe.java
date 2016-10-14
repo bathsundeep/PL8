@@ -45,8 +45,8 @@ public class CreateRecipe extends JsonServlet {
 			Ingredient ing; 
 			try {
 				obj = arr.getJSONObject(i);
-				ing = new Ingredient(obj.getString("name").trim(), obj.getDouble("amount"), obj.getString("unit"), obj.getDouble("abv"));
-				if (ing.amount <= 0.0 || ing.abv > 1.0 || ing.name.equals("") || ing.abv < 0.0) {
+				ing = new Ingredient(obj.getString("name").trim(), obj.getDouble("amount"), obj.getString("unit"));
+				if (ing.amount <= 0.0 || ing.name.equals("")) {
 					jsonServerError(resp, new APIError(APIErrorCode.InvalidIngredient, "Something was wrong with an ingredient."));
 					return;
 				}
@@ -68,7 +68,7 @@ public class CreateRecipe extends JsonServlet {
 		Gson g = new Gson();
 		Entity d = new Entity("Recipe");
 		try {
-			d = RecipeLoader.saveRecipe(recipeName, description, ingredients, 1);
+			d = RecipeLoader.saveRecipe(recipeName, description, ingredients, "N/A");
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			json(resp, HttpStatusCodes.STATUS_CODE_SERVER_ERROR, new APIError(APIErrorCode.UnhandledException, e.toString()));
 			return;

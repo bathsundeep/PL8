@@ -92,13 +92,14 @@ public class RecipeLoader {
 		datastore.delete(keys);
 	}
 
-	public static Entity saveRecipe(String name, List<Ingredient> ingredients, String steps)
+	public static Entity saveRecipe(String name, String description,List<Ingredient> ingredients, String steps)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 
 		/* Set Entity properties */
 		Entity entity = new Entity("Recipe");
 		recipeName = name.trim();
 		entity.setProperty("Name", recipeName);
+		d.setProperty("Description", description);
 		entity.setProperty("Ingredients", ingredients);
 		entity.setProperty("Steps", steps);
 

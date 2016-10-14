@@ -13,3 +13,24 @@
 <h1>Create A Recipe</h1></a></li>
 </nav>
 <router-outlet></router-outlet>
+
+<div class="row">
+
+        <h4 class="text-center">Recipes</h4>
+        
+              <section *ngIf="recipe">
+                  <div class="row">
+                      <div class="col-md-8">
+                          <h2>{{ recipe.propertyMap.Name }}</h2>
+                          <p class="lead">{{ recipe.propertyMap.Description }}</p>
+                          <p class="lead">Ingredients:</p>
+                          <ul>
+                              <li *ngFor="let ing of recipe.propertyMap.Ingredients">
+                                  {{ ing.amount }} {{ ing.unit}} {{ ing.name }}
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </section>
+
+</div>
