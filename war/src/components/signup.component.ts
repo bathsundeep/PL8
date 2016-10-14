@@ -11,10 +11,9 @@ import { PL8Service, UserService } from '../API/api.service';
 
 export class SignupComponent implements OnInit {
     
- /*  constructor(
-      private router: Router,
-      private PL8Service: PL8Service,
-      private UserService: UserService) { }
+    private router: Router;
+    private pl8service: PL8Service;
+    private UserService: UserService;
 
     public username: string;
     public email: string;
@@ -24,7 +23,7 @@ export class SignupComponent implements OnInit {
 
     onSubmit() {
       this.isLoading = true;
-      this.PL8Service.signup(this.username, this.email, this.password)
+      this.pl8service.signup(this.username, this.email, this.password)
       .then(User => {
         this.isLoading = false;
         this.UserService.currentUser = User;
@@ -35,7 +34,7 @@ export class SignupComponent implements OnInit {
       });
       return false;
     }
-     */   
+       
     ngOnInit(): void {
        
     }

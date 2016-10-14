@@ -9,10 +9,11 @@ export interface Model {
 
 export interface User extends Model {
     propertyMap: {
-    Username: string;
-    Email: string;
-    Preferences: string[];
+        Username: string;
+        Email: string;
+        Preferences: string[];
     }
+
 }
 
 export interface Ingredient {
