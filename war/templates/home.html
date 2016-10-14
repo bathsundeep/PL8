@@ -15,12 +15,12 @@
 <router-outlet></router-outlet>
 
 <div class="alert alert-info" *ngIf="isLoading">
-    Loading...
+    <h4 class="text-center"> Loading... </h4>
 </div>
 
 <div class="row">
 
-        <h4 class="text-center">Recipes</h4>
+        <h3 class="text-center">Recipes</h3>
         
               <section *ngIf="recipe">
                   <div class="row">
@@ -40,5 +40,5 @@
 </div>
 
 <section *ngIf="!isLoading && !recipe">
-    No recipe found
+   <h4 class="text-center"> No recipe found </h4>
 </section>
