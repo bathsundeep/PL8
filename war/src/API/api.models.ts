@@ -1,5 +1,7 @@
 /* Create interfaces we use through project and import them when needed */
 
+/* If an interface extends Model, include a propertyMap */
+
 export interface Model {
     key: {
         kind: string;

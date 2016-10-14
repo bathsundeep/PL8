@@ -1,22 +1,35 @@
 <!-- This is the template for the app component called by templateUrl !-->
 
-      <h1>Welcome to Login</h1>
-      <h5>Olive Garden Unlimited Breadsticks</h5>
+<h2>Log in</h2>
 
-      <hr>
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage && errorMessage.length > 0">
+  {{errorMessage}}
+</div>
 
-      <div style="text-align:center;" class="container">
+<div class="alert alert-info" role="alert" *ngIf="isLoading">
+  Loading...
+</div>
 
-          <h3> Log in to PL8</h3>
-          <input type="text" name="Username" placeholder="Username" /> <br />
-          <input type="text" name="Password" placeholder="Password" /> <br />
+<form (ngSubmit)="onSubmit()" class="form-horizontal">
 
-          <!-- Made this hyperlink go to home until we figure out how we want
-               to handle the forgotten password !-->
-          <h6> <a href="http://localhost:3000/#/home"> Forgot password? </a> </h6> <br />
+  <div class="form-group">
+    <label for="username" class="col-sm-2 control-label">Username</label>
+    <div class="col-sm-10">
+      <input name="username" type="text" required class="form-control" id="username" placeholder="Username" [(ngModel)]="username">
+    </div>
+  </div>
 
-          <!-- Button does not do anything yet!-->
-          <button type="submit"> Log In </button>
+  <div class="form-group">
+    <label for="password" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-10">
+      <input name="password" type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="password">
+    </div>
+  </div>
 
-      </div>
-
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </div>
+  </div>
+  
+</form>

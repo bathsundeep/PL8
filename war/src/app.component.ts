@@ -11,14 +11,11 @@ import { PL8Service, UserService } from './API/api.service';
   templateUrl: 'templates/app.component.html', /* Template is what is rendered when app is opened */
   providers: [PL8Service]
 })
-export class AppComponent implements OnInit{ 
-  constructor (
-    private router: Router){}
-  
-  /*constructor(
-    private PL8Service: PL8Service,
-    @Input() private UserService: UserService
-  ) { }
+export class AppComponent implements OnInit { 
+
+  private PL8Service: PL8Service;
+  @Input() private UserService: UserService;
+
 
   public logOut() {
     this.PL8Service.logout()
@@ -26,8 +23,8 @@ export class AppComponent implements OnInit{
         window.location.reload();
       });
   }
-*/
+
   ngOnInit(): void {
-    setTimeout(() => this.router.navigate(['/home']));
+
   }
 }
