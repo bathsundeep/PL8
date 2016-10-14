@@ -1,11 +1,3 @@
-<div class="container">
-    <div class="jumbotron text-center">
-      <!--<div *ngIf="UserService.isLoggedIn">
-      <h1>{{UserService.currentUser.propertyMap.Username}}'s PL8</h1>
-      </div>-->
-      <p></p>
-    </div>
-    </div>
 
 <nav>
 <li routerLinkActive="active"><a routerLink="/profile" >Profile</a></li>
@@ -26,7 +18,7 @@
 
 <div class = "list-group" *ngIf = "!isLoading">
     <a routerLink="/recipes/{{recipes.key.id }}" class="list-group-item" *ngFor="let recipe of recipes">
-    <h4 class = "list-group-item-heading">{{recipe.propertyMap.name}}</h4>
+    <h4 class = "list-group-item-heading">{{recipe.propertyMap.Name}}</h4>
     <p class = "list-group-item-text"> {{recipe.properyMap.Description}};
         <span *ngFor = "let ing of recipe.propertyMap.Ingredients; let isLast = last">
             {{ing.amount}}
