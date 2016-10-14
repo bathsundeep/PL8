@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
     @Input()
     recipes: Recipe[];
 
-    searchquery: string;
 
     allRecipes: Recipe[];
     searchResults: Recipe[];
@@ -42,14 +41,4 @@ export class HomeComponent implements OnInit {
         return false;
     }
 
-    onSubmit() {
-        if(this.searchquery.length == 0) {
-            this.recipes = this.allRecipes;
-            return;
-        }
-
-        this.isLoading = true;
-
-        return false;
-    }
 }

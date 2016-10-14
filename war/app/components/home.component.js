@@ -29,14 +29,6 @@ var HomeComponent = (function () {
         this.recipes = this.allRecipes;
         return false;
     };
-    HomeComponent.prototype.onSubmit = function () {
-        if (this.searchquery.length == 0) {
-            this.recipes = this.allRecipes;
-            return;
-        }
-        this.isLoading = true;
-        return false;
-    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Boolean)

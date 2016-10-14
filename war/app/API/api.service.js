@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
+require('rxjs/Rx');
 var useMocks = false;
 var PL8Service = (function () {
     function PL8Service(http) {
@@ -90,7 +91,7 @@ var PL8Service = (function () {
     };
     PL8Service.prototype.recipes = function () {
         var _this = this;
-        return this.http.get('/getRecipe')
+        return this.http.get('/getRecipes')
             .toPromise()
             .catch(this.handleError)
             .then(function (resp) { return resp.json(); })

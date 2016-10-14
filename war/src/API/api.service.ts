@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-
+import 'rxjs/Rx';
 /* Import our interfaces */
 import { User, Recipe, RecipeBase, Ingredient } from './api.models';
 
@@ -93,7 +93,7 @@ export class PL8Service {
     }
 
     public recipes() {
-        return this.http.get('/getRecipe')
+        return this.http.get('/getRecipes')
             .toPromise()
             .catch(this.handleError)
             .then(resp => resp.json() as RecipeBase[])
