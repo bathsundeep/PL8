@@ -28,9 +28,9 @@ public class Login extends JsonServlet {
 		user = user.replaceAll("\\s+","");
 		String pw = request.getParameter("password");
 		
-		Entity u = UserLoader.getUserByUsername(user);
+		Entity entity = UserLoader.getUserByUsername(user);
 		
-		if(u == null)
+		if(entity == null)
 		{
 			jsonForbidden(resp, new APIError(APIErrorCode.CombinationNotFound, "User & Password Combination not found."));
 		}
@@ -39,7 +39,7 @@ public class Login extends JsonServlet {
 			/* Now test the Password for this User entity */
 			try 
 			{
-				if(Password.validate(pw, (String)u.getProperty("Password")))
+				if(Password.validate(pw, (String)entity.getProperty("Password")))
 				{
                     /* Password is valid, format request back to client with login succeed */
 					HttpSession session = request.getSession();
@@ -47,7 +47,7 @@ public class Login extends JsonServlet {
 
 					session.setMaxInactiveInterval(365*24*60*60);
 					
-					jsonOk(resp, u);
+					jsonOk(resp, entity);
 				}
 				else
 				{

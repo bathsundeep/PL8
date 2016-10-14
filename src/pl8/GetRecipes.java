@@ -35,12 +35,12 @@ public class GetRecipes extends JsonServlet {
 		
 		}
 
-		Entity u = RecipeLoader.getRecipeByIngredients(name);
+		Entity entity = RecipeLoader.getRecipeByIngredients(name);
 		
 		/* Existence check. u will not be null if an existing
 		 * Recipe with this name exists.
 		 */
-		if(u != null)
+		if(entity != null)
 		{
 			jsonForbidden(resp, new APIError(APIErrorCode.RecipeNameTaken, "No recipes matching those ingredients."));
 			
@@ -50,10 +50,10 @@ public class GetRecipes extends JsonServlet {
 		
 		HttpSession session = request.getSession();
         // IDK what this does but I'll keep it
-		session.setAttribute("Recipe", u.getProperty("Name"));
+		session.setAttribute("Recipe", entity.getProperty("Name"));
 
 		session.setMaxInactiveInterval(365*24*60*60);
 		
-		jsonOk(resp, u);
+		jsonOk(resp, entity);
 	}
 }

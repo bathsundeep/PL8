@@ -40,12 +40,12 @@ public class Signup extends JsonServlet {
 		}
 		
 		}
-		Entity u = UserLoader.getUserByUsername(user);
+		Entity entity = UserLoader.getUserByUsername(user);
 		
 		/* Existence check. U will not be null if an existing
 		 * User with this username exists.
 		 */
-		if(u != null)
+		if(entity != null)
 		{
 			jsonForbidden(resp, new APIError(APIErrorCode.UsernameAlreadyTaken, "Username is taken."));
 			
@@ -53,17 +53,17 @@ public class Signup extends JsonServlet {
 		}
 		
 		try {
-			u = UserLoader.saveUser(user, pw, email);
+			entity = UserLoader.saveUser(user, pw, email);
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			json(resp, HttpStatusCodes.STATUS_CODE_SERVER_ERROR, new APIError(APIErrorCode.UnhandledException, e.toString()));
 			return;
 		}
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("User", u.getProperty("Username"));
+		session.setAttribute("User", entity.getProperty("Username"));
 
 		session.setMaxInactiveInterval(365*24*60*60);
 		
-		jsonOk(resp, u);
+		jsonOk(resp, entity);
 	}
 }

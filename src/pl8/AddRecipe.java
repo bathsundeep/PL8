@@ -33,29 +33,29 @@ public class AddRecipe extends JsonServlet {
 		
 		}
         
-		Entity u = RecipeLoader.getRecipeByName(name);
+		Entity entity = RecipeLoader.getRecipeByName(name);
 		
 		/* Existence check. u will not be null if an existing
 		 * Recipe with this name exists.
 		 */
-		if(u != null)
+		if(entity != null)
 		{
 			jsonForbidden(resp, new APIError(APIErrorCode.RecipeNameTaken, "Recipe Name is taken."));
 			return;
 		}
 		
 		try {
-			u = RecipeLoader.saveRecipe(name, ingredients, steps);
+			entity = RecipeLoader.saveRecipe(name, ingredients, steps);
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			json(resp, HttpStatusCodes.STATUS_CODE_SERVER_ERROR, new APIError(APIErrorCode.UnhandledException, e.toString()));
 			return;
 		}
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("Recipe", u.getProperty("Name"));
+		session.setAttribute("Recipe", entity.getProperty("Name"));
 
 		session.setMaxInactiveInterval(365*24*60*60);
 		
-		jsonOk(resp, u);
+		jsonOk(resp, entity);
 	}
 }
