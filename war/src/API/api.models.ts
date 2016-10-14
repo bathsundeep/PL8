@@ -13,5 +13,20 @@ export interface User extends Model {
         Email: string;
         Preferences: string[];
     }
+
 }
 
+export interface Ingredient {
+    ingredient: string;
+    amount: number;
+    unit: string;
+}
+
+export interface Recipe extends Model {
+    propertMap: {
+        Name: string;
+        Description: string;
+        Ingredients: Ingredient[];
+        Pic: string;
+    }
+}
