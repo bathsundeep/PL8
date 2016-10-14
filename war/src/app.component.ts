@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-
+import { Router } from '@angular/router';
 import { User } from './API/api.models';
 import { PL8Service, UserService } from './API/api.service';
 /* This is the app component typescript (.ts) file.  This creates the main App Component, or the root component */
@@ -11,6 +11,9 @@ import { PL8Service, UserService } from './API/api.service';
   providers: [PL8Service]
 })
 export class AppComponent implements OnInit{ 
+  constructor (
+    private router: Router){}
+  
   /*constructor(
     private PL8Service: PL8Service,
     @Input() private UserService: UserService
@@ -23,7 +26,7 @@ export class AppComponent implements OnInit{
       });
   }
 */
-  ngOnInit() {
-    
+  ngOnInit(): void {
+    setTimeout(() => this.router.navigate(['/home']));
   }
 }
