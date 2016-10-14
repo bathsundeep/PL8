@@ -13,7 +13,7 @@
     <fieldset>
         <legend>Ingredients</legend>
         <div class="form-group" *ngFor = "let ing of recipe.propertyMap.Ingredients; let i = index">
-            <div class="col-sm-1">
+            <div class="col-sm-2">
                 <div class = "input-group">
                     <input type="number" class="form-control" placeholder="4" [ngModelOptions]="{standalone: true}" [(ngModel)] ="ing.amount">
                     <div class="input-group-addon">Amount</div>
