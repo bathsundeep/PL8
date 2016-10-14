@@ -29,7 +29,6 @@ import pl8.api.JsonServlet;
 @SuppressWarnings("serial")
 public class QueryRecipe extends JsonServlet {
 	
-	// Search/filter drinks
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		
@@ -55,16 +54,6 @@ public class QueryRecipe extends JsonServlet {
 		
 		// Create Filters for options 
 		
-		// TODO: Add search terms :(
-		
-		// Add filter options
-		// What properties can we filter on?? TBD
-		
-		// filter example
-		// Filter propertyFilter =
-	    //              new FilterPredicate("height", FilterOperator.GREATER_THAN_OR_EQUAL, minHeight);
-	    // Query q = new Query("Person").setFilter(propertyFilter);
-		
 		// Set sort order
 		String[] sortOptions = options.getSortOptions();
 
@@ -87,7 +76,6 @@ public class QueryRecipe extends JsonServlet {
 		
 	}
 	
-	// View all drinks
 	public void doGet(HttpServletRequest request, HttpServletResponse resp)
 			throws IOException {
 		
@@ -96,11 +84,8 @@ public class QueryRecipe extends JsonServlet {
 		Query q = new Query("Recipe");
 		
 		String id = request.getParameter("id");
-		
-		/* If a specific drink is requested, a field 
-		 * for id will be provided. This should be the
-		 * only item fetched and returned.
-		 */
+
+
 		if (id != null) {
 			long idLong = Long.valueOf(id);
 			
@@ -125,9 +110,7 @@ public class QueryRecipe extends JsonServlet {
 		
 		String query = request.getParameter("query");
 		
-		/* The query parameter will be null when a "view all" request is made.
-		 * OR if the query is the empty string, return the full list
-		 */
+
 		if(query == null || query.equals(""))
 		{
 			String json = new Gson().toJson(recipes);
@@ -138,9 +121,6 @@ public class QueryRecipe extends JsonServlet {
 			return;
 		}
 		
-		/* Since we have a query, we are going to refine our list 
-		 * and weight by the number of matching components.
-		 */
 		
 		/* Remove commas */
 		query = query.replaceAll(",", "");
@@ -156,7 +136,7 @@ public class QueryRecipe extends JsonServlet {
 					&& !term.equalsIgnoreCase("in")))
 				queryTerms.add(term);
 		}
-		/* Prepare ArrayList of Result objects <weight, Entity> */
+
 		List<Result> results = new ArrayList<Result>();
 		
 		for(Entity e : recipes)
@@ -173,18 +153,6 @@ public class QueryRecipe extends JsonServlet {
 			for(String str : queryTerms)
 			{
 				/* Get properties for this entity */
-				
-				/*
-				String name = (String) e.getProperty("Name");
-				String desc = (String) e.getProperty("Description");
-				double tasteRating = Double.parseDouble((String) e.getProperty("TasteRating"));
-				double avgRating = Double.parseDouble((String) e.getProperty("averageRating"));
-				double totalRatings = Double.parseDouble((String) e.getProperty("totalRatings"));
-				
-				String[] ingredients = new Gson().fromJson((String) e.getProperty("Ingredients"), new TypeToken<List<String>>(){}.getType());
-				double alcohol = Double.parseDouble((String) e.getProperty("AlcoholContent"));
-				
-				*/
 				
 				/* Get Map of Properties */
 				Map<String, Object> name = e.getProperties();
