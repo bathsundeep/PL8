@@ -24,19 +24,19 @@ public class UserLoader {
 		Filter uf = new FilterPredicate("Email", FilterOperator.EQUAL, email);
 
 		/* Apply Filter to a Query on the Datastore */
-		Query q = null;
-		Entity u = null;
+		Query query = null;
+		Entity entity = null;
 
 		/* Form Query for execution */
-		q = new Query("User").setFilter(uf);
+		query = new Query("User").setFilter(uf);
 
 		/* Run Query on Datastore */
-		PreparedQuery pq = datastore.prepare(q);
+		PreparedQuery pq = datastore.prepare(query);
 
 		/* There should only be one result since emails are unique */
-		u = pq.asSingleEntity();
+		entity = pq.asSingleEntity();
 
-		return u;
+		return entity;
 	}
 
 	public static Entity getUserByUsername(String username) {
@@ -47,19 +47,19 @@ public class UserLoader {
 		Filter uf = new FilterPredicate("Username", FilterOperator.EQUAL, username);
 
 		/* Apply Filter to a Query on the Datastore */
-		Query q = null;
-		Entity u = null;
+		Query query = null;
+		Entity entity = null;
 
 		/* Form Query for execution */
-		q = new Query("User").setFilter(uf);
+		query = new Query("User").setFilter(uf);
 
 		/* Run Query on Datastore */
-		PreparedQuery pq = datastore.prepare(q);
+		PreparedQuery pq = datastore.prepare(query);
 
 		/* There should only be one result since usernames are unique */
-		u = pq.asSingleEntity();
+		entity = pq.asSingleEntity();
 
-		return u;
+		return entity;
 	}
 
 	public static void deleteAll() {
