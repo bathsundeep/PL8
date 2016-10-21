@@ -24,19 +24,19 @@ public class UserLoader {
 		Filter uf = new FilterPredicate("Email", FilterOperator.EQUAL, email);
 
 		/* Apply Filter to a Query on the Datastore */
-		Query query = null;
-		Entity entity = null;
+		Query q = null;
+		Entity u = null;
 
 		/* Form Query for execution */
-		query = new Query("User").setFilter(uf);
+		q = new Query("User").setFilter(uf);
 
 		/* Run Query on Datastore */
-		PreparedQuery pq = datastore.prepare(query);
+		PreparedQuery pq = datastore.prepare(q);
 
 		/* There should only be one result since emails are unique */
-		entity = pq.asSingleEntity();
+		u = pq.asSingleEntity();
 
-		return entity;
+		return u;
 	}
 
 	public static Entity getUserByUsername(String username) {
@@ -44,30 +44,30 @@ public class UserLoader {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
 		/* Create Filter for Username */
-		Filter filter = new FilterPredicate("Username", FilterOperator.EQUAL, username);
+		Filter uf = new FilterPredicate("Username", FilterOperator.EQUAL, username);
 
 		/* Apply Filter to a Query on the Datastore */
-		Query query = null;
-		Entity entity = null;
+		Query q = null;
+		Entity u = null;
 
 		/* Form Query for execution */
-		query = new Query("User").setFilter(uf);
+		q = new Query("User").setFilter(uf);
 
 		/* Run Query on Datastore */
-		PreparedQuery pq = datastore.prepare(query);
+		PreparedQuery pq = datastore.prepare(q);
 
 		/* There should only be one result since usernames are unique */
-		entity = pq.asSingleEntity();
+		u = pq.asSingleEntity();
 
-		return entity;
+		return u;
 	}
 
 	public static void deleteAll() {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-		Query query = new Query("User");
+		Query q = new Query("User");
 
-		Iterable<Entity> it = datastore.prepare(query).asIterable();
+		Iterable<Entity> it = datastore.prepare(q).asIterable();
 
 		List<Key> keys = new ArrayList<Key>();
 		for (Entity entity : it) {
@@ -83,15 +83,15 @@ public class UserLoader {
 		String pw = Password.getHash(password);
 
 		/* Set Entity properties */
-		Entity entity = new Entity("User");
-		entity.setProperty("Username", username);
-		entity.setProperty("Password", pw);
-		entity.setProperty("Email", email);
+		Entity u = new Entity("User");
+		u.setProperty("Username", username);
+		u.setProperty("Password", pw);
+		u.setProperty("Email", email);
 
 		/* Add new User to the datastore */
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		datastore.put(entity);
+		datastore.put(u);
 
-		return entity;
+		return u;
 	}
 }
