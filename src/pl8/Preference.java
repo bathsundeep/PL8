@@ -35,4 +35,8 @@ class Preference {
     public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;
     }
+
+    public boolean isSoft() {
+        return (amount > 0);
+    }
 }
