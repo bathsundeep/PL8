@@ -1,11 +1,12 @@
 package pl8;
 
+import com.google.appengine.api.datastore.Entity;
+
 public class UserPreferences {
 
     // Not yet sure if username should be a field
     String username;
-    List<Ingredient> preferences;
-    
+    List<Ingredient> preferences;    
 
     public UserIngredients(String username) {
         this.username = username;
@@ -38,8 +39,13 @@ public class UserPreferences {
         throw new RuntimeException("Ingredient with name " + ingredientName + " does not exist");
     }
 
-    static boolean isSoft(Ingredient i) {
+    public static boolean isSoftPreference(Ingredient i) {
         return (i.amount > 0);
+    }
+
+    // TODO implement this
+    public Entity toEntity() {
+        return null;
     }
 
 }
