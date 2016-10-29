@@ -6,16 +6,14 @@ import com.google.appengine.api.datastore.Entity;
 
 
 public class Ingredient {
-    String ingredient;
-    float quantity;
-    String unit;
-
-    public String name;
+    
+    // TODO change these to private and add getter/setters
+    public String ingredient;
 	public double amount;
 	public String unit;
 	
 	public Ingredient(String name, double amount, String unit) {
-		this.name = name;
+		this.quantity = name;
 		this.amount = amount;
 		this.unit = unit;
 	}
@@ -44,6 +42,7 @@ public class Ingredient {
         unit = null;
     }
 
+    @Override
     public String toString(){
 //      1 argument ingredient
         if (quantity == 0){
@@ -57,6 +56,18 @@ public class Ingredient {
         else{
             return Float.toString(quantity) + unit + "of" + ingredient;
         }
+    }
+
+    public boolean equals(Ingredient i) {
+        boolean unitsEqual;
+        if (i.unit == null && unit == null) {
+            unitsEqual = true;
+        } else if (i.unit != null && unit != null) {
+            unitsEqual = true;
+        } else {
+            unitsEqual = false;
+        }
+        return (i.ingredient.equals(ingredient) && (i.amount == amount) && unitsEqual);
     }
 
     public Entity toEntity(){
