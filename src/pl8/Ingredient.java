@@ -13,7 +13,7 @@ public class Ingredient {
 	public String unit;
 	
 	public Ingredient(String name, double amount, String unit) {
-		this.quantity = name;
+		this.ingredient = name;
 		this.amount = amount;
 		this.unit = unit;
 	}
