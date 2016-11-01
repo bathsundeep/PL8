@@ -50,7 +50,6 @@ var CreateRecipeComponent = (function () {
     CreateRecipeComponent.prototype.addIng = function () {
         this.recipe.propertyMap.Ingredients.push({
             ingredient: "",
-            abv: 0,
             amount: 0,
             unit: ""
         });

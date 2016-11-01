@@ -16,8 +16,6 @@ import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 
-// Basically plagiarized from UserLoader.java
-
 public class RecipeLoader {
 
 	public static Entity getRecipeByName(String name) {

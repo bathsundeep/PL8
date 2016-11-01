@@ -12,7 +12,8 @@ var core_1 = require('@angular/core');
 var api_service_1 = require('./API/api.service');
 /* This is the app component typescript (.ts) file.  This creates the main App Component, or the root component */
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(PL8Service) {
+        this.PL8Service = PL8Service;
     }
     AppComponent.prototype.logOut = function () {
         this.PL8Service.logout()
@@ -29,10 +30,10 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            templateUrl: 'templates/app.component.html',
+            templateUrl: 'templates/app.html',
             providers: [api_service_1.PL8Service]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [api_service_1.PL8Service])
     ], AppComponent);
     return AppComponent;
 }());

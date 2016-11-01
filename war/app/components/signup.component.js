@@ -15,7 +15,7 @@ var SignupComponent = (function () {
     SignupComponent.prototype.onSubmit = function () {
         var _this = this;
         this.isLoading = true;
-        this.pl8service.signup(this.username, this.email, this.password)
+        this.PL8Service.signup(this.username, this.email, this.password)
             .then(function (User) {
             _this.isLoading = false;
             _this.UserService.currentUser = User;

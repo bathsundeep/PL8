@@ -61,7 +61,6 @@ export class CreateRecipeComponent implements OnInit {
     addIng() {
         this.recipe.propertyMap.Ingredients.push(<Ingredient>{
             ingredient: "",
-            abv: 0,
             amount: 0,
             unit: ""
         });

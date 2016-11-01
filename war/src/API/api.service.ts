@@ -6,8 +6,6 @@ import 'rxjs/Rx';
 /* Import our interfaces */
 import { User, Recipe, RecipeBase, Ingredient } from './api.models';
 
-const useMocks = false;
-
 @Injectable()
 export class PL8Service {
 

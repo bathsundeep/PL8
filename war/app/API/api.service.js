@@ -15,7 +15,6 @@ var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
 require('rxjs/Rx');
-var useMocks = false;
 var PL8Service = (function () {
     function PL8Service(http) {
         this.http = http;
