@@ -57,7 +57,7 @@ var PL8Service = (function () {
             .then(function (resp) { return resp.json(); });
     };
     PL8Service.prototype.handleError = function (error) {
-        console.error('An error occurred', error); // for demo purposes only
+        //console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     };
     PL8Service.prototype.me = function () {
@@ -70,7 +70,8 @@ var PL8Service = (function () {
         return this.apiPost('/api/auth/createRecipe', {
             name: recipe.propertyMap.Name,
             description: recipe.propertyMap.Description,
-            ingredients: JSON.stringify(recipe.propertyMap.Ingredients)
+            ingredients: JSON.stringify(recipe.propertyMap.Ingredients),
+            Pic: recipe.propertyMap.Pic
         })
             .toPromise()
             .catch(this.handleError)

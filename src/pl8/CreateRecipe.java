@@ -1,4 +1,3 @@
-@@ -0,0 +1,69 @@
 package pl8;
 
 import java.io.IOException;
@@ -19,6 +18,10 @@ import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.google.gson.Gson;
 
+import pl8.api.JsonServlet;
+import pl8.api.APIError;
+import pl8.api.APIError.APIErrorCode;
+
 
 @SuppressWarnings("serial")
 public class CreateRecipe extends JsonServlet {
@@ -35,7 +38,6 @@ public class CreateRecipe extends JsonServlet {
 		JSONArray arr = null;
 		try {
 			arr = new JSONArray(ingredientJson);
-		
 		}
 		catch (JSONException e) {
 			//JSON parsing error
