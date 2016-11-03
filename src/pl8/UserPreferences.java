@@ -3,6 +3,9 @@ package pl8;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Blob;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class UserPreferences {
 
     // Not yet sure if username should be a field
