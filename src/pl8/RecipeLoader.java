@@ -16,8 +16,6 @@ import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 
-// Basically plagiarized from UserLoader.java
-
 public class RecipeLoader {
 
 	public static Entity getRecipeByName(String name) {
@@ -99,30 +97,15 @@ public class RecipeLoader {
 		Entity entity = new Entity("Recipe");
 		recipeName = name.trim();
 		entity.setProperty("Name", recipeName);
-		d.setProperty("Description", description);
-		entity.setProperty("Ingredients", ingredients);
+		entity.setProperty("Description", description);
+		Gson g = new Gson();
+		entity.setProperty("Ingredients", g.toJson(ingredients));
 		entity.setProperty("Steps", steps);
 
 		/* Add new Recipe to the datastore */
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		datastore.put(entity);
 
-		return entity;
-	}
-
-	public static Entity saveRecipe(Recipe recipe) 
-			throws NoSuchAlgorithmException, InvalidKeySpecException {
-			
-		// Set Entity properties
-		Entity entity = new Entity("Recipe");
-		entity.setProperty("Name", recipe.name.trim());
-		entity.setProperty("Ingredients", recipe.ingredients);
-		entity.setProperty("Steps", recipe.steps);
-
-		// Add new Recipe to datastore
-		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		datastore.put(entity);
-		
 		return entity;
 	}
 

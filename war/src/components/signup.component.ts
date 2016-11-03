@@ -8,12 +8,13 @@ import { PL8Service, UserService } from '../API/api.service';
   selector: 'my-signup',
   templateUrl: '/templates/signup.html',
 })
-
 export class SignupComponent implements OnInit {
     
-    private router: Router;
-    private pl8service: PL8Service;
-    private UserService: UserService;
+    
+      public router: Router;
+      public PL8Service: PL8Service;
+      public UserService: UserService;
+    
 
     public username: string;
     public email: string;
@@ -23,7 +24,7 @@ export class SignupComponent implements OnInit {
 
     onSubmit() {
       this.isLoading = true;
-      this.pl8service.signup(this.username, this.email, this.password)
+      this.PL8Service.signup(this.username, this.email, this.password)
       .then(User => {
         this.isLoading = false;
         this.UserService.currentUser = User;
@@ -39,4 +40,3 @@ export class SignupComponent implements OnInit {
        
     }
 }
- 

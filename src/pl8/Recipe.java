@@ -7,23 +7,35 @@ import java.util.List;
 
 public class Recipe{
     String name;
-    Stirng picURL;
+    String picURL;
 //  Arraylist of strings to store the instructions
     ArrayList<String> steps;
 //  ArrayList of Ingredient objects
     ArrayList<Ingredient> ingredients;
     ArrayList<String> tags;
 
+//  Create recipe
     public Recipe(String n, ArrayList s, ArrayList i){
         name = n;
         steps = s;
         ingredients = i;
         tags = new ArrayList<String>;
     }
+//  Create empty recipe
+    pubic Recipe(){
+        name = "";
+        steps = new ArrayList<String>(0);
+        ingredients = new ArrayList<Ingredient>(0);
+        tags = new ArrayList<String>(0);
+    }
 
 //  Add picture to recipe
-    public void addPicture(String url){
+    public void setPicture(String url){
         picURL = url; 
+    }
+//  Retrieve picture for recipe
+    public String getPicture(){
+        return picURL;
     }
 
 //  Add and remove tags from recipe
@@ -32,11 +44,6 @@ public class Recipe{
     }
     pubilc void removeTag(String tag){
         tags.remove(tag);
-    }
-
-//  Retrieve tag list
-    public ArrayList getTags(){
-        return tags;
     }
 
     private String listIngredients(){
@@ -60,7 +67,36 @@ public class Recipe{
             sb.append(s)
         }
     }
+
+//  Print entire recipe
     public String toString(){
         return "Ingredients:\n" + listIngredients() + "Steps:" + listSteps();
     }
+
+//  Retrieve individual components of the recipe
+    public String getName(){
+        return name;
+    }
+    public String[] getIngredients(){
+        String[] ingredientList = new String[ingredients.size()];
+        for (int i = 0; i < ingredients.size(); i++){
+            ingredientList[i] = ingredients.get(i).toString();
+        }
+        return ingredientList;
+    }
+    public String[] getSteps(){
+        String[] stepList = new String[steps.size()];
+        for (int i = 0; i < steps.size(); i++){
+            stepList[i] = steps.get(i);
+        }
+        return stepList;
+    }
+    public String[] getTags(){
+        String[] tagList = new String[tags.size()];
+        for (int i = 0; i < tags.size(); i++){
+            tagList[i] = tags.get(i);
+        }
+        return tagList;
+    }
+
 }

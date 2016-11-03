@@ -8,14 +8,16 @@ import { PL8Service, UserService } from './API/api.service';
 
 @Component({
   selector: 'my-app', /* selector so other files know what component to call */
-  templateUrl: 'templates/app.component.html', /* Template is what is rendered when app is opened */
+  templateUrl: 'templates/app.html', /* Template is what is rendered when app is opened */
   providers: [PL8Service]
 })
 export class AppComponent implements OnInit { 
 
-  private PL8Service: PL8Service;
+  constructor(
+    private PL8Service: PL8Service
+  ) {}
+  
   @Input() private UserService: UserService;
-
 
   public logOut() {
     this.PL8Service.logout()
@@ -24,7 +26,7 @@ export class AppComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
 
   }
 }

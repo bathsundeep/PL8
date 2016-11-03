@@ -6,8 +6,6 @@ import 'rxjs/Rx';
 /* Import our interfaces */
 import { User, Recipe, RecipeBase, Ingredient } from './api.models';
 
-const useMocks = false;
-
 @Injectable()
 export class PL8Service {
 
@@ -58,7 +56,7 @@ export class PL8Service {
     }
 
     private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
+        //console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }
 
@@ -72,7 +70,8 @@ export class PL8Service {
         return this.apiPost('/api/auth/createRecipe', {
             name: recipe.propertyMap.Name,
             description: recipe.propertyMap.Description,
-            ingredients: JSON.stringify(recipe.propertyMap.Ingredients)
+            ingredients: JSON.stringify(recipe.propertyMap.Ingredients),
+            Pic: recipe.propertyMap.Pic
         })
         .toPromise()
         .catch(this.handleError)

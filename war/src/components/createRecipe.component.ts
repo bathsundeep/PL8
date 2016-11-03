@@ -9,20 +9,17 @@ import {Recipe, Ingredient } from '../API/api.models';
     selector: 'my-createRecipe',
     templateUrl: '/templates/createRecipe.html',
 })
-
-
-
-
-
 export class CreateRecipeComponent implements OnInit {
 
-    constructor(private router: Router,
-                private PL8Service: PL8Service//,
-                /*private UserService: UserService*/) {}
+    constructor(
+        private router: Router,
+        private PL8Service: PL8Service//,
+        /*private UserService: UserService*/) {}
 
     public name: string;
     public description: string;
     public isLoading: boolean;
+    @Input() public errorMessage: string;
 
     public recipe: Recipe = {
         key: {
@@ -40,12 +37,10 @@ export class CreateRecipeComponent implements OnInit {
 
     public onSubmit() {
         this.isLoading = true;
-        this.recipe.propertyMap.Ingredients.map(i => {
-        });
         this.PL8Service.createRecipe(this.recipe)
             .then(recipe => {
                 this.isLoading = false;
-                this.router.navigate(['/recipe', recipe.key.id]);
+                this.router.navigate(['/home']);
             }, (reason: Response) => {
                 this.isLoading = false;
             });
@@ -61,7 +56,6 @@ export class CreateRecipeComponent implements OnInit {
     addIng() {
         this.recipe.propertyMap.Ingredients.push(<Ingredient>{
             ingredient: "",
-            abv: 0,
             amount: 0,
             unit: ""
         });

@@ -6,8 +6,13 @@ import { SignupComponent } from './components/signup.component';
 import { HomeComponent } from './components/home.component';
 import { ProfileComponent } from './components/profile.component';
 import { PantryComponent } from './components/pantry.component';
-import {CreateRecipeComponent} from './components/createRecipe.component';
+import { CreateRecipeComponent} from './components/createRecipe.component';
 const appRoutes: Routes = [
+    {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+    },
     {
         path: 'login', 
         component: LoginComponent

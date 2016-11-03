@@ -32,12 +32,10 @@ var CreateRecipeComponent = (function () {
     CreateRecipeComponent.prototype.onSubmit = function () {
         var _this = this;
         this.isLoading = true;
-        this.recipe.propertyMap.Ingredients.map(function (i) {
-        });
         this.PL8Service.createRecipe(this.recipe)
             .then(function (recipe) {
             _this.isLoading = false;
-            _this.router.navigate(['/recipe', recipe.key.id]);
+            _this.router.navigate(['/home']);
         }, function (reason) {
             _this.isLoading = false;
         });
@@ -50,11 +48,14 @@ var CreateRecipeComponent = (function () {
     CreateRecipeComponent.prototype.addIng = function () {
         this.recipe.propertyMap.Ingredients.push({
             ingredient: "",
-            abv: 0,
             amount: 0,
             unit: ""
         });
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CreateRecipeComponent.prototype, "errorMessage", void 0);
     CreateRecipeComponent = __decorate([
         core_1.Component({
             selector: 'my-createRecipe',
