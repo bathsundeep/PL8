@@ -1,6 +1,7 @@
 package pl8;
 
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Blob;
 
 public class UserPreferences {
 
@@ -39,13 +40,23 @@ public class UserPreferences {
         throw new RuntimeException("Ingredient with name " + ingredientName + " does not exist");
     }
 
+    public int count() {
+        return preferences.size();
+    }
+
     public static boolean isSoftPreference(Ingredient i) {
         return (i.amount > 0);
     }
 
-    // TODO implement this
     public Entity toEntity() {
-        return null;
+        Entity entity = new Entity("username", username);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(preferences);
+        byte[] bytes = bos.toByteArray();
+        Blob blob = new Blob(bytes);
+        entity.setProperty("list", blob);
+        return entity;
     }
 
 }
