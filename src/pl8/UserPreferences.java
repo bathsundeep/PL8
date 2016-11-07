@@ -56,7 +56,7 @@ public class UserPreferences {
     }
 
     // This should not be used.
-    public Entity toEntity() {
+    /*public Entity toEntity() {
         Entity entity = new Entity("username", username);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(bos);
@@ -65,7 +65,7 @@ public class UserPreferences {
         Blob blob = new Blob(bytes);
         entity.setProperty("list", blob);
         return entity;
-    }
+    }*/
 
     public Blob preferencesListToBlob() {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
