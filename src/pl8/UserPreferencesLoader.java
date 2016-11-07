@@ -44,7 +44,7 @@ public class UserPreferencesLoader {
 		
 		Entity entity = up.toEntity();
 
-		/* Add new User to the datastore */
+		/* Add new UserPreferences to the datastore */
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		datastore.put(entity);
 
