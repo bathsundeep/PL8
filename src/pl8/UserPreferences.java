@@ -9,10 +9,10 @@ import java.util.ArrayList;
 public class UserPreferences {
 
     // Not yet sure if username should be a field
-    String username;
-    List<Ingredient> preferences;    
+    //String username;
+    private List<Ingredient> preferences;    
 
-    public UserIngredients(String username) {
+    /*public UserIngredients(String username) {
         this.username = username;
         this.preferences = new ArrayList<Ingredient>();
     }
@@ -22,6 +22,10 @@ public class UserPreferences {
     }
     public void setUsername(String username) {
         this.username = username;
+    }*/
+
+    public UserIngredients() {
+        this.preferences = new ArrayList<Ingredient>();
     }
 
     public void addPreference(Ingredient ingredient) {
