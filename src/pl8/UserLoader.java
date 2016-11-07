@@ -77,7 +77,7 @@ public class UserLoader {
 		datastore.delete(keys);
 	}
 
-	public static Entity saveUser(String username, String password, String email)
+	public static Entity saveUser(String username, String password, String email, UserPreferences up)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		/* Encrypt password using PBKDF2 */
 		String pw = Password.getHash(password);
@@ -87,6 +87,7 @@ public class UserLoader {
 		entity.setProperty("Username", username);
 		entity.setProperty("Password", pw);
 		entity.setProperty("Email", email);
+		entity.setProperty("UserPreferences", up.toBlob());
 
 		/* Add new User to the datastore */
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
