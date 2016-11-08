@@ -55,6 +55,7 @@ public class User {
                 return;
             }
         }
+        // TODO handle this exception better
         throw new RuntimeException("Ingredient with name " + ingredientName + " does not exist");
     }
 
