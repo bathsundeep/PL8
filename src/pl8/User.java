@@ -71,5 +71,21 @@ public class User {
         return (i.amount > 0);
     }
 
+    public Entity toEntity() {
+        Entity entity = new Entity("User");
+		entity.setProperty("Username", username);
+		entity.setProperty("Password", password);
+		entity.setProperty("Email", email);
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(preferences);
+        byte[] bytes = bos.toByteArray();
+        Blob blob = new Blob(bytes);
+		entity.setProperty("Preferences", blob);
+
+		return entity;
+    }
+
 
 }
