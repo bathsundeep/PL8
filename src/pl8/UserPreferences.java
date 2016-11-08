@@ -6,6 +6,7 @@ import com.google.appengine.api.datastore.Blob;
 import java.util.List;
 import java.util.ArrayList;
 
+// This class should no longer be needed. UserPreferences is now part of the User class
 public class UserPreferences {
 
     // Not yet sure if username should be a field

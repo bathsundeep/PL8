@@ -12,6 +12,7 @@ import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 
+// This class should no longer be needed because UserPreferences is now part of the user class
 public class UserPreferencesLoader {
 	
 	// This may or may not work
