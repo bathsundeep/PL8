@@ -77,6 +77,7 @@ public class User {
 		entity.setProperty("Password", password);
 		entity.setProperty("Email", email);
 
+        // Serialize preferences list
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(bos);
         oos.writeObject(preferences);
