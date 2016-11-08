@@ -24,7 +24,7 @@ public class UserPreferences {
         this.username = username;
     }*/
 
-    public UserIngredients() {
+    public UserPreferences() {
         this.preferences = new ArrayList<Ingredient>();
     }
 
