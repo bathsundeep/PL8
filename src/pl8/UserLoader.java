@@ -77,7 +77,7 @@ public class UserLoader {
 		datastore.delete(keys);
 	}
 
-	public static Entity saveUser(String username, String password, String email, UserPreferences up)
+	public static Entity saveUser(String username, String password, String email, List<Ingredient> preferences)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		/* Encrypt password using PBKDF2 */
 		String pw = Password.getHash(password);
@@ -93,6 +93,13 @@ public class UserLoader {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		datastore.put(entity);
 
+		return entity;
+	}
+
+	public static Entity saveUser(User user) throws NoSuchAlgorithmException, InvalidKeySpecException {
+		Entity entity = user.toEntity();
+		DataService datastore = DatastoreServiceFactory.getDatastoreService();
+		datastore.put(entity);
 		return entity;
 	}
 }
