@@ -9,8 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var api_service_1 = require('../API/api.service');
 var LoginComponent = (function () {
-    function LoginComponent() {
+    function LoginComponent(router, PL8Service) {
+        this.router = router;
+        this.PL8Service = PL8Service;
     }
     LoginComponent.prototype.onSubmit = function () {
         var _this = this;
@@ -20,7 +24,7 @@ var LoginComponent = (function () {
             _this.errorMessage = '';
             _this.isLoading = false;
             _this.UserService.currentUser = User;
-            _this.router.navigate(['/']);
+            _this.router.navigate(['']);
         }, function (reason) {
             _this.errorMessage = reason.json()["message"];
             _this.isLoading = false;
@@ -38,7 +42,7 @@ var LoginComponent = (function () {
             selector: 'my-login',
             templateUrl: '/templates/login.html',
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service])
     ], LoginComponent);
     return LoginComponent;
 }());

@@ -29,11 +29,6 @@ export class HomeComponent implements OnInit {
     ngOnInit(): void {
         this.isLoading = true;
 
-        this.Pl8Service.recipes()
-            .then(recipes => {
-                this.allRecipes = this.recipes = recipes;
-                this.isLoading = false;
-            });
     }
 
     showAll() {

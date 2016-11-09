@@ -7,6 +7,8 @@ import { HomeComponent } from './components/home.component';
 import { ProfileComponent } from './components/profile.component';
 import { PantryComponent } from './components/pantry.component';
 import { CreateRecipeComponent} from './components/createRecipe.component';
+import { RecipeComponent} from './components/recipes.component';
+
 const appRoutes: Routes = [
     {
         path: '',
@@ -35,6 +37,10 @@ const appRoutes: Routes = [
     },
     {   path: 'createRecipe',
         component: CreateRecipeComponent
+    },
+    {
+        path: 'recipes',
+        component: RecipeComponent
     }   
 ];
 

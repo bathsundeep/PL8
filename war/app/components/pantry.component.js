@@ -10,18 +10,46 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var api_service_1 = require('../API/api.service');
 var PantryComponent = (function () {
-    function PantryComponent(router) {
+    function PantryComponent(router, PL8Service) {
         this.router = router;
+        this.PL8Service = PL8Service;
+        this.recipe = {
+            key: {
+                kind: "Recipe",
+                id: -1
+            },
+            propertyMap: {
+                Name: "",
+                Description: "",
+                Ingredients: [],
+                Pic: ""
+            }
+        };
     }
-    PantryComponent.prototype.ngOnInit = function () {
+    PantryComponent.prototype.onSubmit = function () {
     };
+    PantryComponent.prototype.ngOnInit = function () {
+        this.addIng();
+    };
+    PantryComponent.prototype.addIng = function () {
+        this.recipe.propertyMap.Ingredients.push({
+            ingredient: "",
+            amount: 0,
+            unit: ""
+        });
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], PantryComponent.prototype, "errorMessage", void 0);
     PantryComponent = __decorate([
         core_1.Component({
             selector: 'my-pantry',
             templateUrl: '/templates/pantry.html',
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service])
     ], PantryComponent);
     return PantryComponent;
 }());

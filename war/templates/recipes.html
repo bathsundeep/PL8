@@ -1,0 +1,13 @@
+<div class="alert alert-info" *ngIf="isLoading">
+    Loading...
+</div>
+
+<div class="alert alert-info" *ngIf="!isLoading && recipes.length == 0">
+    No Recipes :(
+</div>
+
+<div class="list-group" *ngIf="!isLoading">
+    <a routerLink="/recipes/{{ recipe.key.id }}" class="list-group-item" *ngFor="let recipe of recipes">
+        <h4 class="list-group-item-heading">{{ recipe.propertyMap.Name }} </h4>
+    </a>
+</div>

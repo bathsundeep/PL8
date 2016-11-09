@@ -1,24 +1,27 @@
-<h1>This is your pantry</h1>
+<form action="savePantry" method="post" (ngSubmit)="onSubmit()" class="form-horizontal">
+    <legend>Your Pantry</legend>
+    <div class="form-group" *ngFor = "let ing of recipe.propertyMap.Ingredients; let i = index">
 
-<br> <br>
+        <div class="col-sm-2">
+            <div class = "input-group">
+                <input type="number" class="form-control" placeholder="4" [ngModelOptions]="{standalone: true}" [(ngModel)] ="ing.amount">
+                <div class="input-group-addon">Amount</div>
+            </div>
+        </div>
 
-<div class="row">
-
-    <div class="col-md-4">
-
-        <h4>Space for buttons and such</h4>
-        <button type="button" class="btn btn-primary btn-block"> Add recipe </button>
-        <button type="button" class="btn btn-primary btn-block"> Remove recipe </button>
-
+        <div class="col-sm-4">
+            <input type="text" class = "form-control" placeholder="Unlimited Breadsticks" [ngModelOptions]="{standalone: true}" [(ngModel)]="ing.name">
+        </div>
     </div>
-
-    <div class="col-md-2"></div>
-
-    <div class="col-md-6">
-
-        <h4>Place for pantry contents</h4>
-
+        
+    <div class = "col-sm-offset-3 col-sm-9">
+        <a href = "javascript:;" (click)="addIng()" class = "btn btn-success"> + Add Item</a>
     </div>
-
-
-</div>
+        
+    <div class ="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <br />
+            <button type="submit" class="btn btn-primary btn-lg">Save Pantry</button>
+        </div>
+    </div>
+</form>

@@ -15,10 +15,11 @@ import { HomeComponent } from './components/home.component';
 import { ProfileComponent } from './components/profile.component';
 import { PantryComponent } from './components/pantry.component';
 import { CreateRecipeComponent } from './components/createRecipe.component';
+import { RecipeComponent } from './components/recipes.component';
 
 @NgModule({
   imports:      [ BrowserModule, HttpModule, FormsModule, routing],
-  declarations: [ AppComponent, LoginComponent, SignupComponent, HomeComponent, ProfileComponent, PantryComponent, CreateRecipeComponent ],
+  declarations: [ AppComponent, LoginComponent, SignupComponent, HomeComponent, ProfileComponent, PantryComponent, CreateRecipeComponent, RecipeComponent ],
   bootstrap:    [ AppComponent ],
   providers:    [ PL8Service, UserService]
 })

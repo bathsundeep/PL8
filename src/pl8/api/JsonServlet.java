@@ -1,3 +1,11 @@
+package pl8.api;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.api.client.http.HttpStatusCodes;
 import com.google.gson.Gson;
 
 @SuppressWarnings("serial")

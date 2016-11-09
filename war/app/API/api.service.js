@@ -14,7 +14,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
-require('rxjs/Rx');
 var PL8Service = (function () {
     function PL8Service(http) {
         this.http = http;
@@ -63,6 +62,7 @@ var PL8Service = (function () {
     PL8Service.prototype.me = function () {
         return this.http.get("/api/auth/me")
             .toPromise()
+            .catch(this.handleError)
             .then(function (resp) { return resp.json(); });
     };
     PL8Service.prototype.createRecipe = function (recipe) {

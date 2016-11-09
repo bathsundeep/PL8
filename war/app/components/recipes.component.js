@@ -10,35 +10,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var api_service_1 = require('../API/api.service');
-var HomeComponent = (function () {
-    function HomeComponent(router, Pl8Service) {
-        this.router = router;
-        this.Pl8Service = Pl8Service;
+var RecipeComponent = (function () {
+    function RecipeComponent(rotuer) {
+        this.rotuer = rotuer;
     }
-    HomeComponent.prototype.ngOnInit = function () {
+    RecipeComponent.prototype.ngOnInit = function () {
         this.isLoading = true;
-    };
-    HomeComponent.prototype.showAll = function () {
-        this.recipes = this.allRecipes;
-        return false;
     };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Boolean)
-    ], HomeComponent.prototype, "isLoading", void 0);
+    ], RecipeComponent.prototype, "isLoading", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Array)
-    ], HomeComponent.prototype, "recipes", void 0);
-    HomeComponent = __decorate([
+    ], RecipeComponent.prototype, "recipes", void 0);
+    RecipeComponent = __decorate([
         core_1.Component({
-            selector: 'my-home',
-            templateUrl: '/templates/home.html',
+            selector: 'recipes',
+            templateUrl: '/templates/recipes.html'
         }), 
-        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service])
-    ], HomeComponent);
-    return HomeComponent;
+        __metadata('design:paramtypes', [router_1.Router])
+    ], RecipeComponent);
+    return RecipeComponent;
 }());
-exports.HomeComponent = HomeComponent;
-//# sourceMappingURL=home.component.js.map
+exports.RecipeComponent = RecipeComponent;
+//# sourceMappingURL=recipes.component.js.map

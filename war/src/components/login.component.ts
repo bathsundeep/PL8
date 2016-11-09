@@ -11,9 +11,12 @@ import { PL8Service, UserService } from '../API/api.service';
 
 export class LoginComponent implements OnInit {
 
-   private router: Router;
-   private PL8Service: PL8Service;
-   private UserService: UserService;
+  constructor(
+   private router: Router,
+   private PL8Service: PL8Service
+  ) { }
+
+  private UserService: UserService;
 
   public username: string;
   public password: string;
@@ -27,7 +30,7 @@ export class LoginComponent implements OnInit {
         this.errorMessage = '';
         this.isLoading = false;
         this.UserService.currentUser = User;
-        this.router.navigate(['/']);
+        this.router.navigate(['']);
       }, (reason : Response) => {
         this.errorMessage = reason.json()["message"];
         this.isLoading = false;
