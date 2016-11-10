@@ -6,7 +6,7 @@ import java.util.List;
 import com.google.appengine.api.datastore.Entity;
 
 // POJO representing a recipe
-// TODO decide if we want a unique id to be the key or the name to be the key
+// TODO use a UUID as the key
 public class Recipe{
     private String name;
     private String picURL;
@@ -119,8 +119,11 @@ public class Recipe{
     }
 
     public Entity toEntity() {
-        Entity entity;
-
+        Entity entity = new Entity("Recipe", name);
+		entity.setProperty("PictureURL", picURL);
+		entity.setProperty("Steps", steps);
+		entity.setProperty("Ingredients", ingredients);
+        entity.setProperty("Tags", tags);
         return entity;
     }
 
