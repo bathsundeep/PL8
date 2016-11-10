@@ -72,18 +72,9 @@ public class User {
     }
 
     public Entity toEntity() {
-        Entity entity = new Entity("User");
-		entity.setProperty("Username", username);
+        Entity entity = new Entity("User", username);
 		entity.setProperty("Password", password);
 		entity.setProperty("Email", email);
-
-        // Serialize preferences list
-        /*ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(bos);
-        oos.writeObject(preferences);
-        byte[] bytes = bos.toByteArray();
-        Blob blob = new Blob(bytes);*/
-
 		entity.setProperty("Preferences", preferences);
 
 		return entity;
