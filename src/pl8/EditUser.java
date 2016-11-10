@@ -16,7 +16,8 @@ import com.google.appengine.api.datastore.Entity;
 //TODO create and import API Error code
 import pl8.api.JsonServlet;
 
-/* This class processes signup POST requests from signup.html. */
+// This class takes username, password, email, preferences infomration and overrides old information
+// Throws error if username does not exist. Signup class should be used in that case
 @SuppressWarnings("serial")
 public class EditUser extends JsonServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse resp)
