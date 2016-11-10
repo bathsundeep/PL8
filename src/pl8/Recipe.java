@@ -1,37 +1,38 @@
-/*
-The recipe class
-Kevin Zhou
-*/
+package pl8;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.appengine.api.datastore.Entity;
+
+// POJO representing a recipe
+// TODO decide if we want a unique id to be the key or the name to be the key
 public class Recipe{
-    String name;
-    String picURL;
-//  Arraylist of strings to store the instructions
-    ArrayList<String> steps;
-//  ArrayList of Ingredient objects
-    ArrayList<Ingredient> ingredients;
-    ArrayList<String> tags;
+    private String name;
+    private String picURL;
+    private List<String> steps;
+    private List<Ingredient> ingredients;
+    private List<String> tags;
 
 //  Create recipe
-    public Recipe(String n, ArrayList s, ArrayList i){
+    public Recipe(String n, List<String> s, List<Ingredient> i){
         name = n;
         steps = s;
         ingredients = i;
-        tags = new ArrayList<String>;
+        tags = new ArrayList<String>();
     }
-//  Create empty recipe
+
+    //  Create empty recipe
+    // Should it even be possible to create a recipe without steps or ingredients?
     pubic Recipe(){
-        name = "";
-        steps = new ArrayList<String>(0);
-        ingredients = new ArrayList<Ingredient>(0);
-        tags = new ArrayList<String>(0);
+        this("", new ArrayList<String>(), new ArrayList<Ingredient>());
     }
 
 //  Add picture to recipe
     public void setPicture(String url){
-        picURL = url; 
+        if (isValidPictureURL(url)) {
+            picURL = url;
+        }
     }
 //  Retrieve picture for recipe
     public String getPicture(){
@@ -40,9 +41,11 @@ public class Recipe{
 
 //  Add and remove tags from recipe
     public void addTag(String tag){
-        tags.add(tag);
+        if (!tags.contains(tag)) {
+            tags.add(tag);
+        }
     }
-    pubilc void removeTag(String tag){
+    public void removeTag(String tag){
         tags.remove(tag);
     }
 
@@ -69,6 +72,7 @@ public class Recipe{
     }
 
 //  Print entire recipe
+    @Override
     public String toString(){
         return "Ingredients:\n" + listIngredients() + "Steps:" + listSteps();
     }
@@ -77,7 +81,7 @@ public class Recipe{
     public String getName(){
         return name;
     }
-    public String[] getIngredients(){
+    /*public String[] getIngredients(){
         String[] ingredientList = new String[ingredients.size()];
         for (int i = 0; i < ingredients.size(); i++){
             ingredientList[i] = ingredients.get(i).toString();
@@ -97,6 +101,27 @@ public class Recipe{
             tagList[i] = tags.get(i);
         }
         return tagList;
+    }*/
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+    public List<String> getSteps() {
+        return steps;
+    }
+    public List<String> getTags() {
+        return tags;
+    }
+
+    // TODO implement this
+    private static boolean isValidPictureURL(String url) {
+        return true;
+    }
+
+    public Entity toEntity() {
+        Entity entity;
+
+        return entity;
     }
 
 }
