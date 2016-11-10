@@ -118,6 +118,21 @@ public class Recipe{
         return true;
     }
 
+    @Override
+    public String toString() {
+        String ret = "Recipe with the following ingredients:\n";
+        ret += ingredients.toString();
+        ret += "\nsteps:\n";
+        for (String s : steps) {
+            ret += s;
+        }
+        ret += "\nAnd tags:\n";
+        for (String t : tags) {
+            ret += t;
+        }
+        return ret;
+    }
+
     public Entity toEntity() {
         Entity entity = new Entity("Recipe", name);
 		entity.setProperty("PictureURL", picURL);
