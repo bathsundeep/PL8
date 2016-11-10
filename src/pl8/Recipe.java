@@ -121,12 +121,14 @@ public class Recipe{
     @Override
     public String toString() {
         String ret = "Recipe with the following ingredients:\n";
-        ret += ingredients.toString();
-        ret += "\nsteps:\n";
+        for (Ingredient i : ingredients) {
+            ret += i.toString();
+        }
+        ret += "\nthe following steps:\n";
         for (String s : steps) {
             ret += s;
         }
-        ret += "\nAnd tags:\n";
+        ret += "\nAnd the following tags:\n";
         for (String t : tags) {
             ret += t;
         }
