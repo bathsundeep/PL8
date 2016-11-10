@@ -78,12 +78,13 @@ public class User {
 		entity.setProperty("Email", email);
 
         // Serialize preferences list
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        /*ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(bos);
         oos.writeObject(preferences);
         byte[] bytes = bos.toByteArray();
-        Blob blob = new Blob(bytes);
-		entity.setProperty("Preferences", blob);
+        Blob blob = new Blob(bytes);*/
+
+		entity.setProperty("Preferences", preferences);
 
 		return entity;
     }
