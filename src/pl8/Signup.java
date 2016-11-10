@@ -24,16 +24,15 @@ public class Signup extends JsonServlet {
 		System.out.println("Attempting sign up");
 		
 		/* Get parameters from login attempt */
-		String user = request.getParameter("username");
+		String username = request.getParameter("username");
 		
 		/* Remove white space */
-		user = user.replaceAll("\\s+","");
+		username = username.replaceAll("\\s+","");
 		
 		String pw = request.getParameter("password");
 		String email = request.getParameter("email");
 		
-		}
-		Entity entity = UserLoader.getUserByUsername(user);
+		Entity entity = UserLoader.getUserByUsername(username);
 		
 		/* Existence check. U will not be null if an existing
 		 * User with this username exists.
@@ -45,8 +44,10 @@ public class Signup extends JsonServlet {
 			return;
 		}
 		
+		//Create new user object, save it with userloader
+		User user = new User(username, pw, email);
 		try {
-			entity = UserLoader.saveUser(user, pw, email);
+			entity = UserLoader.saveUser(user);
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			json(resp, HttpStatusCodes.STATUS_CODE_SERVER_ERROR, new APIError(APIErrorCode.UnhandledException, e.toString()));
 			return;
