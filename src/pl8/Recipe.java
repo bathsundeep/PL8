@@ -136,7 +136,7 @@ public class Recipe{
     }
 
     public Entity toEntity() {
-        Entity entity = new Entity("Recipe", name);
+        Entity entity = new Entity("Name", name);
 		entity.setProperty("PictureURL", picURL);
 		entity.setProperty("Steps", steps);
 		entity.setProperty("Ingredients", ingredients);
