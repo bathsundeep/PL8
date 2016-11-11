@@ -2,6 +2,7 @@ import { NgModule }  from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { Ng2Webstorage} from 'ng2-webstorage';
 
 /* Import components we make here.  Include the component file when importing so the app
    module knows where to find the component. Create components like app.component.ts */
@@ -18,7 +19,7 @@ import { CreateRecipeComponent } from './components/createRecipe.component';
 import { RecipeComponent } from './components/recipes.component';
 
 @NgModule({
-  imports:      [ BrowserModule, HttpModule, FormsModule, routing],
+  imports:      [ BrowserModule, HttpModule, FormsModule, routing, Ng2Webstorage],
   declarations: [ AppComponent, LoginComponent, SignupComponent, HomeComponent, ProfileComponent, PantryComponent, CreateRecipeComponent, RecipeComponent ],
   bootstrap:    [ AppComponent ],
   providers:    [ PL8Service, UserService]
