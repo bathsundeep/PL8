@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 
-import {PL8Service, UserService } from '../API/api.service';
-import {Recipe, Ingredient } from '../API/api.models';
+import { PL8Service, UserService, LocalStorageRecipeService } from '../API/api.service';
+import { Recipe, Ingredient } from '../API/api.models';
 
 @Component({
     selector: 'my-createRecipe',
@@ -13,8 +13,9 @@ export class CreateRecipeComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private PL8Service: PL8Service//,
-        /*private UserService: UserService*/) {}
+        private PL8Service: PL8Service,
+        private recipeStorage: LocalStorageRecipeService
+    ) {}
 
     public name: string;
     public description: string;
@@ -37,15 +38,12 @@ export class CreateRecipeComponent implements OnInit {
 
     public onSubmit() {
         this.isLoading = true;
-        this.PL8Service.createRecipe(this.recipe)
-            .then(recipe => {
-                this.isLoading = false;
-                this.router.navigate(['/home']);
-            }, (reason: Response) => {
-                this.isLoading = false;
-            });
-            setTimeout(() => this.router.navigate(['/home']));
-            return false;
+
+        this.recipeStorage.createRecipe(this.recipe);
+        this.isLoading = false;
+ 
+        this.router.navigate(['/home']);
+        return false;
         } 
     
     ngOnInit(): void {

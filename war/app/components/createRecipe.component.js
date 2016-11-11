@@ -12,10 +12,10 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var api_service_1 = require('../API/api.service');
 var CreateRecipeComponent = (function () {
-    function CreateRecipeComponent(router, PL8Service //,
-        ) {
+    function CreateRecipeComponent(router, PL8Service, recipeStorage) {
         this.router = router;
         this.PL8Service = PL8Service;
+        this.recipeStorage = recipeStorage;
         this.recipe = {
             key: {
                 kind: "Recipe",
@@ -30,16 +30,10 @@ var CreateRecipeComponent = (function () {
         };
     }
     CreateRecipeComponent.prototype.onSubmit = function () {
-        var _this = this;
         this.isLoading = true;
-        this.PL8Service.createRecipe(this.recipe)
-            .then(function (recipe) {
-            _this.isLoading = false;
-            _this.router.navigate(['/home']);
-        }, function (reason) {
-            _this.isLoading = false;
-        });
-        setTimeout(function () { return _this.router.navigate(['/home']); });
+        this.recipeStorage.createRecipe(this.recipe);
+        this.isLoading = false;
+        this.router.navigate(['/home']);
         return false;
     };
     CreateRecipeComponent.prototype.ngOnInit = function () {
@@ -61,7 +55,7 @@ var CreateRecipeComponent = (function () {
             selector: 'my-createRecipe',
             templateUrl: '/templates/createRecipe.html',
         }), 
-        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service])
+        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service, api_service_1.LocalStorageRecipeService])
     ], CreateRecipeComponent);
     return CreateRecipeComponent;
 }());

@@ -129,3 +129,42 @@ export class UserService {
             });
     }
 }
+
+@Injectable()
+export class LocalStorageRecipeService {
+
+    public createRecipe(recipe: Recipe) {
+        console.log("Create Recipe", JSON.stringify(recipe));
+        let id = recipe.propertyMap.Name;
+        let localData = JSON.parse(localStorage.getItem(id));
+        if (localData) {
+            // If recipe exists
+            console.log("recipe exists");
+            localData = JSON.parse(localData);
+        }
+        else {
+            console.log("recipe doesn't exist");
+            localData = {};
+        }
+
+        console.log("hi");
+        localData[id] = recipe;
+        localStorage.setItem(id, JSON.stringify(localData));
+    }
+
+    public get(recipe: Recipe){
+        let id = recipe.propertyMap.Name;
+	    let data = JSON.parse(localStorage.getItem(id));
+  	    if(!data){
+  	    	return undefined;
+  	    }
+	    if(recipe){
+    		if(data[id]){
+     			return data[id];
+  	        } else {
+  			    return {};
+  		    }
+    	}
+  	    return data ;
+    }
+}

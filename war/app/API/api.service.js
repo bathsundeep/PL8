@@ -140,4 +140,47 @@ var UserService = (function () {
     return UserService;
 }());
 exports.UserService = UserService;
+var LocalStorageRecipeService = (function () {
+    function LocalStorageRecipeService() {
+    }
+    LocalStorageRecipeService.prototype.createRecipe = function (recipe) {
+        console.log("Create Recipe", JSON.stringify(recipe));
+        var id = recipe.propertyMap.Name;
+        var localData = JSON.parse(localStorage.getItem(id));
+        if (localData) {
+            // If recipe exists
+            console.log("recipe exists");
+            localData = JSON.parse(localData);
+        }
+        else {
+            console.log("recipe doesn't exist");
+            localData = {};
+        }
+        console.log("hi");
+        localData[id] = recipe;
+        localStorage.setItem(id, JSON.stringify(localData));
+    };
+    LocalStorageRecipeService.prototype.get = function (recipe) {
+        var id = recipe.propertyMap.Name;
+        var data = JSON.parse(localStorage.getItem(id));
+        if (!data) {
+            return undefined;
+        }
+        if (recipe) {
+            if (data[id]) {
+                return data[id];
+            }
+            else {
+                return {};
+            }
+        }
+        return data;
+    };
+    LocalStorageRecipeService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [])
+    ], LocalStorageRecipeService);
+    return LocalStorageRecipeService;
+}());
+exports.LocalStorageRecipeService = LocalStorageRecipeService;
 //# sourceMappingURL=api.service.js.map
