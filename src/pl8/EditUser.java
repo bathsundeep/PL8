@@ -16,8 +16,9 @@ import com.google.appengine.api.datastore.Entity;
 //TODO create and import API Error code
 import pl8.api.JsonServlet;
 
-// This class takes username, password, email, preferences infomration and overrides old information
-// Throws error if username does not exist. Signup class should be used in that case
+// This class is designed to retrieve a user by username and change any of these fields:
+// password, email, preferences, and pantry infomration
+// Throws error if username does not exist in the datastore. Signup class should be used in that case
 @SuppressWarnings("serial")
 public class EditUser extends JsonServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse resp)
@@ -49,6 +50,10 @@ public class EditUser extends JsonServlet {
         for (Ingredient i : preferences) {
             user.addPreference(i);
         }
+        List<Ingredient> pantry = getPantry(request);
+        for (Ingredient j : pantry) {
+            user.addToPantry(j);
+        }
 
 		try {
 			entity = UserLoader.saveUser(user);
@@ -58,15 +63,25 @@ public class EditUser extends JsonServlet {
 		}
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("User", entity.getProperty("Username"));
+		session.setAttribute("User", entity.getProperty("User"));
 
 		session.setMaxInactiveInterval(365*24*60*60);
 		
 		jsonOk(resp, entity);
 	}
 
-    // TODO find out how list will be sent within request, then implement this
+    // TODO make sure the *.class arguments work correctly
     private static List<Ingredient> getPreferences(HttpServletRequest request) {
-        return new ArrayList<Ingredient>();
+        String json = request.getParameter("preferences");
+        Gson g = new Gson();
+        ArrayList<Ingredient> preferences = g.fromJson(json, ArrayList<Ingredient>.class);
+        return pantry;
+    }
+
+    private static List<Ingredient> getPantry(HttpServletRequest request) {
+        String json = request.getParameter("pantry");
+        Gson g = new Gson();
+        ArrayList<Ingredient> pantry = g.fromJson(json, ArrayList<Ingredient>.class);
+        return pantry;
     }
 }
