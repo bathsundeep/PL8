@@ -2,17 +2,19 @@ package pl8;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.google.appengine.api.datastore.Entity;
 
 // POJO representing a recipe
-// TODO use a UUID as the key
 public class Recipe{
     private String name;
     private String picURL;
     private List<String> steps;
     private List<Ingredient> ingredients;
     private List<String> tags;
+    // Unique ID for each recipe. This way multiple recipes can have the same name
+    final private String id;
 
 //  Create recipe
     public Recipe(String n, List<String> s, List<Ingredient> i){
@@ -20,12 +22,13 @@ public class Recipe{
         steps = s;
         ingredients = i;
         tags = new ArrayList<String>();
+        id = UUID.randomUUID().toString();
     }
 
     //  Create empty recipe
-    // Should it even be possible to create a recipe without steps or ingredients?
+    // Should it even be possible to create a recipe without a name or steps or ingredients?
     pubic Recipe(){
-        this("", new ArrayList<String>(), new ArrayList<Ingredient>());
+        this("Empty Recipe", new ArrayList<String>(), new ArrayList<Ingredient>());
     }
 
 //  Add picture to recipe
@@ -81,27 +84,6 @@ public class Recipe{
     public String getName(){
         return name;
     }
-    /*public String[] getIngredients(){
-        String[] ingredientList = new String[ingredients.size()];
-        for (int i = 0; i < ingredients.size(); i++){
-            ingredientList[i] = ingredients.get(i).toString();
-        }
-        return ingredientList;
-    }
-    public String[] getSteps(){
-        String[] stepList = new String[steps.size()];
-        for (int i = 0; i < steps.size(); i++){
-            stepList[i] = steps.get(i);
-        }
-        return stepList;
-    }
-    public String[] getTags(){
-        String[] tagList = new String[tags.size()];
-        for (int i = 0; i < tags.size(); i++){
-            tagList[i] = tags.get(i);
-        }
-        return tagList;
-    }*/
 
     public List<Ingredient> getIngredients() {
         return ingredients;
@@ -136,7 +118,8 @@ public class Recipe{
     }
 
     public Entity toEntity() {
-        Entity entity = new Entity("Recipe", name);
+        Entity entity = new Entity("Recipe", id);
+        entity.setProperty("Name", name)
 		entity.setProperty("PictureURL", picURL);
 		entity.setProperty("Steps", steps);
 		entity.setProperty("Ingredients", ingredients);
