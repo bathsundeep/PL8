@@ -18,18 +18,10 @@ var LoginComponent = (function () {
         this.UserService = UserService;
     }
     LoginComponent.prototype.onSubmit = function () {
-        var _this = this;
         this.isLoading = true;
-        this.PL8Service.login(this.username, this.password)
-            .then(function (User) {
-            _this.errorMessage = '';
-            _this.isLoading = false;
-            _this.UserService.currentUser = User;
-            _this.router.navigate(['']);
-        }, function (reason) {
-            _this.errorMessage = reason.json()["message"];
-            _this.isLoading = false;
-        });
+        this.PL8Service.login(this.username, this.password);
+        this.isLoading = false;
+        this.router.navigate(['']);
         return false;
     };
     LoginComponent.prototype.ngOnInit = function () {

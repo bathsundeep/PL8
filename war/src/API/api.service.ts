@@ -29,13 +29,15 @@ export class PL8Service {
     }
 
     public login(username: string, password: string) {
-        return this.apiPost('/login', {
+        /*return this.apiPost('/login', {
             username: username,
             password: password
         })
             .toPromise()
             .catch(this.handleError)
-            .then(resp => resp.json() as User);
+            .then(resp => resp.json() as User);*/
+        console.log("Adding user:", username);
+        sessionStorage.setItem("currentUser", username);
     }
 
     public signup(username: string, email: string, password: string) {

@@ -32,13 +32,15 @@ var PL8Service = (function () {
         return this.http.post(url, this.urlEncode(body), options);
     };
     PL8Service.prototype.login = function (username, password) {
-        return this.apiPost('/login', {
+        /*return this.apiPost('/login', {
             username: username,
             password: password
         })
             .toPromise()
             .catch(this.handleError)
-            .then(function (resp) { return resp.json(); });
+            .then(resp => resp.json() as User);*/
+        console.log("Adding user:", username);
+        sessionStorage.setItem("currentUser", username);
     };
     PL8Service.prototype.signup = function (username, email, password) {
         return this.apiPost('/signup', {

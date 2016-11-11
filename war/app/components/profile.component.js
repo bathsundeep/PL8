@@ -9,15 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var nutrition_service_1 = require('../nutrition.service');
+var api_service_1 = require('../API/api.service');
 var ProfileComponent = (function () {
-    function ProfileComponent(nutrtionServices) {
-        this.nutrtionServices = nutrtionServices;
+    function ProfileComponent(router, PL8Service, UserService, nutritionServices) {
+        this.router = router;
+        this.PL8Service = PL8Service;
+        this.UserService = UserService;
+        this.nutritionServices = nutritionServices;
+        this.name = sessionStorage.getItem('currentUser');
         this.title = 'Your profile';
     }
     ProfileComponent.prototype.getNutrition = function () {
         var _this = this;
-        this.nutrtionServices.getNutritions().then(function (nutritions) { return _this.nutritions = nutritions; });
+        this.nutritionServices.getNutritions().then(function (nutritions) { return _this.nutritions = nutritions; });
     };
     ProfileComponent.prototype.add = function (name) {
         //TO DO:
@@ -35,7 +41,7 @@ var ProfileComponent = (function () {
             templateUrl: '/templates/profile.html',
             providers: [nutrition_service_1.NutritionService]
         }), 
-        __metadata('design:paramtypes', [nutrition_service_1.NutritionService])
+        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service, api_service_1.UserService, nutrition_service_1.NutritionService])
     ], ProfileComponent);
     return ProfileComponent;
 }());
