@@ -109,7 +109,7 @@ var UserService = (function () {
         this.PL8Service = PL8Service;
         this.loadingUser = false;
         this.currentUser = null;
-        this.refreshUser();
+        //this.refreshUser();
     }
     Object.defineProperty(UserService.prototype, "isLoggedIn", {
         get: function () {
@@ -134,31 +134,22 @@ var UserService = (function () {
     };
     UserService = __decorate([
         core_1.Injectable(),
-        __param(0, core_1.Inject({ PL8Service: PL8Service })), 
+        __param(0, core_1.Inject(PL8Service)), 
         __metadata('design:paramtypes', [PL8Service])
     ], UserService);
     return UserService;
 }());
 exports.UserService = UserService;
 var LocalStorageRecipeService = (function () {
-    function LocalStorageRecipeService() {
+    function LocalStorageRecipeService(http) {
+        this.http = http;
     }
     LocalStorageRecipeService.prototype.createRecipe = function (recipe) {
         console.log("Create Recipe", JSON.stringify(recipe));
-        var id = recipe.propertyMap.Name;
+        var id = "recipe:" + recipe.propertyMap.Name;
         var localData = JSON.parse(localStorage.getItem(id));
-        if (localData) {
-            // If recipe exists
-            console.log("recipe exists");
-            localData = JSON.parse(localData);
-        }
-        else {
-            console.log("recipe doesn't exist");
-            localData = {};
-        }
-        console.log("hi");
-        localData[id] = recipe;
-        localStorage.setItem(id, JSON.stringify(localData));
+        //localData[id] = recipe;
+        localStorage.setItem(id, JSON.stringify(recipe));
     };
     LocalStorageRecipeService.prototype.get = function (recipe) {
         var id = recipe.propertyMap.Name;
@@ -178,9 +169,44 @@ var LocalStorageRecipeService = (function () {
     };
     LocalStorageRecipeService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], LocalStorageRecipeService);
     return LocalStorageRecipeService;
 }());
 exports.LocalStorageRecipeService = LocalStorageRecipeService;
+var LocalStoragePantryService = (function () {
+    function LocalStoragePantryService(http) {
+        this.http = http;
+    }
+    LocalStoragePantryService.prototype.addIngredient = function (ing, index) {
+        console.log("Add Ingredient to Pantry", JSON.stringify(ing));
+        console.log("Index = ", index);
+        var id = ("pantry:" + index).toString();
+        var localData = JSON.parse(localStorage.getItem(id));
+        //localData[id] = recipe;
+        sessionStorage.setItem(id, JSON.stringify(ing));
+    };
+    LocalStoragePantryService.prototype.get = function (recipe) {
+        var id = recipe.propertyMap.Name;
+        var data = JSON.parse(localStorage.getItem(id));
+        if (!data) {
+            return undefined;
+        }
+        if (recipe) {
+            if (data[id]) {
+                return data[id];
+            }
+            else {
+                return {};
+            }
+        }
+        return data;
+    };
+    LocalStoragePantryService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Http])
+    ], LocalStoragePantryService);
+    return LocalStoragePantryService;
+}());
+exports.LocalStoragePantryService = LocalStoragePantryService;
 //# sourceMappingURL=api.service.js.map

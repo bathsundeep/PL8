@@ -103,8 +103,8 @@ export class PL8Service {
 @Injectable()
 export class UserService {
 
-    constructor( @Inject({PL8Service}) private PL8Service: PL8Service) {
-        this.refreshUser();
+    constructor( @Inject(PL8Service) private PL8Service: PL8Service) {
+        //this.refreshUser();
     }
     
     public loadingUser: boolean = false;
@@ -133,23 +133,47 @@ export class UserService {
 @Injectable()
 export class LocalStorageRecipeService {
 
+    constructor(private http: Http) { }
+
     public createRecipe(recipe: Recipe) {
         console.log("Create Recipe", JSON.stringify(recipe));
-        let id = recipe.propertyMap.Name;
+        let id = "recipe:" + recipe.propertyMap.Name;
         let localData = JSON.parse(localStorage.getItem(id));
-        if (localData) {
-            // If recipe exists
-            console.log("recipe exists");
-            localData = JSON.parse(localData);
-        }
-        else {
-            console.log("recipe doesn't exist");
-            localData = {};
-        }
 
-        console.log("hi");
-        localData[id] = recipe;
-        localStorage.setItem(id, JSON.stringify(localData));
+        //localData[id] = recipe;
+        localStorage.setItem(id, JSON.stringify(recipe));
+    }
+
+    public get(recipe: Recipe){
+        let id = recipe.propertyMap.Name;
+	    let data = JSON.parse(localStorage.getItem(id));
+  	    if(!data){
+  	    	return undefined;
+  	    }
+	    if(recipe){
+    		if(data[id]){
+     			return data[id];
+  	        } else {
+  			    return {};
+  		    }
+    	}
+  	    return data ;
+    }
+}
+
+@Injectable()
+export class LocalStoragePantryService {
+
+    constructor(private http: Http) { }
+
+    public addIngredient(ing: Ingredient, index) {
+        console.log("Add Ingredient to Pantry", JSON.stringify(ing));
+        console.log("Index = ", index);
+        let id = ("pantry:" + index).toString();
+        let localData = JSON.parse(localStorage.getItem(id));
+
+        //localData[id] = recipe;
+        sessionStorage.setItem(id, JSON.stringify(ing));
     }
 
     public get(recipe: Recipe){

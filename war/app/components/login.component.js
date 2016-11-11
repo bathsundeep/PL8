@@ -12,9 +12,10 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var api_service_1 = require('../API/api.service');
 var LoginComponent = (function () {
-    function LoginComponent(router, PL8Service) {
+    function LoginComponent(router, PL8Service, UserService) {
         this.router = router;
         this.PL8Service = PL8Service;
+        this.UserService = UserService;
     }
     LoginComponent.prototype.onSubmit = function () {
         var _this = this;
@@ -42,7 +43,7 @@ var LoginComponent = (function () {
             selector: 'my-login',
             templateUrl: '/templates/login.html',
         }), 
-        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service])
+        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service, api_service_1.UserService])
     ], LoginComponent);
     return LoginComponent;
 }());

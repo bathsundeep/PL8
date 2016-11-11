@@ -13,10 +13,11 @@ export class LoginComponent implements OnInit {
 
   constructor(
    private router: Router,
-   private PL8Service: PL8Service
+   private PL8Service: PL8Service,
+   private UserService: UserService
   ) { }
 
-  private UserService: UserService;
+  
 
   public username: string;
   public password: string;

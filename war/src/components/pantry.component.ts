@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 
-import {PL8Service, UserService } from '../API/api.service';
+import {PL8Service, UserService, LocalStoragePantryService } from '../API/api.service';
 import {Recipe, Ingredient } from '../API/api.models';
 
 @Component({
@@ -14,7 +14,8 @@ export class PantryComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private PL8Service: PL8Service
+        private PL8Service: PL8Service,
+        private pantryStorage: LocalStoragePantryService
     ) {}
 
     public isLoading: boolean;
@@ -35,7 +36,14 @@ export class PantryComponent implements OnInit {
     };
 
     public onSubmit() {
+        this.isLoading = true;
         
+        this.recipe.propertyMap.Ingredients.forEach((item, index) => {
+            this.pantryStorage.addIngredient(item, index);
+        });
+        this.isLoading = false;
+
+        return false;
     }
 
     ngOnInit(): void {
