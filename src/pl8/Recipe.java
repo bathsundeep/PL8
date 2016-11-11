@@ -88,11 +88,21 @@ public class Recipe{
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
     public List<String> getSteps() {
         return steps;
     }
+    public void setSteps(List<String> steps) {
+        this.steps = steps;
+    }
     public List<String> getTags() {
         return tags;
+    }
+
+    public String getId() {
+        return id;
     }
 
     // TODO implement this
