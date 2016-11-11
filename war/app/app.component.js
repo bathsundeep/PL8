@@ -15,18 +15,6 @@ var AppComponent = (function () {
     function AppComponent(PL8Service, storageService) {
         this.PL8Service = PL8Service;
         this.storageService = storageService;
-        this.recipe = {
-            key: {
-                kind: "Recipe",
-                id: 1
-            },
-            propertyMap: {
-                Name: "test",
-                Description: "",
-                Ingredients: [],
-                Pic: ""
-            }
-        };
     }
     AppComponent.prototype.logOut = function () {
         this.PL8Service.logout()
