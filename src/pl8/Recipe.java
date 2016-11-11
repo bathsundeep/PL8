@@ -9,18 +9,21 @@ import com.google.appengine.api.datastore.Entity;
 // POJO representing a recipe
 public class Recipe{
     private String name;
+    private String description;
     private String picURL;
     private List<String> steps;
     private List<Ingredient> ingredients;
     private List<String> tags;
-    // Unique ID for each recipe. This way multiple recipes can have the same name
+    // Unique ID for each recipe.
+    // Unfortunately recipes with multiple names have not been implemented :(
     final private String id;
 
 //  Create recipe
-    public Recipe(String n, List<String> s, List<Ingredient> i){
-        name = n;
-        steps = s;
-        ingredients = i;
+    public Recipe(String name, String description, List<String> steps, List<Ingredient> ingredients){
+        this.name = name;
+        this.description = description;
+        this.steps = steps;
+        this.ingredients = ingredients;
         tags = new ArrayList<String>();
         id = UUID.randomUUID().toString();
     }
@@ -28,7 +31,14 @@ public class Recipe{
     //  Create empty recipe
     // Should it even be possible to create a recipe without a name or steps or ingredients?
     pubic Recipe(){
-        this("Empty Recipe", new ArrayList<String>(), new ArrayList<Ingredient>());
+        this("Empty Recipe", "Blank Description", new ArrayList<String>(), new ArrayList<Ingredient>());
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public String getDescription() {
+        return description;
     }
 
 //  Add picture to recipe
@@ -50,34 +60,6 @@ public class Recipe{
     }
     public void removeTag(String tag){
         tags.remove(tag);
-    }
-
-    private String listIngredients(){
-        if (ingredients.size() == 0)
-            return "\tNo ingredients\n"
-        StringBuilder sb = new StringBuilder();
-        for (Ingredient i : ingredients){
-            sb.append("\t");
-            sb.append(i.toString());
-            sb.append("\n");
-        }
-        return sb.toString();
-    }
-
-    private String listSteps(){
-        if (steps.size() == 0)
-            return "\nNo steps";
-        StringBuilder sb = new StringBuilder();
-        for (String s : steps){
-            sb.append("\n");
-            sb.append(s)
-        }
-    }
-
-//  Print entire recipe
-    @Override
-    public String toString(){
-        return "Ingredients:\n" + listIngredients() + "Steps:" + listSteps();
     }
 
 //  Retrieve individual components of the recipe
@@ -112,7 +94,9 @@ public class Recipe{
 
     @Override
     public String toString() {
-        String ret = "Recipe with the following ingredients:\n";
+        String ret = "Recipe with the following name: " + name;
+        ret += "\nthe following description: " + description;
+        ret = "the following ingredients:\n";
         for (Ingredient i : ingredients) {
             ret += i.toString();
         }
@@ -131,9 +115,10 @@ public class Recipe{
         Entity entity = new Entity("Recipe", id);
         entity.setProperty("Name", name)
 		entity.setProperty("PictureURL", picURL);
-		entity.setProperty("Steps", steps);
-		entity.setProperty("Ingredients", ingredients);
-        entity.setProperty("Tags", tags);
+        Gson g = new Gson();
+		entity.setProperty("Steps", g.toJson(steps));
+		entity.setProperty("Ingredients", g.toJson(ingredients));
+        entity.setProperty("Tags", g.toJson(tags));
         return entity;
     }
 

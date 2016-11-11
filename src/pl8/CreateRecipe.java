@@ -67,16 +67,20 @@ public class CreateRecipe extends JsonServlet {
 		catch (Exception e) {
 			//Parse error
 		}
-		Gson g = new Gson();
-		Entity d = new Entity("Recipe");
+		ArrayList<String> steps = new ArrayList<String>();
+		steps.add("steps");
+		steps.add("go");
+		steps.add("here");
+		Recipe recipe = new Recipe(recipeName, description, ingredients, steps);
+		Entity entity = recipe.toEntity();
 		try {
-			d = RecipeLoader.saveRecipe(recipeName, description, ingredients, "N/A");
+			entity = RecipeLoader.saveRecipe(recipe);
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			json(resp, HttpStatusCodes.STATUS_CODE_SERVER_ERROR, new APIError(APIErrorCode.UnhandledException, e.toString()));
 			return;
 		}
 		
-		jsonOk(resp, d);
+		jsonOk(resp, entity);
 	}
 	
 }

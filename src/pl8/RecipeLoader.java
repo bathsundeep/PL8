@@ -18,11 +18,10 @@ import com.google.appengine.api.datastore.Query.FilterPredicate;
 
 public class RecipeLoader {
 
+	// TODO at some point change this to a thing that returns a list of Entity objects
 	public static Entity getRecipeByName(String name) {
 		/* Init a datastore session to perform the check */
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-
-		Key key = KeyFactory.createKey("Name", name);
 
 		/* Create Filter for Email */
 		Filter filter = new FilterPredicate("Name", FilterOperator.EQUAL, name);
@@ -30,16 +29,18 @@ public class RecipeLoader {
 		/* Apply Filter to a Query on the Datastore */
 
 		/* Form Query for execution */
-		Query query = new Query("Recipe").setFilter(uf);
+		Query query = new Query("Recipe").setFilter(filter);
 
 		/* Run Query on Datastore */
 		PreparedQuery pq = datastore.prepare(query);
 
+		//For now, only one entity will be able to have each name :(
 		Entity entity = pq.asSingleEntity();
 
 		return entity;
 	}
 
+	// Don't think this will work quite right, since an ingredient with 1ounce and 2ounce are not equal
 	public static Entity getRecipeByIngredients(Ingredient ingredients[]) {
 
 		/* Validate ingredient list */
@@ -80,7 +81,7 @@ public class RecipeLoader {
 
 		Query query = new Query("Recipe");
 
-		Iterable<Entity> it = datastore.prepare(q).asIterable();
+		Iterable<Entity> it = datastore.prepare(query).asIterable();
 
 		List<Key> keys = new ArrayList<Key>();
 		for (Entity entity : it) {
@@ -90,17 +91,10 @@ public class RecipeLoader {
 		datastore.delete(keys);
 	}
 
-	public static Entity saveRecipe(String name, String description,List<Ingredient> ingredients, String steps)
+	public static Entity saveRecipe(Recipe recipe)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-		/* Set Entity properties */
-		Entity entity = new Entity("Recipe");
-		recipeName = name.trim();
-		entity.setProperty("Name", recipeName);
-		entity.setProperty("Description", description);
-		Gson g = new Gson();
-		entity.setProperty("Ingredients", g.toJson(ingredients));
-		entity.setProperty("Steps", steps);
+		Entity entity = recipe.toEntity();
 
 		/* Add new Recipe to the datastore */
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
