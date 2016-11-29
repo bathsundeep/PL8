@@ -27,9 +27,11 @@ export class LoginComponent implements OnInit {
   public onSubmit() {
     this.isLoading = true;
     this.PL8Service.login(this.username, this.password)
-    this.isLoading = false;
-    this.router.navigate(['']);
-
+      .then(User => {
+        this.isLoading = false;
+      }, (reason : Response) => {
+        this.isLoading = false;
+      });
     return false;
   }
         
