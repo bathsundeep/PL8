@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var api_service_1 = require('../API/api.service');
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var api_service_1 = require("../API/api.service");
 var PantryComponent = (function () {
     function PantryComponent(router, PL8Service, pantryStorage) {
         this.router = router;
@@ -48,18 +48,20 @@ var PantryComponent = (function () {
             unit: ""
         });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], PantryComponent.prototype, "errorMessage", void 0);
-    PantryComponent = __decorate([
-        core_1.Component({
-            selector: 'my-pantry',
-            templateUrl: '/templates/pantry.html',
-        }), 
-        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service, api_service_1.LocalStoragePantryService])
-    ], PantryComponent);
     return PantryComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], PantryComponent.prototype, "errorMessage", void 0);
+PantryComponent = __decorate([
+    core_1.Component({
+        selector: 'my-pantry',
+        templateUrl: '/templates/pantry.html',
+    }),
+    __metadata("design:paramtypes", [router_1.Router,
+        api_service_1.PL8Service,
+        api_service_1.LocalStoragePantryService])
+], PantryComponent);
 exports.PantryComponent = PantryComponent;
 //# sourceMappingURL=pantry.component.js.map

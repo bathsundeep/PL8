@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { PL8Service, UserService } from '../API/api.service';
-import { Recipe } from '../API/api.models'
+import { PL8Service, UserService, LocalStorageRecipeService } from '../API/api.service';
+import { Recipe, Ingredient } from '../API/api.models'
 
 @Component({
     selector: 'recipes',
@@ -11,13 +11,12 @@ import { Recipe } from '../API/api.models'
 })
 export class RecipeComponent implements OnInit {
     constructor(
-        private rotuer: Router
+        private rotuer: Router,
+        private PL8Service: PL8Service,
+        private recipeStorage: LocalStorageRecipeService
     ) { }
     
     @Input() isLoading: boolean;
-
-    @Input() recipes: Recipe[];
-
 
     ngOnInit(): void {
         this.isLoading = true;

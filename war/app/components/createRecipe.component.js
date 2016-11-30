@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var api_service_1 = require('../API/api.service');
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var api_service_1 = require("../API/api.service");
 var CreateRecipeComponent = (function () {
     function CreateRecipeComponent(router, PL8Service, recipeStorage) {
         this.router = router;
@@ -32,7 +32,6 @@ var CreateRecipeComponent = (function () {
     CreateRecipeComponent.prototype.onSubmit = function () {
         this.isLoading = true;
         this.recipeStorage.createRecipe(this.recipe);
-        this.isLoading = false;
         this.router.navigate(['/home']);
         return false;
     };
@@ -46,18 +45,20 @@ var CreateRecipeComponent = (function () {
             unit: ""
         });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], CreateRecipeComponent.prototype, "errorMessage", void 0);
-    CreateRecipeComponent = __decorate([
-        core_1.Component({
-            selector: 'my-createRecipe',
-            templateUrl: '/templates/createRecipe.html',
-        }), 
-        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service, api_service_1.LocalStorageRecipeService])
-    ], CreateRecipeComponent);
     return CreateRecipeComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], CreateRecipeComponent.prototype, "errorMessage", void 0);
+CreateRecipeComponent = __decorate([
+    core_1.Component({
+        selector: 'my-createRecipe',
+        templateUrl: '/templates/createRecipe.html',
+    }),
+    __metadata("design:paramtypes", [router_1.Router,
+        api_service_1.PL8Service,
+        api_service_1.LocalStorageRecipeService])
+], CreateRecipeComponent);
 exports.CreateRecipeComponent = CreateRecipeComponent;
 //# sourceMappingURL=createRecipe.component.js.map

@@ -8,31 +8,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var api_service_1 = require("../API/api.service");
 var RecipeComponent = (function () {
-    function RecipeComponent(rotuer) {
+    function RecipeComponent(rotuer, PL8Service, recipeStorage) {
         this.rotuer = rotuer;
+        this.PL8Service = PL8Service;
+        this.recipeStorage = recipeStorage;
     }
     RecipeComponent.prototype.ngOnInit = function () {
         this.isLoading = true;
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], RecipeComponent.prototype, "isLoading", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Array)
-    ], RecipeComponent.prototype, "recipes", void 0);
-    RecipeComponent = __decorate([
-        core_1.Component({
-            selector: 'recipes',
-            templateUrl: '/templates/recipes.html'
-        }), 
-        __metadata('design:paramtypes', [router_1.Router])
-    ], RecipeComponent);
     return RecipeComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], RecipeComponent.prototype, "isLoading", void 0);
+RecipeComponent = __decorate([
+    core_1.Component({
+        selector: 'recipes',
+        templateUrl: '/templates/recipes.html'
+    }),
+    __metadata("design:paramtypes", [router_1.Router,
+        api_service_1.PL8Service,
+        api_service_1.LocalStorageRecipeService])
+], RecipeComponent);
 exports.RecipeComponent = RecipeComponent;
 //# sourceMappingURL=recipes.component.js.map

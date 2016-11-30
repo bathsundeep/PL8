@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var core_1 = require('@angular/core');
-var api_service_1 = require('./API/api.service');
+var core_1 = require("@angular/core");
+var api_service_1 = require("./API/api.service");
 /* This is the app component typescript (.ts) file.  This creates the main App Component, or the root component */
 var AppComponent = (function () {
     function AppComponent(PL8Service, storageService, pantryService, UserService) {
@@ -29,16 +29,19 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.ngOnInit = function () {
     };
-    AppComponent = __decorate([
-        core_1.Component({
-            selector: 'my-app',
-            templateUrl: 'templates/app.html',
-            providers: [api_service_1.PL8Service, api_service_1.LocalStorageRecipeService, api_service_1.LocalStoragePantryService]
-        }),
-        __param(3, core_1.Input()), 
-        __metadata('design:paramtypes', [api_service_1.PL8Service, api_service_1.LocalStorageRecipeService, api_service_1.LocalStoragePantryService, api_service_1.UserService])
-    ], AppComponent);
     return AppComponent;
 }());
+AppComponent = __decorate([
+    core_1.Component({
+        selector: 'my-app',
+        templateUrl: 'templates/app.html',
+        providers: [api_service_1.PL8Service, api_service_1.LocalStorageRecipeService, api_service_1.LocalStoragePantryService]
+    }),
+    __param(3, core_1.Input()),
+    __metadata("design:paramtypes", [api_service_1.PL8Service,
+        api_service_1.LocalStorageRecipeService,
+        api_service_1.LocalStoragePantryService,
+        api_service_1.UserService])
+], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

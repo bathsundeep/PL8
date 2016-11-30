@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-require('rxjs/add/operator/toPromise');
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+require("rxjs/add/operator/toPromise");
 var PL8Service = (function () {
     function PL8Service(http) {
         this.http = http;
@@ -29,22 +29,22 @@ var PL8Service = (function () {
     PL8Service.prototype.apiPost = function (url, body) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         var options = new http_1.RequestOptions({ headers: headers });
+        console.log("hello");
+        // Try removing return statement
         return this.http.post(url, this.urlEncode(body), options);
     };
-    PL8Service.prototype.login = function (username, password) {
+    PL8Service.prototype.login = function (username, password, done) {
+        console.log("hi");
         return this.apiPost('/login', {
             username: username,
             password: password
-        })
-            .toPromise()
-            .catch(this.handleError)
-            .then(function (resp) { return resp.json(); });
+        });
         /*console.log("Adding user:", username);
         sessionStorage.setItem("currentUser", username);
         */
     };
     PL8Service.prototype.signup = function (username, email, password) {
-        return this.apiPost('/signup', {
+        return this.apiPost('/api/auth/signup', {
             username: username,
             password: password,
             email: email
@@ -52,6 +52,17 @@ var PL8Service = (function () {
             .toPromise()
             .catch(this.handleError)
             .then(function (resp) { return resp.json(); });
+        /*
+        return this.http.post('/signup',
+            {
+                username: username,
+                password: password,
+                email: email
+            }, {headers: headers})
+            .toPromise()
+            .then(resp => resp.json() as User)
+            .catch(this.handleError);
+        */
     };
     PL8Service.prototype.logout = function () {
         return this.http.get("/api/auth/logout")
@@ -59,7 +70,7 @@ var PL8Service = (function () {
             .then(function (resp) { return resp.json(); });
     };
     PL8Service.prototype.handleError = function (error) {
-        //console.error('An error occurred', error); // for demo purposes only
+        console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     };
     PL8Service.prototype.me = function () {
@@ -69,17 +80,12 @@ var PL8Service = (function () {
             .then(function (resp) { return resp.json(); });
     };
     PL8Service.prototype.createRecipe = function (recipe) {
-        var _this = this;
         return this.apiPost('/api/auth/createRecipe', {
             name: recipe.propertyMap.Name,
             description: recipe.propertyMap.Description,
             ingredients: JSON.stringify(recipe.propertyMap.Ingredients),
             Pic: recipe.propertyMap.Pic
-        })
-            .toPromise()
-            .catch(this.handleError)
-            .then(function (resp) { return resp.json(); })
-            .then(function (db) { return _this.toRecipe(db); });
+        });
     };
     PL8Service.prototype.toRecipe = function (original) {
         return {
@@ -100,12 +106,12 @@ var PL8Service = (function () {
             .then(function (resp) { return resp.json(); })
             .then(function (recipebases) { return recipebases.map(_this.toRecipe); });
     };
-    PL8Service = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], PL8Service);
     return PL8Service;
 }());
+PL8Service = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], PL8Service);
 exports.PL8Service = PL8Service;
 var UserService = (function () {
     function UserService(PL8Service) {
@@ -135,24 +141,27 @@ var UserService = (function () {
             _this.currentUser = user;
         });
     };
-    UserService = __decorate([
-        core_1.Injectable(),
-        __param(0, core_1.Inject(PL8Service)), 
-        __metadata('design:paramtypes', [PL8Service])
-    ], UserService);
     return UserService;
 }());
+UserService = __decorate([
+    core_1.Injectable(),
+    __param(0, core_1.Inject(PL8Service)),
+    __metadata("design:paramtypes", [PL8Service])
+], UserService);
 exports.UserService = UserService;
 var LocalStorageRecipeService = (function () {
     function LocalStorageRecipeService(http) {
         this.http = http;
+        this.numRecipes = 0;
     }
     LocalStorageRecipeService.prototype.createRecipe = function (recipe) {
         console.log("Create Recipe", JSON.stringify(recipe));
-        var id = "recipe:" + recipe.propertyMap.Name;
+        var id = "recipe:" + this.numRecipes.toString();
         var localData = JSON.parse(localStorage.getItem(id));
         //localData[id] = recipe;
         localStorage.setItem(id, JSON.stringify(recipe));
+        this.numRecipes = this.numRecipes + 1;
+        this.recipes.push(recipe);
     };
     LocalStorageRecipeService.prototype.get = function (recipe) {
         var id = recipe.propertyMap.Name;
@@ -170,12 +179,15 @@ var LocalStorageRecipeService = (function () {
         }
         return data;
     };
-    LocalStorageRecipeService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], LocalStorageRecipeService);
+    LocalStorageRecipeService.prototype.allRecipes = function () {
+        return this.recipes;
+    };
     return LocalStorageRecipeService;
 }());
+LocalStorageRecipeService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], LocalStorageRecipeService);
 exports.LocalStorageRecipeService = LocalStorageRecipeService;
 var LocalStoragePantryService = (function () {
     function LocalStoragePantryService(http) {
@@ -205,11 +217,11 @@ var LocalStoragePantryService = (function () {
         }
         return data;
     };
-    LocalStoragePantryService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], LocalStoragePantryService);
     return LocalStoragePantryService;
 }());
+LocalStoragePantryService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], LocalStoragePantryService);
 exports.LocalStoragePantryService = LocalStoragePantryService;
 //# sourceMappingURL=api.service.js.map

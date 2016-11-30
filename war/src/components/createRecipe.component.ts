@@ -40,8 +40,6 @@ export class CreateRecipeComponent implements OnInit {
         this.isLoading = true;
 
         this.recipeStorage.createRecipe(this.recipe);
-        this.isLoading = false;
- 
         this.router.navigate(['/home']);
         return false;
         } 

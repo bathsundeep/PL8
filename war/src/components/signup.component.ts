@@ -10,11 +10,11 @@ import { PL8Service, UserService } from '../API/api.service';
 })
 export class SignupComponent implements OnInit {
     
-    
-      public router: Router;
-      public PL8Service: PL8Service;
-      public UserService: UserService;
-    
+    constructor(
+      public router: Router,
+      public PL8Service: PL8Service,
+      public UserService: UserService
+    ) { }
 
     public username: string;
     public email: string;
@@ -25,12 +25,11 @@ export class SignupComponent implements OnInit {
     onSubmit() {
       this.isLoading = true;
       this.PL8Service.signup(this.username, this.email, this.password)
-      .then(User => {
+        .then(User => {
         this.isLoading = false;
-        this.UserService.currentUser = User;
-        this.router.navigate(['/'])
+        this.router.navigate(['/home'])
       }, (reason : Response) => {
-        this.errorMessage = reason.json()["message"];
+        this.errorMessage = '';
         this.isLoading = false;
       });
       return false;
