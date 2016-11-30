@@ -13,10 +13,11 @@ export class LoginComponent implements OnInit {
 
   constructor(
    private router: Router,
-   private PL8Service: PL8Service
+   private PL8Service: PL8Service,
+   private UserService: UserService
   ) { }
 
-  private UserService: UserService;
+  
 
   public username: string;
   public password: string;
@@ -27,12 +28,8 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.PL8Service.login(this.username, this.password)
       .then(User => {
-        this.errorMessage = '';
         this.isLoading = false;
-        this.UserService.currentUser = User;
-        this.router.navigate(['']);
       }, (reason : Response) => {
-        this.errorMessage = reason.json()["message"];
         this.isLoading = false;
       });
     return false;

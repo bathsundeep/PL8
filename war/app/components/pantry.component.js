@@ -12,9 +12,10 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var api_service_1 = require('../API/api.service');
 var PantryComponent = (function () {
-    function PantryComponent(router, PL8Service) {
+    function PantryComponent(router, PL8Service, pantryStorage) {
         this.router = router;
         this.PL8Service = PL8Service;
+        this.pantryStorage = pantryStorage;
         this.recipe = {
             key: {
                 kind: "Recipe",
@@ -29,6 +30,13 @@ var PantryComponent = (function () {
         };
     }
     PantryComponent.prototype.onSubmit = function () {
+        var _this = this;
+        this.isLoading = true;
+        this.recipe.propertyMap.Ingredients.forEach(function (item, index) {
+            _this.pantryStorage.addIngredient(item, index);
+        });
+        this.isLoading = false;
+        return false;
     };
     PantryComponent.prototype.ngOnInit = function () {
         this.addIng();
@@ -49,7 +57,7 @@ var PantryComponent = (function () {
             selector: 'my-pantry',
             templateUrl: '/templates/pantry.html',
         }), 
-        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service])
+        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service, api_service_1.LocalStoragePantryService])
     ], PantryComponent);
     return PantryComponent;
 }());
