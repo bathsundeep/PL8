@@ -152,7 +152,7 @@ export class LocalStorageRecipeService {
 
     numRecipes = 0;
 
-    recipes:Recipe[];
+    recipes:Array<Recipe> = [];
 
     public createRecipe(recipe: Recipe) {
         console.log("Create Recipe", JSON.stringify(recipe));

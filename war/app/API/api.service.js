@@ -153,6 +153,7 @@ var LocalStorageRecipeService = (function () {
     function LocalStorageRecipeService(http) {
         this.http = http;
         this.numRecipes = 0;
+        this.recipes = [];
     }
     LocalStorageRecipeService.prototype.createRecipe = function (recipe) {
         console.log("Create Recipe", JSON.stringify(recipe));

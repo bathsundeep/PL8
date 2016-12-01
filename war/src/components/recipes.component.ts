@@ -18,7 +18,9 @@ export class RecipeComponent implements OnInit {
     
     @Input() isLoading: boolean;
 
+    recipes: Array<Recipe> = this.recipeStorage.recipes;
+
     ngOnInit(): void {
-        this.isLoading = true;
+        this.isLoading = false;
     }
 }

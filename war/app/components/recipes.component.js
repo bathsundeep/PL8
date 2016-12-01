@@ -16,6 +16,7 @@ var RecipeComponent = (function () {
         this.rotuer = rotuer;
         this.PL8Service = PL8Service;
         this.recipeStorage = recipeStorage;
+        this.recipes = this.recipeStorage.recipes;
     }
     RecipeComponent.prototype.ngOnInit = function () {
         this.isLoading = true;
