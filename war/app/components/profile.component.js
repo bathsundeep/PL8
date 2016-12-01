@@ -8,10 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var nutrition_service_1 = require('../nutrition.service');
-var api_service_1 = require('../API/api.service');
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var nutrition_service_1 = require("../nutrition.service");
+var api_service_1 = require("../API/api.service");
 var ProfileComponent = (function () {
     function ProfileComponent(router, PL8Service, UserService, nutritionServices) {
         this.router = router;
@@ -35,15 +35,18 @@ var ProfileComponent = (function () {
     ProfileComponent.prototype.ngOnInit = function () {
         this.getNutrition();
     };
-    ProfileComponent = __decorate([
-        core_1.Component({
-            selector: 'my-profile',
-            templateUrl: '/templates/profile.html',
-            providers: [nutrition_service_1.NutritionService]
-        }), 
-        __metadata('design:paramtypes', [router_1.Router, api_service_1.PL8Service, api_service_1.UserService, nutrition_service_1.NutritionService])
-    ], ProfileComponent);
     return ProfileComponent;
 }());
+ProfileComponent = __decorate([
+    core_1.Component({
+        selector: 'my-profile',
+        templateUrl: '/templates/profile.html',
+        providers: [nutrition_service_1.NutritionService]
+    }),
+    __metadata("design:paramtypes", [router_1.Router,
+        api_service_1.PL8Service,
+        api_service_1.UserService,
+        nutrition_service_1.NutritionService])
+], ProfileComponent);
 exports.ProfileComponent = ProfileComponent;
 //# sourceMappingURL=profile.component.js.map

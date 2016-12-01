@@ -1,12 +1,13 @@
 "use strict";
-var router_1 = require('@angular/router');
-var login_component_1 = require('./components/login.component');
-var signup_component_1 = require('./components/signup.component');
-var home_component_1 = require('./components/home.component');
-var profile_component_1 = require('./components/profile.component');
-var pantry_component_1 = require('./components/pantry.component');
-var createRecipe_component_1 = require('./components/createRecipe.component');
-var recipes_component_1 = require('./components/recipes.component');
+var router_1 = require("@angular/router");
+var login_component_1 = require("./components/login.component");
+var signup_component_1 = require("./components/signup.component");
+var home_component_1 = require("./components/home.component");
+var profile_component_1 = require("./components/profile.component");
+var pantry_component_1 = require("./components/pantry.component");
+var createRecipe_component_1 = require("./components/createRecipe.component");
+var recipes_component_1 = require("./components/recipes.component");
+var recipes_component_2 = require("./components/recipes.component");
 var appRoutes = [
     {
         path: '',
@@ -38,7 +39,11 @@ var appRoutes = [
     },
     {
         path: 'recipes',
-        component: recipes_component_1.RecipeComponent
+        component: recipes_component_1.RecipesComponent
+    },
+    {
+        path: 'recipes/:id',
+        component: recipes_component_2.RecipeComponent
     }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes, { useHash: true });

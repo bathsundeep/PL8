@@ -12,6 +12,7 @@ export class PL8Service {
     constructor(private http: Http) { }
 
     private val: number = 14;
+    
 
     urlEncode(obj: Object): string {
         let urlSearchParams = new URLSearchParams();
@@ -24,26 +25,27 @@ export class PL8Service {
     apiPost(url: string, body: any) {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
-
+        console.log("hello");
+        // Try removing return statement
         return this.http.post(url, this.urlEncode(body), options);
+        
     }
 
-    public login(username: string, password: string) {
+    public login(username: string, password: string, done: Function) {
+        console.log("hi");
         return this.apiPost('/login', {
             username: username,
             password: password
         })
-            .toPromise()
-            .catch(this.handleError)
-            .then(resp => resp.json() as User);
         
         /*console.log("Adding user:", username);
         sessionStorage.setItem("currentUser", username);
         */ 
     }
 
-    public signup(username: string, email: string, password: string) {
-        return this.apiPost('/signup', {
+    public signup(username: string, email: string, password: string){
+
+        return this.apiPost('/api/auth/signup', {
             username: username,
             password: password,
             email: email
@@ -51,6 +53,18 @@ export class PL8Service {
             .toPromise()
             .catch(this.handleError)
             .then(resp => resp.json() as User);
+        
+        /*
+        return this.http.post('/signup', 
+            {
+                username: username,
+                password: password,
+                email: email
+            }, {headers: headers})
+            .toPromise()
+            .then(resp => resp.json() as User)
+            .catch(this.handleError);
+        */
     }
 
     public logout() {
@@ -60,7 +74,7 @@ export class PL8Service {
     }
 
     private handleError(error: any): Promise<any> {
-        //console.error('An error occurred', error); // for demo purposes only
+        console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }
 
@@ -78,12 +92,9 @@ export class PL8Service {
             ingredients: JSON.stringify(recipe.propertyMap.Ingredients),
             Pic: recipe.propertyMap.Pic
         })
-        .toPromise()
-        .catch(this.handleError)
-        .then(resp => resp.json() as RecipeBase)
-        .then(db => this.toRecipe(db));
     }
 
+/*
     private toRecipe(original: RecipeBase) : Recipe {
         return {
             key: original.key,
@@ -91,18 +102,20 @@ export class PL8Service {
                 Name: original.propertyMap.Name,
                 Description: original.propertyMap.Description,
                 Ingredients: <Ingredient[]>JSON.parse(original.propertyMap.Ingredients),
+                Steps: <String[]>JSON.parse(original.propertyMap.Steps),
                 Pic: original.propertyMap.Pic
             }
         };
-    }
+    }*/
 
     public recipes() {
         return this.http.get('/getRecipes')
             .toPromise()
             .catch(this.handleError)
             .then(resp => resp.json() as RecipeBase[])
-            .then(recipebases => recipebases.map(this.toRecipe));
+            //.then(recipebases => recipebases.map(this.toRecipe));
     }
+
 }
 @Injectable()
 export class UserService {
@@ -139,13 +152,19 @@ export class LocalStorageRecipeService {
 
     constructor(private http: Http) { }
 
+    numRecipes = 0;
+
+    recipes:Array<Recipe> = [];
+
     public createRecipe(recipe: Recipe) {
         console.log("Create Recipe", JSON.stringify(recipe));
-        let id = "recipe:" + recipe.propertyMap.Name;
+        let id = "recipe:" + this.numRecipes.toString();
         let localData = JSON.parse(localStorage.getItem(id));
 
         //localData[id] = recipe;
         localStorage.setItem(id, JSON.stringify(recipe));
+        this.numRecipes = this.numRecipes + 1;
+        this.recipes.push(recipe);
     }
 
     public get(recipe: Recipe){
@@ -163,12 +182,36 @@ export class LocalStorageRecipeService {
     	}
   	    return data ;
     }
+
+    public repopulate() {
+        if (localStorage.length == 0) {
+            for (let i = 0; i < this.numRecipes; i++) {
+                let recipe = this.recipes[i];
+                console.log("Repopulating recipe localStorage", JSON.stringify(recipe));
+                let id = "recipe:" + i.toString();
+                let localData = JSON.parse(localStorage.getItem(id));
+                localStorage.setItem(id, JSON.stringify(recipe));
+            }
+        }
+        else if (this.recipes.length == 0) {
+            for (var j = 0; j < localStorage.length; j++) {
+                let id = "recipe:" + j.toString();
+                let recipe = JSON.parse(localStorage.getItem(id));
+                console.log("Repopulating recipes", JSON.stringify(recipe));
+                this.recipes.push(recipe);
+                this.numRecipes = this.numRecipes + 1;
+            }
+        }
+    }
 }
 
 @Injectable()
 export class LocalStoragePantryService {
 
     constructor(private http: Http) { }
+
+    numItems = 0;
+    pantry: Array<Ingredient> = [];
 
     public addIngredient(ing: Ingredient, index) {
         console.log("Add Ingredient to Pantry", JSON.stringify(ing));
@@ -178,6 +221,8 @@ export class LocalStoragePantryService {
 
         //localData[id] = recipe;
         sessionStorage.setItem(id, JSON.stringify(ing));
+        this.numItems = this.numItems + 1;
+        this.pantry.push(ing);
     }
 
     public get(recipe: Recipe){
@@ -194,5 +239,26 @@ export class LocalStoragePantryService {
   		    }
     	}
   	    return data ;
+    }
+
+    public repopulate() {
+        if (localStorage.length == 0) {
+            for (let i = 0; i < this.numItems; i++) {
+                let recipe = this.pantry[i];
+                console.log("Repopulating pantry localStorage", JSON.stringify(recipe));
+                let id = "pantry:" + i.toString();
+                let localData = JSON.parse(localStorage.getItem(id));
+                localStorage.setItem(id, JSON.stringify(recipe));
+            }
+        }
+        else if (this.pantry.length == 0) {
+            for (var j = 0; j < localStorage.length; j++) {
+                let id = "pantry:" + j.toString();
+                let recipe = JSON.parse(localStorage.getItem(id));
+                console.log("Repopulating pantry", JSON.stringify(recipe));
+                this.pantry.push(recipe);
+                this.numItems = this.numItems + 1;
+            }
+        }
     }
 }

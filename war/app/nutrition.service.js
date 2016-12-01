@@ -8,19 +8,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var mock_nutrition_1 = require('./mock-nutrition');
+var core_1 = require("@angular/core");
+var mock_nutrition_1 = require("./mock-nutrition");
 var NutritionService = (function () {
     function NutritionService() {
     }
     NutritionService.prototype.getNutritions = function () {
         return Promise.resolve(mock_nutrition_1.NUTRITIONS);
     };
-    NutritionService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], NutritionService);
     return NutritionService;
 }());
+NutritionService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [])
+], NutritionService);
 exports.NutritionService = NutritionService;
 //# sourceMappingURL=nutrition.service.js.map

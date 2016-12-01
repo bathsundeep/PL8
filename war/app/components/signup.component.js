@@ -8,9 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var api_service_1 = require("../API/api.service");
 var SignupComponent = (function () {
-    function SignupComponent() {
+    function SignupComponent(router, PL8Service, UserService) {
+        this.router = router;
+        this.PL8Service = PL8Service;
+        this.UserService = UserService;
     }
     SignupComponent.prototype.onSubmit = function () {
         var _this = this;
@@ -18,28 +23,29 @@ var SignupComponent = (function () {
         this.PL8Service.signup(this.username, this.email, this.password)
             .then(function (User) {
             _this.isLoading = false;
-            _this.UserService.currentUser = User;
-            _this.router.navigate(['/']);
+            _this.router.navigate(['/home']);
         }, function (reason) {
-            _this.errorMessage = reason.json()["message"];
+            _this.errorMessage = '';
             _this.isLoading = false;
         });
         return false;
     };
     SignupComponent.prototype.ngOnInit = function () {
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], SignupComponent.prototype, "errorMessage", void 0);
-    SignupComponent = __decorate([
-        core_1.Component({
-            selector: 'my-signup',
-            templateUrl: '/templates/signup.html',
-        }), 
-        __metadata('design:paramtypes', [])
-    ], SignupComponent);
     return SignupComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], SignupComponent.prototype, "errorMessage", void 0);
+SignupComponent = __decorate([
+    core_1.Component({
+        selector: 'my-signup',
+        templateUrl: '/templates/signup.html',
+    }),
+    __metadata("design:paramtypes", [router_1.Router,
+        api_service_1.PL8Service,
+        api_service_1.UserService])
+], SignupComponent);
 exports.SignupComponent = SignupComponent;
 //# sourceMappingURL=signup.component.js.map
