@@ -1,13 +1,9 @@
 <!-- This is the template for the app component called by templateUrl !-->
-
-      <h1>This is your profile</h1>
+    <!--img src="http://www.xspearfishing.com.au/images/cooking-icon.png" alt="profile icon" width="150" height="150"-->
+    <div class="container" style="background:white url(http://www.xspearfishing.com.au/images/cooking-icon.png); background-repeat:no-repeat; background-position:right top; height: 200px; ">
+      <h1>This is your Profile Page</h1>
       <h2> Your name is {{name}} </h2>
-      <div>
-          <label> Nutrition Restriction</label> <input #nutritionName/>
-          <button (click) = "add(nutrionName.value); nutritionName.value=''">
-              Add
-          </button>
-     </div>
+      </div>
      <div class = "right">
         <ul class = "nav nav-pills pull-right">
             <h3> Your dietary restrictions </h3>
@@ -17,18 +13,32 @@
                     </li>
                     </ul>
             </ul> </div>
+    <div>
+          <h3>Add a dietary restriction:</h3>
+          <!--label> Nutrition Restriction</label--> <input #nutritionName/>
+          <button (click) = "add(nutrionName.value); nutritionName.value=''">
+              Add
+          </button>
+     </div>
             <div style="text-align:center;">
-                <h4> Space </h4>
+                <h4> </h4>
                 </div>
-        <ul class = "nav nav-pills">
-                <h2> Maybe a picture will go here</h2>
-                </ul>
+        <!--ul class = "nav nav-pills">
+                <!--h2> Maybe a picture will go here</h2-->
      <br />
-     <div>
-         <!-- Button to route to personal pantry page !-->
-         <li routerLinkActive="active"><a routerLink="/pantry" >Your pantry</a></li>
-         
-         <router-outlet></router-outlet>
+     <div class="container" style="background: white">
+         <h3>Actions:</h3>
+        <div class = "col-xs-12">
+            <!-- Button to route to personal pantry page !-->
+            <nav>
+                <ul class="nav nav-pills pull-left">
+                    <li routerLinkActive="active"><a routerLink="/pantry" >View my pantry</a></li>
+                    <li routerLinkActive="active"><a routerLink="/createRecipe" >Create a Recipe</a></li>
+                </ul>
+            </nav>
+            
+            <router-outlet></router-outlet>
+        </div>
      </div>
 
 

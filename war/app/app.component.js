@@ -18,11 +18,8 @@ var AppComponent = (function () {
     function AppComponent(PL8Service, storageService, pantryService, UserService) {
         this.PL8Service = PL8Service;
         this.storageService = storageService;
-<<<<<<< HEAD
-=======
         this.pantryService = pantryService;
         this.UserService = UserService;
->>>>>>> bc654700d8ab70c19749af6a85999673d9fe496e
     }
     AppComponent.prototype.logOut = function () {
         this.PL8Service.logout()

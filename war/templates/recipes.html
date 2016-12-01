@@ -1,4 +1,4 @@
-<div class="alert alert-info" *ngIf="isLoading">
+<!--div class="alert alert-info" *ngIf="isLoading">
     Loading...
 </div>
 
@@ -10,4 +10,51 @@
     <a routerLink="/recipes/{{ recipe.key.id }}" class="list-group-item" *ngFor="let recipe of recipes">
         <h4 class="list-group-item-heading">{{ recipe.propertyMap.Name }} </h4>
     </a>
+</div-->
+<div class="container" style="background: white">
+
+    <h2>Example Recipe: Chocolate Chip Cookies</h2>
+    <hr>
+
+    <img src="http://images-gmi-pmc.edge-generalmills.com/eb52c020-c145-440c-8445-911f133c0096.jpg" alt="cookie picture" style="height:300">
+
+    <h3>Ingredients:</h3>
+    <ul>
+        <li>1 stick butter</li>
+        <li>3/4 cup brown sugar</li>
+        <li>3/4 cup sugar</li>
+        <li>2 eggs</li>
+        <li>1 tsp vanilla extract</li>
+        <li>12 oz chocolate chips</li>
+        <li>2 1/4 cups flour</li>
+        <li>3/4 tsp baking soda</li>
+        <li>1 tsp salt</li>
+    </ul>
+    <h3>Procedure:</h3>
+    <ol>
+        <li>Preheat oven to 375 degrees Farenheit.</li>
+        <li>Melt butter and combine with sugar, eggs, and vanilla.</li>
+        <li>In a separate bowl mix the flour, baking soda, and salt. Then, combine both mixtures along with the chocolate chips.</li>
+        <li>Place spoonfuls of dough 2 inches apart on the baking pans. Bake for 12 to 16 minutes.</li>
+    </ol>
+    <hr>
+
+    <!--Took this directly from w3schools-->
+    <div class="container">
+        <p>Did you like this recipe?</p>
+        <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-thumbs-up"></span>
+        </button>
+        <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-thumbs-down"></span>
+        </button>
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+            <label class = "col-sm-1.1 control-label">Add a comment</label>
+            <textarea class="form-control" placeholder="Share some advice!"></textarea>
+            <button class="btn btn-primary" style="float:right">Add comment</button>
+    </div>
 </div>

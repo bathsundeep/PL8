@@ -1,6 +1,8 @@
 <!-- This is the template for the app component called by templateUrl !-->
-
+<div class="container" style="background: white">
 <h2>Sign Up</h2>
+<p>Already have an account? <a routerLink="/login" >Log in!</a></p>
+
 
 <div class="alert alert-danger" role="alert" *ngIf="errorMessage && errorMessage.length > 0">
   {{errorMessage}}
@@ -40,3 +42,4 @@
   </div>
   
 </form>
+</div>
