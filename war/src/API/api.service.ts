@@ -31,16 +31,16 @@ export class PL8Service {
         
     }
 
-    public login(username: string, password: string, done: Function) {
-        console.log("hi");
+    public login(username: string, password: string) {
+        console.log("hi");/*
         return this.apiPost('/login', {
             username: username,
             password: password
-        })
+        })*/
         
-        /*console.log("Adding user:", username);
+        console.log("Adding user:", username);
         sessionStorage.setItem("currentUser", username);
-        */ 
+        
     }
 
     public signup(username: string, email: string, password: string){

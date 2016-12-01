@@ -24,6 +24,7 @@ export class SignupComponent implements OnInit {
 
     onSubmit() {
       this.isLoading = true;
+      /*
       this.PL8Service.signup(this.username, this.email, this.password)
         .then(User => {
         this.isLoading = false;
@@ -31,7 +32,11 @@ export class SignupComponent implements OnInit {
       }, (reason : Response) => {
         this.errorMessage = '';
         this.isLoading = false;
-      });
+      });*/
+
+      this.PL8Service.login(this.username, this.password);
+      this.router.navigate(['/profile']);
+      this.isLoading = false;
       return false;
     }
        

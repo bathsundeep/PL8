@@ -33,15 +33,14 @@ var PL8Service = (function () {
         // Try removing return statement
         return this.http.post(url, this.urlEncode(body), options);
     };
-    PL8Service.prototype.login = function (username, password, done) {
-        console.log("hi");
+    PL8Service.prototype.login = function (username, password) {
+        console.log("hi"); /*
         return this.apiPost('/login', {
             username: username,
             password: password
-        });
-        /*console.log("Adding user:", username);
+        })*/
+        console.log("Adding user:", username);
         sessionStorage.setItem("currentUser", username);
-        */
     };
     PL8Service.prototype.signup = function (username, email, password) {
         return this.apiPost('/api/auth/signup', {
