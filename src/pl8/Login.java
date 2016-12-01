@@ -22,7 +22,7 @@ public class Login extends JsonServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse resp)
 			throws IOException {		
 		/* Get parameters from login attempt */
-		console.log("hi");
+		console.log("LOGGING IN");
 		String user = request.getParameter("username");
 		
 		/* Remove white space */		

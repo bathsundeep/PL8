@@ -18,16 +18,19 @@ var SignupComponent = (function () {
         this.UserService = UserService;
     }
     SignupComponent.prototype.onSubmit = function () {
-        var _this = this;
         this.isLoading = true;
+        /*
         this.PL8Service.signup(this.username, this.email, this.password)
-            .then(function (User) {
-            _this.isLoading = false;
-            _this.router.navigate(['/home']);
-        }, function (reason) {
-            _this.errorMessage = '';
-            _this.isLoading = false;
-        });
+          .then(User => {
+          this.isLoading = false;
+          this.router.navigate(['/home'])
+        }, (reason : Response) => {
+          this.errorMessage = '';
+          this.isLoading = false;
+        });*/
+        this.PL8Service.login(this.username, this.password);
+        this.router.navigate(['/profile']);
+        this.isLoading = false;
         return false;
     };
     SignupComponent.prototype.ngOnInit = function () {
