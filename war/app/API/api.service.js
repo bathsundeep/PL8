@@ -87,24 +87,25 @@ var PL8Service = (function () {
             Pic: recipe.propertyMap.Pic
         });
     };
-    PL8Service.prototype.toRecipe = function (original) {
-        return {
-            key: original.key,
-            propertyMap: {
-                Name: original.propertyMap.Name,
-                Description: original.propertyMap.Description,
-                Ingredients: JSON.parse(original.propertyMap.Ingredients),
-                Pic: original.propertyMap.Pic
-            }
-        };
-    };
+    /*
+        private toRecipe(original: RecipeBase) : Recipe {
+            return {
+                key: original.key,
+                propertyMap: {
+                    Name: original.propertyMap.Name,
+                    Description: original.propertyMap.Description,
+                    Ingredients: <Ingredient[]>JSON.parse(original.propertyMap.Ingredients),
+                    Steps: <String[]>JSON.parse(original.propertyMap.Steps),
+                    Pic: original.propertyMap.Pic
+                }
+            };
+        }*/
     PL8Service.prototype.recipes = function () {
-        var _this = this;
         return this.http.get('/getRecipes')
             .toPromise()
             .catch(this.handleError)
-            .then(function (resp) { return resp.json(); })
-            .then(function (recipebases) { return recipebases.map(_this.toRecipe); });
+            .then(function (resp) { return resp.json(); });
+        //.then(recipebases => recipebases.map(this.toRecipe));
     };
     return PL8Service;
 }());
@@ -180,8 +181,25 @@ var LocalStorageRecipeService = (function () {
         }
         return data;
     };
-    LocalStorageRecipeService.prototype.allRecipes = function () {
-        return this.recipes;
+    LocalStorageRecipeService.prototype.repopulate = function () {
+        if (localStorage.length == 0) {
+            for (var i = 0; i < this.numRecipes; i++) {
+                var recipe = this.recipes[i];
+                console.log("Repopulating recipe localStorage", JSON.stringify(recipe));
+                var id = "recipe:" + i.toString();
+                var localData = JSON.parse(localStorage.getItem(id));
+                localStorage.setItem(id, JSON.stringify(recipe));
+            }
+        }
+        else if (this.recipes.length == 0) {
+            for (var j = 0; j < localStorage.length; j++) {
+                var id = "recipe:" + j.toString();
+                var recipe = JSON.parse(localStorage.getItem(id));
+                console.log("Repopulating recipes", JSON.stringify(recipe));
+                this.recipes.push(recipe);
+                this.numRecipes = this.numRecipes + 1;
+            }
+        }
     };
     return LocalStorageRecipeService;
 }());
@@ -193,6 +211,8 @@ exports.LocalStorageRecipeService = LocalStorageRecipeService;
 var LocalStoragePantryService = (function () {
     function LocalStoragePantryService(http) {
         this.http = http;
+        this.numItems = 0;
+        this.pantry = [];
     }
     LocalStoragePantryService.prototype.addIngredient = function (ing, index) {
         console.log("Add Ingredient to Pantry", JSON.stringify(ing));
@@ -201,6 +221,8 @@ var LocalStoragePantryService = (function () {
         var localData = JSON.parse(localStorage.getItem(id));
         //localData[id] = recipe;
         sessionStorage.setItem(id, JSON.stringify(ing));
+        this.numItems = this.numItems + 1;
+        this.pantry.push(ing);
     };
     LocalStoragePantryService.prototype.get = function (recipe) {
         var id = recipe.propertyMap.Name;
@@ -217,6 +239,26 @@ var LocalStoragePantryService = (function () {
             }
         }
         return data;
+    };
+    LocalStoragePantryService.prototype.repopulate = function () {
+        if (localStorage.length == 0) {
+            for (var i = 0; i < this.numItems; i++) {
+                var recipe = this.pantry[i];
+                console.log("Repopulating pantry localStorage", JSON.stringify(recipe));
+                var id = "pantry:" + i.toString();
+                var localData = JSON.parse(localStorage.getItem(id));
+                localStorage.setItem(id, JSON.stringify(recipe));
+            }
+        }
+        else if (this.pantry.length == 0) {
+            for (var j = 0; j < localStorage.length; j++) {
+                var id = "pantry:" + j.toString();
+                var recipe = JSON.parse(localStorage.getItem(id));
+                console.log("Repopulating pantry", JSON.stringify(recipe));
+                this.pantry.push(recipe);
+                this.numItems = this.numItems + 1;
+            }
+        }
     };
     return LocalStoragePantryService;
 }());

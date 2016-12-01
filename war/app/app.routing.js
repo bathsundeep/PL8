@@ -7,6 +7,7 @@ var profile_component_1 = require("./components/profile.component");
 var pantry_component_1 = require("./components/pantry.component");
 var createRecipe_component_1 = require("./components/createRecipe.component");
 var recipes_component_1 = require("./components/recipes.component");
+var recipes_component_2 = require("./components/recipes.component");
 var appRoutes = [
     {
         path: '',
@@ -38,7 +39,11 @@ var appRoutes = [
     },
     {
         path: 'recipes',
-        component: recipes_component_1.RecipeComponent
+        component: recipes_component_1.RecipesComponent
+    },
+    {
+        path: 'recipes/:id',
+        component: recipes_component_2.RecipeComponent
     }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes, { useHash: true });

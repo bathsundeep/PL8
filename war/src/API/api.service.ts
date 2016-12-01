@@ -94,6 +94,7 @@ export class PL8Service {
         })
     }
 
+/*
     private toRecipe(original: RecipeBase) : Recipe {
         return {
             key: original.key,
@@ -101,17 +102,18 @@ export class PL8Service {
                 Name: original.propertyMap.Name,
                 Description: original.propertyMap.Description,
                 Ingredients: <Ingredient[]>JSON.parse(original.propertyMap.Ingredients),
+                Steps: <String[]>JSON.parse(original.propertyMap.Steps),
                 Pic: original.propertyMap.Pic
             }
         };
-    }
+    }*/
 
     public recipes() {
         return this.http.get('/getRecipes')
             .toPromise()
             .catch(this.handleError)
             .then(resp => resp.json() as RecipeBase[])
-            .then(recipebases => recipebases.map(this.toRecipe));
+            //.then(recipebases => recipebases.map(this.toRecipe));
     }
 
 }
@@ -181,8 +183,25 @@ export class LocalStorageRecipeService {
   	    return data ;
     }
 
-    public allRecipes() {
-        return this.recipes;
+    public repopulate() {
+        if (localStorage.length == 0) {
+            for (let i = 0; i < this.numRecipes; i++) {
+                let recipe = this.recipes[i];
+                console.log("Repopulating recipe localStorage", JSON.stringify(recipe));
+                let id = "recipe:" + i.toString();
+                let localData = JSON.parse(localStorage.getItem(id));
+                localStorage.setItem(id, JSON.stringify(recipe));
+            }
+        }
+        else if (this.recipes.length == 0) {
+            for (var j = 0; j < localStorage.length; j++) {
+                let id = "recipe:" + j.toString();
+                let recipe = JSON.parse(localStorage.getItem(id));
+                console.log("Repopulating recipes", JSON.stringify(recipe));
+                this.recipes.push(recipe);
+                this.numRecipes = this.numRecipes + 1;
+            }
+        }
     }
 }
 
@@ -190,6 +209,9 @@ export class LocalStorageRecipeService {
 export class LocalStoragePantryService {
 
     constructor(private http: Http) { }
+
+    numItems = 0;
+    pantry: Array<Ingredient> = [];
 
     public addIngredient(ing: Ingredient, index) {
         console.log("Add Ingredient to Pantry", JSON.stringify(ing));
@@ -199,6 +221,8 @@ export class LocalStoragePantryService {
 
         //localData[id] = recipe;
         sessionStorage.setItem(id, JSON.stringify(ing));
+        this.numItems = this.numItems + 1;
+        this.pantry.push(ing);
     }
 
     public get(recipe: Recipe){
@@ -215,5 +239,26 @@ export class LocalStoragePantryService {
   		    }
     	}
   	    return data ;
+    }
+
+    public repopulate() {
+        if (localStorage.length == 0) {
+            for (let i = 0; i < this.numItems; i++) {
+                let recipe = this.pantry[i];
+                console.log("Repopulating pantry localStorage", JSON.stringify(recipe));
+                let id = "pantry:" + i.toString();
+                let localData = JSON.parse(localStorage.getItem(id));
+                localStorage.setItem(id, JSON.stringify(recipe));
+            }
+        }
+        else if (this.pantry.length == 0) {
+            for (var j = 0; j < localStorage.length; j++) {
+                let id = "pantry:" + j.toString();
+                let recipe = JSON.parse(localStorage.getItem(id));
+                console.log("Repopulating pantry", JSON.stringify(recipe));
+                this.pantry.push(recipe);
+                this.numItems = this.numItems + 1;
+            }
+        }
     }
 }

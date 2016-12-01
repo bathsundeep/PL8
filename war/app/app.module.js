@@ -25,6 +25,7 @@ var profile_component_1 = require("./components/profile.component");
 var pantry_component_1 = require("./components/pantry.component");
 var createRecipe_component_1 = require("./components/createRecipe.component");
 var recipes_component_1 = require("./components/recipes.component");
+var recipes_component_2 = require("./components/recipes.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -33,7 +34,8 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, http_1.HttpModule, forms_1.FormsModule, app_routing_1.routing, ng2_webstorage_1.Ng2Webstorage],
-        declarations: [app_component_1.AppComponent, login_component_1.LoginComponent, signup_component_1.SignupComponent, home_component_1.HomeComponent, profile_component_1.ProfileComponent, pantry_component_1.PantryComponent, createRecipe_component_1.CreateRecipeComponent, recipes_component_1.RecipeComponent],
+        declarations: [app_component_1.AppComponent, login_component_1.LoginComponent, signup_component_1.SignupComponent, home_component_1.HomeComponent, profile_component_1.ProfileComponent, pantry_component_1.PantryComponent,
+            createRecipe_component_1.CreateRecipeComponent, recipes_component_2.RecipeComponent, recipes_component_1.RecipesComponent],
         bootstrap: [app_component_1.AppComponent],
         providers: [api_service_1.PL8Service, api_service_1.UserService]
     }),

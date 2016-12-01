@@ -16,11 +16,13 @@ import { HomeComponent } from './components/home.component';
 import { ProfileComponent } from './components/profile.component';
 import { PantryComponent } from './components/pantry.component';
 import { CreateRecipeComponent } from './components/createRecipe.component';
+import { RecipesComponent } from './components/recipes.component';
 import { RecipeComponent } from './components/recipes.component';
 
 @NgModule({
   imports:      [ BrowserModule, HttpModule, FormsModule, routing, Ng2Webstorage],
-  declarations: [ AppComponent, LoginComponent, SignupComponent, HomeComponent, ProfileComponent, PantryComponent, CreateRecipeComponent, RecipeComponent ],
+  declarations: [ AppComponent, LoginComponent, SignupComponent, HomeComponent, ProfileComponent, PantryComponent, 
+                  CreateRecipeComponent, RecipeComponent, RecipesComponent ],
   bootstrap:    [ AppComponent ],
   providers:    [ PL8Service, UserService]
 })

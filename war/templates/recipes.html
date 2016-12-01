@@ -2,12 +2,19 @@
     Loading...
 </div>
 
-<div class="alert alert-info" *ngIf="!isLoading && recipes.length == 0">
+<div class="alert alert-info" *ngIf="!isLoading && numRecipes == 0">
     No Recipes :(
 </div>
 
 <div class="list-group" *ngIf="!isLoading">
     <a  class="list-group-item" *ngFor="let recipe of recipes">
         <h4 class="list-group-item-heading">{{ recipe.propertyMap.Name }} </h4>
+        <p class="list-group-item-text">{{ recipe.propertyMap.Description }}:
+            <span *ngFor="let ing of recipe.propertyMap.Ingredients; let isLast = last">
+            {{ ing.amount}}
+            {{ ing.name }}
+            <span *ngIf="!isLast">,</span>
+            </span>
+        </p>
     </a>
 </div>

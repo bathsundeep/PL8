@@ -9,7 +9,7 @@ import { Recipe, Ingredient } from '../API/api.models'
     selector: 'recipes',
     templateUrl: '/templates/recipes.html'
 })
-export class RecipeComponent implements OnInit {
+export class RecipesComponent implements OnInit {
     constructor(
         private rotuer: Router,
         private PL8Service: PL8Service,
@@ -19,8 +19,29 @@ export class RecipeComponent implements OnInit {
     @Input() isLoading: boolean;
 
     recipes: Array<Recipe> = this.recipeStorage.recipes;
+    numRecipes: number = this.numRecipes;
 
     ngOnInit(): void {
+        this.isLoading = true;
+        this.recipeStorage.repopulate();
         this.isLoading = false;
+    }
+}
+
+@Component({
+    selector: 'recipe',
+    templateUrl: '/templates/recipe.html'
+})
+export class RecipeComponent implements OnInit {
+
+    constructor(
+        private rotuer: Router,
+        private PL8Service: PL8Service,
+        private recipeStorage: LocalStorageRecipeService
+    ) { }
+
+
+    ngOnInit(): void {
+        
     }
 }

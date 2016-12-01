@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home.component';
 import { ProfileComponent } from './components/profile.component';
 import { PantryComponent } from './components/pantry.component';
 import { CreateRecipeComponent} from './components/createRecipe.component';
+import { RecipesComponent} from './components/recipes.component';
 import { RecipeComponent} from './components/recipes.component';
 
 const appRoutes: Routes = [
@@ -40,8 +41,12 @@ const appRoutes: Routes = [
     },
     {
         path: 'recipes',
+        component: RecipesComponent
+    },
+    {
+        path: 'recipes/:id',
         component: RecipeComponent
-    }   
+    }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes, { useHash: true });

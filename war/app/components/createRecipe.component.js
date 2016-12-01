@@ -25,6 +25,7 @@ var CreateRecipeComponent = (function () {
                 Name: "",
                 Description: "",
                 Ingredients: [],
+                Steps: [],
                 Pic: ""
             }
         };
@@ -37,6 +38,7 @@ var CreateRecipeComponent = (function () {
     };
     CreateRecipeComponent.prototype.ngOnInit = function () {
         this.addIng();
+        this.addStep();
     };
     CreateRecipeComponent.prototype.addIng = function () {
         this.recipe.propertyMap.Ingredients.push({
@@ -44,6 +46,16 @@ var CreateRecipeComponent = (function () {
             amount: 0,
             unit: ""
         });
+    };
+    CreateRecipeComponent.prototype.addStep = function () {
+        if (this.recipe.propertyMap.Steps.length > 0) {
+            var inputValue = document.getElementById("info").value;
+            console.log("Step = ", inputValue);
+            this.recipe.propertyMap.Steps.push(inputValue);
+        }
+        else {
+            this.recipe.propertyMap.Steps.push("");
+        }
     };
     return CreateRecipeComponent;
 }());

@@ -29,6 +29,7 @@ export interface Recipe extends Model {
         Name: string;
         Description: string;
         Ingredients: Ingredient[];
+        Steps: String[];
         Pic: string;
     }
 }

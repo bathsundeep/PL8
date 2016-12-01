@@ -30,6 +30,7 @@ export class PantryComponent implements OnInit {
             Name: "",
             Description: "",
             Ingredients: [],
+            Steps: [],
             Pic: ""
         }
 

@@ -25,6 +25,7 @@ var PantryComponent = (function () {
                 Name: "",
                 Description: "",
                 Ingredients: [],
+                Steps: [],
                 Pic: ""
             }
         };

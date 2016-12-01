@@ -31,6 +31,7 @@ export class CreateRecipeComponent implements OnInit {
             Name: "",
             Description: "",
             Ingredients: [],
+            Steps: [],
             Pic: ""
         }
 
@@ -46,6 +47,7 @@ export class CreateRecipeComponent implements OnInit {
     
     ngOnInit(): void {
         this.addIng();
+        this.addStep();
     }
 
 
@@ -55,5 +57,16 @@ export class CreateRecipeComponent implements OnInit {
             amount: 0,
             unit: ""
         });
+    }
+
+    addStep() {
+        if (this.recipe.propertyMap.Steps.length > 0) {
+            var inputValue = (<HTMLInputElement>document.getElementById("info")).value;
+            console.log("Step = ", inputValue);
+            this.recipe.propertyMap.Steps.push(inputValue);
+        }
+        else {
+            this.recipe.propertyMap.Steps.push("");
+        }
     }
 }
