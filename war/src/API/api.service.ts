@@ -207,6 +207,23 @@ export class LocalStorageRecipeService {
             }
         }
     }
+
+    public getAllRecipes() {return this.recipes;}
+
+    //get suggestions based on pantry
+    //this function sucks and will be changed
+    public getSuggestions(pantry: Array<Ingredient>) {
+        let all = this.getAllRecipes();
+        for (var i = pantry.length; i > 0; i-- ) {
+            for (var j = 0; j < this.numRecipes; j++) {
+                let count = 0;
+                let r = all[j];
+                for (var k = 0; k < r.propertyMap.Ingredients.length; k++) {
+                    
+                }
+            }
+        }
+    }
 }
 
 @Injectable()
