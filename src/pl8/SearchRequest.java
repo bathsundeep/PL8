@@ -22,7 +22,7 @@ import pl8.api.JsonServlet;
 import pl8.api.APIError;
 import pl8.api.APIError.APIErrorCode;
 
-
+// Parameters: boolean usePreferences, string username, string query, and more?
 @SuppressWarnings("serial")
 public class SearchRequest extends JsonServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse resp)
