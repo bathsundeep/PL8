@@ -181,7 +181,11 @@ var LocalStorageRecipeService = (function () {
         return data;
     };
     LocalStorageRecipeService.prototype.repopulate = function () {
-        if (localStorage.length == 0) {
+        if (localStorage.length == 0 && this.recipes.length == 0) {
+            console.log("Empty everything!!");
+            return;
+        }
+        else if (localStorage.length == 0) {
             for (var i = 0; i < this.numRecipes; i++) {
                 var recipe = this.recipes[i];
                 console.log("Repopulating recipe localStorage", JSON.stringify(recipe));

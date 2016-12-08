@@ -184,7 +184,11 @@ export class LocalStorageRecipeService {
     }
 
     public repopulate() {
-        if (localStorage.length == 0) {
+        if (localStorage.length == 0 && this.recipes.length == 0) {
+            console.log("Empty everything!!");
+            return;
+        }
+        else if (localStorage.length == 0) {
             for (let i = 0; i < this.numRecipes; i++) {
                 let recipe = this.recipes[i];
                 console.log("Repopulating recipe localStorage", JSON.stringify(recipe));
