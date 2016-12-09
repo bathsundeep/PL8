@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { Nutrition } from '../nutrition';
 import { NutritionService } from '../nutrition.service';
 
-import { PL8Service, UserService, LocalStoragePantryService } from '../API/api.service';
+import { Ingredient } from '../API/api.models'
+
+import { PL8Service, UserService, LocalStorageRecipeService } from '../API/api.service';
 
 @Component({
   selector: 'my-profile',
@@ -18,26 +20,26 @@ export class ProfileComponent implements OnInit {
         private router: Router,
         private PL8Service: PL8Service,
         private UserService: UserService,
-        private nutritionServices: NutritionService
+        private LocalStorageRecipeService: LocalStorageRecipeService,
+        private NutritionService: NutritionService
     ) { }
    
     name = sessionStorage.getItem('currentUser');
     title = 'Your profile';
     nutritions: Nutrition[];
+    preferences: Array<Ingredient>;
 
     getNutrition(): void {
-        this.nutritionServices.getNutritions().then(nutritions=>this.nutritions=nutritions);
+        this.NutritionService.getNutritions().then(nutritions=>this.nutritions=nutritions);
     }
 
     
         
-        add(name: string): void {
-            //TO DO:
-            //Implement a ton of shit
-           /* name = name.trim();
-            if (!name) {return;}
-            this.selectedNutrition = null; */
-        }
+    add(name: string): void {
+        //TODO get info from front end to push
+        //this.LocalStorageRecipeService.preferences.push(arg);
+    }
+
     ngOnInit(): void {
         this.getNutrition();
     }

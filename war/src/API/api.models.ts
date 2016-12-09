@@ -13,7 +13,7 @@ export interface User extends Model {
     propertyMap: {
         Username: string;
         Email: string;
-        Preferences: string[];
+        Preferences: Array<Ingredient>;
     }
 
 }
