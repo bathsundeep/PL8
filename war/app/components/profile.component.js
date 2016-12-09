@@ -13,24 +13,22 @@ var router_1 = require("@angular/router");
 var nutrition_service_1 = require("../nutrition.service");
 var api_service_1 = require("../API/api.service");
 var ProfileComponent = (function () {
-    function ProfileComponent(router, PL8Service, UserService, nutritionServices) {
+    function ProfileComponent(router, PL8Service, UserService, LocalStorageRecipeService, NutritionService) {
         this.router = router;
         this.PL8Service = PL8Service;
         this.UserService = UserService;
-        this.nutritionServices = nutritionServices;
+        this.LocalStorageRecipeService = LocalStorageRecipeService;
+        this.NutritionService = NutritionService;
         this.name = sessionStorage.getItem('currentUser');
         this.title = 'Your profile';
     }
     ProfileComponent.prototype.getNutrition = function () {
         var _this = this;
-        this.nutritionServices.getNutritions().then(function (nutritions) { return _this.nutritions = nutritions; });
+        this.NutritionService.getNutritions().then(function (nutritions) { return _this.nutritions = nutritions; });
     };
     ProfileComponent.prototype.add = function (name) {
-        //TO DO:
-        //Implement a ton of shit
-        /* name = name.trim();
-         if (!name) {return;}
-         this.selectedNutrition = null; */
+        //TODO get info from front end to push
+        //this.LocalStorageRecipeService.preferences.push(arg);
     };
     ProfileComponent.prototype.ngOnInit = function () {
         this.getNutrition();
@@ -46,6 +44,7 @@ ProfileComponent = __decorate([
     __metadata("design:paramtypes", [router_1.Router,
         api_service_1.PL8Service,
         api_service_1.UserService,
+        api_service_1.LocalStorageRecipeService,
         nutrition_service_1.NutritionService])
 ], ProfileComponent);
 exports.ProfileComponent = ProfileComponent;

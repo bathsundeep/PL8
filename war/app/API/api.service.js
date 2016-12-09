@@ -153,7 +153,9 @@ var LocalStorageRecipeService = (function () {
     function LocalStorageRecipeService(http) {
         this.http = http;
         this.numRecipes = 0;
+        this.numPrefs = 0;
         this.recipes = [];
+        this.preferences = [];
     }
     LocalStorageRecipeService.prototype.createRecipe = function (recipe) {
         console.log("Create Recipe", JSON.stringify(recipe));
@@ -201,6 +203,20 @@ var LocalStorageRecipeService = (function () {
                 console.log("Repopulating recipes", JSON.stringify(recipe));
                 this.recipes.push(recipe);
                 this.numRecipes = this.numRecipes + 1;
+            }
+        }
+    };
+    LocalStorageRecipeService.prototype.getAllRecipes = function () { return this.recipes; };
+    //get suggestions based on pantry
+    //this function sucks and will be changed
+    LocalStorageRecipeService.prototype.getSuggestions = function (pantry) {
+        var all = this.getAllRecipes();
+        for (var i = pantry.length; i > 0; i--) {
+            for (var j = 0; j < this.numRecipes; j++) {
+                var count = 0;
+                var r = all[j];
+                for (var k = 0; k < r.propertyMap.Ingredients.length; k++) {
+                }
             }
         }
     };

@@ -7,7 +7,7 @@
 </div>
 
 <div class="list-group" *ngIf="!isLoading">
-    <a  class="list-group-item" *ngFor="let recipe of recipes">
+    <a  class="list-group-item" *ngFor="let recipe of recipes; let i = index"  routerLink="/recipes/{{ i }}">
         <h4 class="list-group-item-heading">{{ recipe.propertyMap.Name }} </h4>
         <p class="list-group-item-text">{{ recipe.propertyMap.Description }}:
             <span *ngFor="let ing of recipe.propertyMap.Ingredients; let isLast = last">
