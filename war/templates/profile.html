@@ -41,5 +41,18 @@
         </div>
      </div>
 
+<div class="list-group" >
+    <a  class="list-group-item" *ngFor="let recipe of suggestions; let i = index">
+        <h4 class="list-group-item-heading">{{ recipe.propertyMap.Name }} </h4>
+        <p class="list-group-item-text">{{ recipe.propertyMap.Description }}:
+            <span *ngFor="let ing of recipe.propertyMap.Ingredients; let isLast = last">
+            {{ ing.amount}}
+            {{ ing.name }}
+            <span *ngIf="!isLast">,</span>
+            </span>
+        </p>
+    </a>
+</div>
+
 
                 

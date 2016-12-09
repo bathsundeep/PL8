@@ -18,21 +18,27 @@ export class AppComponent implements OnInit {
     private PL8Service: PL8Service,
     private storageService: LocalStorageRecipeService,
     private pantryService: LocalStoragePantryService,
+    private router: Router,
     @Input() private UserService: UserService
   ) {
     
   }
   
-  
+  isLoggedIn: boolean;
 
   public logOut() {
-    this.PL8Service.logout()
-      .then(obj => {
-        window.location.reload();
-      });
+    this.PL8Service.logout();
+    this.isLoggedIn = false;
+    this.router.navigate(['/home']);
+    
   }
 
   ngOnInit() {
-    
+    if (sessionStorage.getItem("currentUser") != null) {
+      this.isLoggedIn = true;
+    }
+    else {
+      this.isLoggedIn = false;
+    }
   }
 }

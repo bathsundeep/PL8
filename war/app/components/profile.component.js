@@ -13,11 +13,12 @@ var router_1 = require("@angular/router");
 var nutrition_service_1 = require("../nutrition.service");
 var api_service_1 = require("../API/api.service");
 var ProfileComponent = (function () {
-    function ProfileComponent(router, PL8Service, UserService, LocalStorageRecipeService, NutritionService) {
+    function ProfileComponent(router, PL8Service, UserService, LocalStorageRecipeService, LocalStoragePantryService, NutritionService) {
         this.router = router;
         this.PL8Service = PL8Service;
         this.UserService = UserService;
         this.LocalStorageRecipeService = LocalStorageRecipeService;
+        this.LocalStoragePantryService = LocalStoragePantryService;
         this.NutritionService = NutritionService;
         this.name = sessionStorage.getItem('currentUser');
         this.title = 'Your profile';
@@ -32,6 +33,7 @@ var ProfileComponent = (function () {
     };
     ProfileComponent.prototype.ngOnInit = function () {
         this.getNutrition();
+        this.suggestions = this.LocalStorageRecipeService.getSuggestions(this.LocalStoragePantryService.pantry);
     };
     return ProfileComponent;
 }());
@@ -45,6 +47,7 @@ ProfileComponent = __decorate([
         api_service_1.PL8Service,
         api_service_1.UserService,
         api_service_1.LocalStorageRecipeService,
+        api_service_1.LocalStoragePantryService,
         nutrition_service_1.NutritionService])
 ], ProfileComponent);
 exports.ProfileComponent = ProfileComponent;

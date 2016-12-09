@@ -64,9 +64,11 @@ var PL8Service = (function () {
         */
     };
     PL8Service.prototype.logout = function () {
-        return this.http.get("/api/auth/logout")
+        /*return this.http.get("/api/auth/logout")
             .toPromise()
-            .then(function (resp) { return resp.json(); });
+            .then(resp => resp.json() as {});*/
+        console.log("Logging user out");
+        sessionStorage.setItem("currentUser", null);
     };
     PL8Service.prototype.handleError = function (error) {
         console.error('An error occurred', error); // for demo purposes only
@@ -219,6 +221,7 @@ var LocalStorageRecipeService = (function () {
                 }
             }
         }
+        return;
     };
     return LocalStorageRecipeService;
 }());

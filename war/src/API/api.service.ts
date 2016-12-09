@@ -68,9 +68,12 @@ export class PL8Service {
     }
 
     public logout() {
-        return this.http.get("/api/auth/logout")
+        /*return this.http.get("/api/auth/logout")
             .toPromise()
-            .then(resp => resp.json() as {});
+            .then(resp => resp.json() as {});*/
+
+        console.log("Logging user out");
+        sessionStorage.setItem("currentUser", null);
     }
 
     private handleError(error: any): Promise<any> {
@@ -214,7 +217,7 @@ export class LocalStorageRecipeService {
 
     //get suggestions based on pantry
     //this function sucks and will be changed
-    public getSuggestions(pantry: Array<Ingredient>) {
+    public getSuggestions(pantry: Array<Ingredient>) : Array<Recipe> {
         let all = this.getAllRecipes();
         for (var i = pantry.length; i > 0; i-- ) {
             for (var j = 0; j < this.numRecipes; j++) {
@@ -225,6 +228,7 @@ export class LocalStorageRecipeService {
                 }
             }
         }
+        return;
     }
 }
 

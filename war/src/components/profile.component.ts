@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { Nutrition } from '../nutrition';
 import { NutritionService } from '../nutrition.service';
 
-import { Ingredient } from '../API/api.models'
+import { Ingredient, Recipe } from '../API/api.models'
 
-import { PL8Service, UserService, LocalStorageRecipeService } from '../API/api.service';
+import { PL8Service, UserService, LocalStorageRecipeService, LocalStoragePantryService } from '../API/api.service';
 
 @Component({
   selector: 'my-profile',
@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
         private PL8Service: PL8Service,
         private UserService: UserService,
         private LocalStorageRecipeService: LocalStorageRecipeService,
+        private LocalStoragePantryService: LocalStoragePantryService,
         private NutritionService: NutritionService
     ) { }
    
@@ -28,6 +29,8 @@ export class ProfileComponent implements OnInit {
     title = 'Your profile';
     nutritions: Nutrition[];
     preferences: Array<Ingredient>;
+
+    suggestions: Recipe[];
 
     getNutrition(): void {
         this.NutritionService.getNutritions().then(nutritions=>this.nutritions=nutritions);
@@ -42,6 +45,7 @@ export class ProfileComponent implements OnInit {
 
     ngOnInit(): void {
         this.getNutrition();
+        this.suggestions = this.LocalStorageRecipeService.getSuggestions(this.LocalStoragePantryService.pantry);
     }
 }
  

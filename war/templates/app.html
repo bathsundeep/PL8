@@ -5,14 +5,15 @@
         <div class = "col-xs-12">
             <nav>
             <ul class="nav nav-pills pull-right">
-                <li routerLinkActive="active"><a routerLink="/profile" >Profile</a></li>
-                <li routerLinkActive="active"><a routerLink="/login" >Log In</a></li>   <!-- Add check for if user logged in using *ngIf for buttons !-->
-                <li routerLinkActive="active"><a routerLink="/signup" >Sign Up</a></li>      
+                <li routerLinkActive="active"><a *ngIf="isLoggedIn" routerLink="/profile" >Profile</a></li>
+                <li routerLinkActive="active"><a *ngIf="!isLoggedIn" routerLink="/login" >Log In</a></li>   <!-- Add check for if user logged in using *ngIf for buttons !-->
+                <li routerLinkActive="active"><a *ngIf="!isLoggedIn" routerLink="/signup" >Sign Up</a></li>  
+                <li routerLinkActive="active"><a *ngIf="isLoggedIn" (click)="logOut()" routerLink="/home">Log Out</a></li>
             </ul>
             <ul class="nav nav-pills">
                 <li routerLinkActive="active"><a routerLink="/home">Home</a></li>
                 <li routerLinkActive="active"><a routerLink="/recipes">View Recipes</a></li>
-                <li routerLinkActive="active"><a routerLink="/createRecipe">Create Recipe</a></li>
+                <li routerLinkActive="active"><a *ngIf="isLoggedIn" routerLink="/createRecipe">Create Recipe</a></li>
             </ul>
             </nav>
         </div>
