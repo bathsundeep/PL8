@@ -213,7 +213,7 @@ export class LocalStorageRecipeService {
     //get suggestions based on pantry
     //this function sucks and will be changed
     public getSuggestions(pantry: Array<Ingredient>) {
-        let all = this.getAllRecipes();
+        /*let all = this.getAllRecipes();
         for (var i = pantry.length; i > 0; i-- ) {
             for (var j = 0; j < this.numRecipes; j++) {
                 let count = 0;
@@ -222,7 +222,30 @@ export class LocalStorageRecipeService {
                     
                 }
             }
+        }*/
+
+        let matches = [];
+        let all = this.getAllRecipes();
+
+        for (var i = 0; i < all.length; i++) {
+            let recipe = all[i];
+            for (var j = 0; j < recipe.propertyMap.Ingredients.length; j++) {
+                for (var k = 0; k < pantry.length; k++) {
+                    if (j == k) {
+                        matches[i] = matches[i] + 1;
+                    }
+                }
+            }
         }
+
+        let newRecipes = [];
+        for (var i = 0; i < matches.length; i++) {
+            if (matches[i] > 0) {
+                newRecipes.push(all[i]);
+            }
+        }
+
+        return newRecipes;
     }
 }
 
