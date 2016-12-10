@@ -240,9 +240,6 @@ export class LocalStorageRecipeService {
         }
 
         return newRecipes;
-=======
-        return;
->>>>>>> origin/master
     }
 }
 
