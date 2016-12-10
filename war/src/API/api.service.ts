@@ -68,9 +68,12 @@ export class PL8Service {
     }
 
     public logout() {
-        return this.http.get("/api/auth/logout")
+        /*return this.http.get("/api/auth/logout")
             .toPromise()
-            .then(resp => resp.json() as {});
+            .then(resp => resp.json() as {});*/
+
+        console.log("Logging user out");
+        sessionStorage.setItem("currentUser", null);
     }
 
     private handleError(error: any): Promise<any> {
@@ -153,8 +156,10 @@ export class LocalStorageRecipeService {
     constructor(private http: Http) { }
 
     numRecipes = 0;
+    numPrefs = 0;
 
     recipes:Array<Recipe> = [];
+    preferences:Array<Ingredient> = [];
 
     public createRecipe(recipe: Recipe) {
         console.log("Create Recipe", JSON.stringify(recipe));
@@ -211,18 +216,7 @@ export class LocalStorageRecipeService {
     public getAllRecipes() {return this.recipes;}
 
     //get suggestions based on pantry
-    //this function sucks and will be changed
     public getSuggestions(pantry: Array<Ingredient>) {
-        /*let all = this.getAllRecipes();
-        for (var i = pantry.length; i > 0; i-- ) {
-            for (var j = 0; j < this.numRecipes; j++) {
-                let count = 0;
-                let r = all[j];
-                for (var k = 0; k < r.propertyMap.Ingredients.length; k++) {
-                    
-                }
-            }
-        }*/
 
         let matches = [];
         let all = this.getAllRecipes();
@@ -246,6 +240,9 @@ export class LocalStorageRecipeService {
         }
 
         return newRecipes;
+=======
+        return;
+>>>>>>> origin/master
     }
 }
 

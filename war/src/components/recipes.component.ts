@@ -19,7 +19,7 @@ export class RecipesComponent implements OnInit {
     @Input() isLoading: boolean;
 
     recipes: Array<Recipe> = this.recipeStorage.recipes;
-    numRecipes: number = this.numRecipes;
+    numRecipes: number = this.recipeStorage.numRecipes;
 
     ngOnInit(): void {
         this.isLoading = true;
@@ -35,13 +35,29 @@ export class RecipesComponent implements OnInit {
 export class RecipeComponent implements OnInit {
 
     constructor(
-        private rotuer: Router,
+        private router: Router,
+        private route: ActivatedRoute,
         private PL8Service: PL8Service,
         private recipeStorage: LocalStorageRecipeService
     ) { }
 
+    recipes: Array<Recipe> = this.recipeStorage.getAllRecipes();
+    numRecipes: number = this.recipeStorage.numRecipes;
+
+    id: number;
+
+    recipe: Recipe;
 
     ngOnInit(): void {
+        // Get current url in form of 'recipes/x' where x = index in this.recipeStorage.recipes
+        var url = this.router.url;
         
+        // split to get 'x' only and store in this.id
+        var split = url.split('/');
+
+        this.id = Number(split[2]);
+        
+        this.recipe = this.recipes[this.id];
+        console.log(JSON.stringify(this.recipe));
     }
 }

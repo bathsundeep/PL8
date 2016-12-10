@@ -17,7 +17,7 @@ var RecipesComponent = (function () {
         this.PL8Service = PL8Service;
         this.recipeStorage = recipeStorage;
         this.recipes = this.recipeStorage.recipes;
-        this.numRecipes = this.numRecipes;
+        this.numRecipes = this.recipeStorage.numRecipes;
     }
     RecipesComponent.prototype.ngOnInit = function () {
         this.isLoading = true;
@@ -41,12 +41,22 @@ RecipesComponent = __decorate([
 ], RecipesComponent);
 exports.RecipesComponent = RecipesComponent;
 var RecipeComponent = (function () {
-    function RecipeComponent(rotuer, PL8Service, recipeStorage) {
-        this.rotuer = rotuer;
+    function RecipeComponent(router, route, PL8Service, recipeStorage) {
+        this.router = router;
+        this.route = route;
         this.PL8Service = PL8Service;
         this.recipeStorage = recipeStorage;
+        this.recipes = this.recipeStorage.getAllRecipes();
+        this.numRecipes = this.recipeStorage.numRecipes;
     }
     RecipeComponent.prototype.ngOnInit = function () {
+        // Get current url in form of 'recipes/x' where x = index in this.recipeStorage.recipes
+        var url = this.router.url;
+        // split to get 'x' only and store in this.id
+        var split = url.split('/');
+        this.id = Number(split[2]);
+        this.recipe = this.recipes[this.id];
+        console.log(JSON.stringify(this.recipe));
     };
     return RecipeComponent;
 }());
@@ -56,6 +66,7 @@ RecipeComponent = __decorate([
         templateUrl: '/templates/recipe.html'
     }),
     __metadata("design:paramtypes", [router_1.Router,
+        router_1.ActivatedRoute,
         api_service_1.PL8Service,
         api_service_1.LocalStorageRecipeService])
 ], RecipeComponent);

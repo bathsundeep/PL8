@@ -1,0 +1,35 @@
+<ol class="breadcrumb">
+    <li><a routerLink="/home">Home</a></li>
+    <li><a routerLink="/recipes">All Recipes</a></li>
+    <li class="active" *ngIf="recipe">{{ recipe.propertyMap.Name }}</li>
+</ol>
+
+<section *ngIf="recipe">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>{{ recipe.propertyMap.Name }}</h2>
+            <p class="lead">{{ recipe.propertyMap.Description }}</p>
+            <p class="lead">Ingredients:</p>
+            <ul>
+                <li *ngFor="let ing of recipe.propertyMap.Ingredients" >
+                    <div *ngIf="ing.amount > 0">
+                        {{ ing.amount }} {{ ing.name }}
+                    </div>
+                </li>
+            </ul>
+            <p class="lead">Steps:</p>
+            <ul>
+                <li *ngFor="let step of recipe.propertyMap.Steps; let i = index">
+                    <div *ngIf="step">
+                        {{i}}  -  {{ step }}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<section *ngIf="!recipe">
+    Recipe not found :(
+</section>
