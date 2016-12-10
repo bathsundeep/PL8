@@ -232,7 +232,7 @@ export class LocalStorageRecipeService {
             }
         }
 
-        let newRecipes = [];
+        let newRecipes:Array<Recipe> = [];
         for (var i = 0; i < matches.length; i++) {
             if (matches[i] > 0) {
                 newRecipes.push(all[i]);
